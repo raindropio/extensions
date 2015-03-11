@@ -8,7 +8,7 @@ Different appearance implemented with CSS media queries and specific environment
 
 Directories:
 * chrome — Main code base of browser extension and Mac OS X app
-* chrome-build — Google Chrome build
+* chrome-build — Google Chrome and Opera build
 * desktop — Mac OS X build with Atom-Shell wrapper, config and specific sources
 * firefox — Firefox build with wrapper, config and specific sources
 * safari — Safari build with wrapper, config and specific sources
