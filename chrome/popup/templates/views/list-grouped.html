@@ -1,0 +1,13 @@
+<div class="list-view">
+    <span ng-repeat="item in raindrops.items" bindonce>
+        <div class="items-group" bo-if="item.breakLine" bo-text="item.breakLine"></div>
+
+        <article id="raindrop{{::item._id}}" bo-attr bo-attr-data-type="item.type"
+                 ng-class="{'active':item.check, 'new':item.new, 'viewing': viewer.item._id == item._id}" ng-context-menu="raindrops.contextMenu">
+            <a href="" class="icon-item-more context-menu-show"><span class="icon" data-glyph="more-gray"></span></a>
+            <ng-include src="'templates/views/list-item.html'"></ng-include>
+        </article>
+	</span>
+
+    <ng-include src="'templates/extra/no-bookmarks.html'"></ng-include>
+</div>

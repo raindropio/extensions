@@ -1,0 +1,23 @@
+<img src="img/screen.png" height="201" alt="" /><br><br>
+<div class="">
+	<h1 trans="done"></h1>
+	<h2 style="max-width:500px;margin:0 auto;">
+		{{data.items.length}}
+		<span trans="collections"></span>
+		<span trans="and"></span> {{data.count-data.dublicates-data.errors}} <span trans="bookmarks"></span>
+		<span ng-show="data.dublicates>0">
+			({{data.dublicates}} <span trans="dublicates"></span>)
+		</span>
+		<span ng-show="data.errors>0">
+			({{data.errors}} <span trans="errors"></span>)
+		</span>
+		<span trans="doneD"></span>
+	</h2>
+
+	<br>
+
+	<a href="https://raindrop.io/app" class="button pink" trans="goToRaindrop" desktop-browser></a>
+
+	<br>
+	<a href="#/" target="_self" trans="cancel" class="simple-link"></a>
+</div>

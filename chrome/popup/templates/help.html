@@ -1,0 +1,86 @@
+<div class="top">
+	<div class="top-wrap"><div class="top-wrap-wrap">
+		<div class="header header-padding">
+			<div class="table table-max">
+				<div class="cell">
+					<a ui-sref="app.index" tab-index="2" class="icon" data-glyph="back"></a>
+				</div>
+				<div class="cell cell-max">
+					<h1 class="caption" trans="help"></h1>
+				</div>
+				<div class="cell">
+					<button tab-index="1" id="actionClose" class="icon " data-glyph="close" ng-click="actions.close()"></button>
+				</div>
+			</div>
+
+			<div class="table table-max help-table e-desktop-hide" ng-switch="helpInfo">
+				<div class="row" ng-switch-when="0">
+					<div class="cell">
+						<img src="img/help/mouse.png" width="57" height="95" alt=""/>
+					</div>
+					<div class="cell">
+						<h3 class="caption" trans="helpContext"></h3>
+						<div class="subinfo" trans="helpContextD"></div>
+					</div>
+				</div>
+
+				<div class="row" ng-switch-when="1">
+					<div class="cell">
+						<img src="img/help/keyboard-mac.png" width="125" alt=""/>
+					</div>
+					<div class="cell">
+						<h3 class="caption" trans="helpHotKey"></h3>
+						<div class="subinfo" trans="helpHotKeyD"></div>
+					</div>
+				</div>
+
+				<div class="row" ng-switch-when="2">
+					<div class="cell">
+						<img src="img/help/sidebar-width.png" width="57" alt=""/>
+					</div>
+					<div class="cell">
+						<h3 class="caption" trans="helpVisible"></h3>
+						<div class="subinfo" trans="helpVisibleD"></div>
+					</div>
+				</div>
+
+				<div class="row" ng-switch-when="3">
+					<div class="cell">
+						<img src="img/help/select.png" width="104" alt=""/>
+					</div>
+					<div class="cell">
+						<h3 class="caption" trans="helpBatch"></h3>
+						<div class="subinfo" trans="helpBatchD"></div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="cell" style="padding:0"></div>
+					<div class="cell" style="padding:0;text-align: right"><a href="" class="btn" data-color="common-dark" ng-click="nextHelpInfo()" trans="moreTips"></a></div>
+				</div>
+			</div>
+		</div>
+	</div></div>
+</div>
+
+<div class="content no-animation" data-color="white"><div class="cell"><scrollable>
+	<div class="anim-translate edit-form">
+		<h6 class="caption" trans="followUsOn"></h6>
+		<div class="edit-form-block">
+			<a href="https://www.facebook.com/raindropio" target="_blank" desktop-browser class="icon" data-glyph="social-facebook">Facebook</a>&nbsp;
+			<a href="https://twitter.com/raindrop_io" target="_blank" desktop-browser class="icon" data-glyph="social-twitter">Twitter</a>&nbsp;
+			<a href="https://vk.com/raindropio" target="_blank" desktop-browser class="icon" data-glyph="social-vk">Вконтаке</a>
+		</div>
+
+		<h6 class="caption" trans="writeUs"></h6>
+		<div class="edit-form-block">
+			<a href="mailto:info@raindrop.io" target="_blank" desktop-browser>info@raindrop.io</a>
+		</div>
+
+		<a href="https://raindrop.io/pages/about" target="_blank" desktop-browser trans="about" class="btn" data-color="default" style="display:block"></a>
+		<br>
+		<a href="https://raindrop.io/pages/dev" target="_blank" desktop-browser trans="forDevelopers" class="btn" data-color="default" style="display:block"></a>
+		<Br>
+		<a href="https://raindrop.io/other/support.html#{{lang}}" desktop-browser class="btn" data-color="blue" target="_blank" trans="haveIdeas" style="display:block"></a>
+	</div>
+</scrollable></div></div>

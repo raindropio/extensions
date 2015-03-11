@@ -1,0 +1,96 @@
+<div class="top"><div class="top-wrap"><div class="top-wrap-wrap">
+	<div class="header">
+		<div class="table table-max">
+			<div class="cell">
+				<a href="#{{ (collections.current.parent.$id ? 'bookmarks/'+collections.current.parent.$id||0 : '' ) }}" trans="back" trans-attr="title" tab-index="1" class="icon" data-glyph="back"></a><!--background-cover="collections.current.cover[0]"-->
+			</div>
+			<div class="cell view-mode-only">
+				<window-actions></window-actions>
+			</div>
+			<div class="cell cell-max">
+				<h1 class="caption" trans="allBookmarks" ng-show="::(collections.current._id==0)"></h1>
+			</div>
+			<div class="cell">
+				<a href="#/bookmarks/0" trans="smartSearch" trans-attr="title" class="icon" data-glyph="search-alt" ng-show="::(collections.current._id!=0)"></a>
+
+				<span class="inline-dropdown">
+					<a href="" class="icon" data-glyph="{{collections.current.view}}" ng-click="showChangeView = !showChangeView" trans="view" trans-attr="title"></a>
+
+					<span class="id-content" ng-show="showChangeView">
+						<a href="" class="icon-list-item" ng-class="{'active': (collections.current.view=='grid' || collections.current.view=='masonry')}" ng-click="collections.setView('grid'); showChangeView = false"><img src="img/desktop/icon-view-grid.png" height="16" alt="" /></a>
+        				<a href="" class="icon-list-item" ng-class="{'active': collections.current.view=='list'}" ng-click="collections.setView('list'); showChangeView = false"><img src="img/desktop/icon-view-list.png" height="16" alt="" /></a>
+        				<a href="" class="icon-list-item" ng-class="{'active': collections.current.view=='simple'}" ng-click="collections.setView('simple'); showChangeView = false"><img src="img/desktop/icon-view-simple.png" height="16" alt="" /></a>
+					</span>
+				</span>
+				<!--
+				<a href="" class="icon" data-glyph="{{collections.current.view}}" ng-click="collections.setView( (collections.current.view=='list'?'grid':'list') )" trans="view" trans-attr="title"></a>
+				-->
+
+				<a href="" class="icon" data-glyph="sort-{{raindrops.sort}}" ng-click="raindrops.sort = ( (raindrops.sort=='title'?'lastUpdate':'title') ); raindrops.reset(true); raindrops.load()" title="{{'bySort' | translate}} {{(raindrops.sort=='title'?'byName':'byDate')|translate}}"></a>
+
+				<a href="" ng-click="collections.shareCollection()" class="icon" data-glyph="share" ng-show="(collections.current._id>0)&&((collections.current.author)||(collections.current.public))" trans="shareCollection" trans-attr="title"></a>
+
+
+				<button id="actionClose" tab-index="2" class="icon " data-glyph="close" ng-click="actions.close()"></button>
+			</div>
+		</div>
+
+		<menu class="parents" ng-show="collections.current.parent">
+			<li>
+				<a href="#/index" trans="all"></a><span>&#9656;</span>
+			</li>
+			<li ng-repeat="item in parents.items" bindonce>
+				<a bo-href="'#/bookmarks/'+item._id" bo-text="item.title"></a><span>&#9656;</span>
+			</li>
+			<li>
+				{{collections.current.title}}
+			</li>
+		</menu>
+
+		<div class="table table-max collection-info-title" ng-if="::(collections.current._id!=0)">
+			<div class="cell">
+				<span class="cover icon" data-glyph="collection-cover" background-cover="collections.current.cover[0]" background-cover-watch="true" style="width:40px;height:40px;"></span>
+			</div>
+			<div class="cell cell-max">
+				<h1 class="caption">
+					<div class="pull-right" ng-if="::(collections.current._id>0)" style="margin-top:6px">
+						<a href="" ng-click="collections.shareCollection()" class="icon action-hidden" data-glyph="person-add" trans="sharing" trans-attr="title"></a><a href="https://raindrop.io/app/collection/{{collections.current._id}}" target="_blank" desktop-browser class="icon action-hidden" data-glyph="open-browser" trans="openInBrowser" trans-attr="title"></a><a href="#/collection/{{collections.current._id}}" class="icon action-hidden" data-glyph="edit" style="margin:0"></a>
+					</div>
+					<span ng-if="collections.current.title" ng-bind="collections.current.title"></span><span ng-hide="(collections.current.title)" ng-bind="('defaultCollection-'+collections.current._id | translate)"></span>
+					<div class="subinfo">{{collections.current.count | numnominus}} {{'elements' |sclon:(collections.current.count | numnominus) | translate}}</div>
+				</h1>
+			</div>
+		</div>
+		<div class="collection-info-title" ng-if="::(collections.current._id==0)">
+			<extra-search submit="search.now()" key="searchbox.filter" keys="searchbox.search" focused="searchbox.focus" autocomplete="complete.items" placeholder=""></extra-search>
+		</div>
+	</div>
+
+	<div ng-include="'templates/extra/toolbar.html'" ng-hide="raindrops.selected"></div>
+
+	<div class="selected-actions" ng-if="raindrops.selected">
+		<div class="pull-left">
+			<a href="" class="icon" data-glyph="selectall" ng-click="raindrops.selectAll();" trans="selectAll" trans-attr="title" style="margin-left:0"></a>
+		</div>
+
+		<div class="pull-right">
+			<a href="" class="icon" data-glyph="cross" ng-click="raindrops.resetSelection();" trans="cancel" trans-attr="title" style="margin-left:0"></a>
+		</div>
+
+		<a href="" class="icon" data-glyph="move-collection" ng-click="raindrops.showMoveModal()" trans="moveSelectedBookmarks" trans-attr="title"></a><span class="divider"></span><span ng-if="raindrops.selected==1"><a href="" class="icon" data-glyph="edit" ng-click="raindrops.editSelected();" trans="edit" trans-attr="title"></a><span class="divider"></span></span><a href="" class="icon" data-glyph="remove-alt" ng-click="raindrops.removeSelected();" trans="remove" trans-attr="title"></a>
+	</div>
+</div></div></div>
+
+<ng-include ng-if="bookmarkWorker.lastSaved._id && collections.current._id!=-99 && collections.current._id!=0" src="'templates/extra/allready.html'"></ng-include>
+
+<div class="content" data-color="white" ng-class="{'no-bookmarks': raindrops.items.length=='0' && raindrops.items!=null && raindrops.loading == false}">
+	<div class=" bookmarks-section cell" ng-class="{'no-animation': temp.noAnim}" desktop-drop><scrollable><!--anim-translate-top-->
+		<div infinite-scroll="raindrops.more()">
+			<div ng-class="{'selection-mode': raindrops.selected}" ng-if="!raindrops.loading || raindrops.page>0">
+				<ng-include src="'templates/views/'+((collections.current.view == 'grid' || collections.current.view == 'list' || collections.current.view == 'simple') ? collections.current.view : (collections.current.view == 'masonry' ? 'grid' : 'list') )+(collections.current._id<=0?'-grouped':'')+'.html'"></ng-include>
+			</div>
+
+			<div class="load-more" ng-show="raindrops.items.length < collections.current.count  &&  !raindrops.noMore"><a href="" ng-click="raindrops.more()" ng-class="{'loading':raindrops.loading}"><span trans="more"></span>...</a></div>
+		</div>
+	</scrollable></div>
+</div>

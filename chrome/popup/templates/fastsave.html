@@ -1,0 +1,77 @@
+<div class="content no-animation" ng-mouseover="ctimer.stop()">
+    <div class="fastsave cell center" ng-switch="step">
+        <div class="top-actions" ng-show="step=='item'">
+            <div class="pull-right">
+                <div class="circular-timer" ng-click="actions.close()" ng-show="ctimer.show">
+                    <div class="tspinner tpie"></div>
+                    <div class="tfiller tpie"></div>
+                    <div class="tmask"></div>
+                    <div class="tdigit">{{ctimer.digit}}</div>
+                </div>
+
+                <button id="actionClose" tab-index="2" class="icon pull-right " data-glyph="close-black" ng-click="actions.close()"  ng-hide="ctimer.show"></button>
+            </div>
+
+
+            <a href="#/bookmarks/{{item.collection.$id}}" trans="back" trans-attr="title" tab-index="1" class="icon" data-glyph="back-black"></a>
+        </div>
+
+        <div class="save-step" ng-switch-when="loading">
+            <span class="spinner"><img src="img/icon-loading.png" alt="" /></span>
+        </div>
+
+        <div class="save-step" ng-switch-when="item" ng-class="{'have':item.have}">
+            <div class="item-cover-wrap">
+                <div class="item-status">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+                        <path d="M0 0h48v48h-48z" fill="none"/>
+                        <path d="M38.71 20.07c-1.36-6.88-7.43-12.07-14.71-12.07-5.78 0-10.79 3.28-13.3 8.07-6.01.65-10.7 5.74-10.7 11.93 0 6.63 5.37 12 12 12h26c5.52 0 10-4.48 10-10 0-5.28-4.11-9.56-9.29-9.93zm-18.71 13.93l-7-7 2.83-2.83 4.17 4.17 10.35-10.35 2.83 2.83-13.18 13.18z"/>
+                    </svg>
+                </div>
+                <div class="item-cover" style="{{(item.cover ? 'background-image:url('+(item.cover|fixURL)+')' : '' )}}">
+                    <a href="" class="make-screenshot" ng-show="item.cover==item.media.length-1 && item.haveScreenshot==false" ng-click="worker.capturePage()"></a>
+                </div>
+            </div>
+
+            <img src="img/arrow-bottom-long.png" height="18" style="opacity: .3" alt="" />
+
+            <div class="infolder table" ng-hide="showCollections">
+                <div class="cell">
+                    <div class="folder">
+                        <img src="{{collection.cover[0] | fixURL}}" ng-if="collection.cover[0]" height="24" alt="" />
+                    </div>
+                </div>
+                <div class="cell">
+                    <div style="margin-top:-2px;margin-bottom: -1px">{{item.type | translate}} <span class="save-status">{{ (!item.have?'saved':'already') | translate }}</span> {{'in'|translate}}</div>
+                    <div class="folder-title"><a href="" ng-click="showCollectionsNow()">{{collection.title}}</a></div>
+                </div>
+            </div>
+
+            <div class="select-collection-wrap" ng-if="showCollections">
+                <select-collection data-base="collections.items"
+                                   data-disable-groups="true"
+                                   data-show-system-collections="true"
+                                   data-parent="item.collection"
+                                   data-disable-id="0"
+                                   data-enable-collections="true"></select-collection>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="actions">
+                <a href="#/bookmarks/{{collection._id}}?bookmark={{item._id}}" class="btn" data-color="default" trans="alreadyInCollectionDD"></a><br><br>
+
+                <a href="" class="ajaxed" trans="remove" ng-click="removeItem()"></a>
+            </div>
+
+            <div ng-if="environment.name == 'desktop'">
+                <div class="line"></div>
+
+                <div style="padding:0px 20px;text-align: left;">
+                    <span class="extra-switch pull-right" data-status="on"><i></i></span>
+                    Автоматически сохранять текущую страницу при клике на иконку расширения.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="center">
+	<div class="cover icon" data-glyph="collection-cover" style="width:96px;height:96px;" background-cover="collections.lastCollection.cover[0]" background-cover-watch="true">
+		<img src="img/shared.png" width="32" alt="" style="position:absolute;bottom: -6px;right:-6px;" />
+	</div>
+</div>
+<div class="modal-padding">
+	<span class="extra-switch pull-right" data-status="{{collections.lastCollection.public ? 'on': ''}}" ng-click="collections.updateCollection(collections.lastCollection._id, {public: !collections.lastCollection.public}); collections.lastCollection.public = !collections.lastCollection.public"><i></i></span>
+	<h1 class="caption"><span trans="accessViaLink"></span></h1>
+</div>
+<div class="modal-padding modal-share-block" ng-if="collections.lastCollection.public" style="padding-top:0" ng-init="collections.lastCollection.url=(('https://raindrop.io/collection/'+collections.lastCollection._id))">
+	<div class="edit-form-block" style="margin:0;">
+		<input type="text" class="extra input-on-black" tab-index="6" value="https://raindrop.io/collection/{{collections.lastCollection._id}}" readonly autofocus focus-element="select" ng-if="collections.lastCollection.public" />
+	</div><br>
+
+	<h6 class="caption" trans="inSocial"></h6>
+	<div style="margin-bottom:4px;">
+		<a href="" ng-click="collections.openShareLink('facebook')" taget="_blank" class="icon" data-glyph="social-facebook">Facebook</a>
+		<a href="" ng-click="collections.openShareLink('twitter')" class="icon" data-glyph="social-twitter">Twitter</a>
+		<a href="" ng-click="collections.openShareLink('google')" class="icon" data-glyph="social-google">Google+</a>
+	</div>
+	<div>
+		<a href="" ng-click="collections.openShareLink('vk')" class="icon" data-glyph="social-vk">Вконтаке</a>
+		<a href="mailto:?subject={{collections.lastCollection.title|uriencode}}&body=https://raindrop.io/collection/{{collections.lastCollection._id}}" desktop-browser target="_blank" class="icon" data-glyph="mail">E-mail</a>
+	</div>
+
+	<!--div class="disabled-overflow"></div-->
+</div>
+
+<div class="simple-line"></div>
+
+<div class="modal-padding">
+	<h1 class="caption"><span trans="members"></span></h1>
+
+	<div class="members-list" ng-if="collections.lastCollection.collaborators">
+		<div class="table table-max vertical-middle">
+			<div class="row" ng-repeat="item in collections.lastCollection.collaborators">
+				<div class="cell">
+					<a href="https://raindrop.io/user/{{item._id}}" desktop-browser target="_blank"><img ng-src="https://www.gravatar.com/avatar/{{item.email_MD5}}?d=mm&s=24" width="24" height="24" alt="" style="border-radius:100%;" /></a>
+				</div>
+				<div class="cell cell-max">
+					<a href="https://raindrop.io/user/{{item._id}}" desktop-browser target="_blank" class="member-name" ng-class="{'bold': item.me}">{{item.fullName}}</a>
+					<span class="member-name subinfo">{{item.email}}</span>
+
+					<select class="member-role" ng-model="item.role" ng-disabled="item.role == 'owner' || !collections.lastCollection.author" ng-change="collections.changeRole(item._id, item.role)">
+						<option value="owner" trans="role_owner" ng-show="item.role == 'owner'"></option>
+						<option value="member" trans="role_member"></option>
+						<option value="viewer" trans="role_viewer"></option>
+					</select>
+				</div>
+				<div class="cell">
+					<a href="" ng-hide="item.role == 'owner'" ng-click="collections.changeRole(item._id, '')"><i class="icon" data-glyph="remove"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+
+
+	<h6 class="caption" trans="inviteMorePeople"></h6>
+	<div class="edit-form-block">
+		<textarea ng-model="collections.invite.emails" autofocus focus-element rows="4" class="input-on-black" trans="enterEmails" trans-attr="placeholder" ng-disabled="collections.invite.loading"></textarea>
+	</div>
+
+	<div class="pull-right" ng-show="collections.invite.emails" style="font-size: 13px;text-align: right">
+		<div style="margin-bottom: 8px;">
+			<span trans="withAccessLevel"></span>:
+			<select ng-model="collections.invite.role">
+				<option value="member" trans="role_members"></option>
+				<option value="viewer" trans="role_viewer"></option>
+			</select>
+		</div>
+
+		<a href="" class="btn" data-color="green" trans="sendInvites" ng-hide="collections.invite.loading" ng-click="collections.invite.send()"></a>
+		<span class="spinner iconic" data-glyph="electric" ng-show="collections.invite.loading"></span>
+
+		<br>
+	</div>
+
+	<div class="clear"></div>
+
+	<a href="" class="btn" data-color="pink" style="display: block" ng-show="(collections.lastCollection.user.$id == user.me._id)&&(!collections.invite.emails)" trans="unshareCollection" ng-click="collections.unshare()"></a>
+
+
+</div>

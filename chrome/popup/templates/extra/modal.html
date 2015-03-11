@@ -1,0 +1,19 @@
+<div id="modal" ng-if="modal.show"><div id="modal-wrap">
+    <!-- -->
+
+		<scrollable class="modal-container" ng-mouseover="modal.hover=true" ng-mouseleave="modal.hover=false">
+		<div class="header">
+			<div class="table table-max">
+				<div class="cell cell-max">
+					<a href="" ng-click="modal.hide(true);" trans="back" trans-attr="title" tab-index="1" class="icon" data-glyph="back"></a>
+				</div>
+				<div class="cell e-desktop-show">
+					<button id="actionClose" tab-index="2" class="icon " data-glyph="close" ng-click="actions.close()"></button>
+				</div>
+			</div>
+		</div>
+
+		<ng-include src="'templates/modals/'+modal.src+'.html'"></ng-include>
+		</scrollable>
+
+</div></div>

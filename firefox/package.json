@@ -1,0 +1,16 @@
+{
+	"license": "",
+	"description": "Raindrop.io - Smart bookmarks",
+	"contributors": [],
+	"author": "exentrich",
+	"url": "",
+	"name": "raindropio",
+	"dependencies": ["api-utils", "addon-kit"],
+	"version": "3.3.9",
+	"lib": "lib",
+	"fullName": "Raindrop.io",
+	"main": "main",
+	"id": "jid0-adyhmvsP91nUO8pRv0Mn2VKeB84",
+	"permissions": {"cross-domain-content": ["https://raindrop.io", "http://raindrop.io", "http://*/*", "https://*/*"], "private-browsing": true},
+	"homepage": "https://raindrop.io"
+}

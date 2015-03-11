@@ -1,0 +1,100 @@
+<div class="modal-padding" style="padding-top:0" ng-controller="AddURL" ng-init="howAdd='dragndrop'">
+    <h1 class="caption" trans="addBookmark"></h1>
+    <h6 class="caption" trans="addBookmarkD"></h6><br>
+
+    <form ng-submit="addNow()">
+        <input type="text" class="input-on-black form-title" required ng-model="url" msd-elastic placeholder="http://" focus-element></textarea><br>
+        <input class="btn" style="display:block;width:100%;" data-color="green" type="submit" trans="addBookmark" trans-attr="value">
+    </form>
+
+
+    <br>
+    <br>
+    <h3 class="caption"><span trans="addAdvice"></span>&nbsp;<span class="badge" trans="advice"></span></h3>
+
+    <br>
+    <div class="edit-form-block">
+        <div class="extra-select">
+            <select ng-model="howAdd">
+                <option value="dragndrop">Drag'n'drop</option>
+                <option value="extension" trans="browserExtension"></option>
+                <option value="android" trans="androidApp"></option>
+                <option value="import" trans="importBookmarks"></option>
+            </select>
+        </div>
+    </div>
+
+    <div ng-switch="howAdd">
+        <img ng-src="img/how/{{howAdd}}.png" height="206" style="display: block;margin-left: -17px;margin-top:-6px" alt="" />
+
+        <div ng-switch-when="dragndrop" ng-switch="lang">
+            <div ng-switch-when="ru_RU">
+                Переместите любую ссылку или картинку со страницы. Она будет сразу сохранена в коллекцию.
+            </div>
+            <div ng-switch-default>
+                Drag'n'drop any link or image from page. It will be immediately stored in the collection.
+            </div>
+        </div>
+
+        <div ng-switch-when="extension" ng-switch="lang">
+            <div ng-switch-when="ru_RU">
+                Сохраняйте открытую страницу в один клик или горячей клавишей Command+Shift+S!<br><br>
+                <a href="https://raindrop.io/pages/download" desktop-browser class="btn" data-color="pink">Установить расширение для браузера</a>
+            </div>
+            <div ng-switch-default>
+                Save page in one click or with hotkey Command+Shift+S!<br><br>
+                <a href="https://raindrop.io/pages/download" desktop-browser class="btn" data-color="pink">Install browser extension</a>
+            </div>
+        </div>
+
+        <div ng-switch-when="android" ng-switch="lang">
+            <div ng-switch-when="ru_RU">
+                Сохраняйте важную для вас информацию из интернета и любимых приложений в один тап!<br><br>
+                <a href="https://play.google.com/store/apps/details?id=io.raindrop.raindropio" desktop-browser class="btn" data-color="pink">Установить из Google Play</a>
+            </div>
+            <div ng-switch-default>
+                Save important content from web & favorite apps!<br><br>
+                <a href="https://play.google.com/store/apps/details?id=io.raindrop.raindropio" desktop-browser class="btn" data-color="pink">Install from Google Play</a>
+            </div>
+        </div>
+
+        <div ng-switch-when="import" ng-switch="lang">
+            <div ng-switch-when="ru_RU">
+                Перенесите закладки из Google Chrome, Firefox, Safari, Opera, Pocket, Instapaper, Readability, Kippt, Delicious и других сервисов на Raindrop.io.<br><br>
+                <a href="../import/import.html#/?environment={{environment.name}}" target="_blank" class="btn" data-color="pink">Импортировать закладки</a>
+            </div>
+            <div ng-switch-default>
+                Transfer bookmarks from Google Chrome, Firefox, Safari, Opera, Pocket, Instapaper, Readability, Kippt, Delicious or other services to Raindrop.io.<br><br>
+                <a href="../import/import.html#/?environment={{environment.name}}" target="_blank" class="btn" data-color="pink">Import bookmarks</a>
+            </div>
+        </div>
+    </div>
+    <!--br><br>
+    <h1 class="caption" trans="browserExtension"></h1>
+    <div style="margin-left: -48px;margin-top:6px;">
+        <img src="https://raindrop.io/img/v3/how_extension.png" height="330" style="display: block;" alt="">
+    </div>
+
+    <div style="margin:20px 0px;">
+        <a href="" style="margin-right:20px;"><img src="img/other/chrome.png" width="48" height="48" alt="" /></a>
+        <a href="" style="margin-right:20px;"><img src="img/other/firefox.png" width="48" height="48" alt="" /></a>
+        <a href="" style="margin-right:20px;"><img src="img/other/opera.png" width="48" height="48" alt="" /></a>
+        <a href=""><img src="img/other/safari.png" width="48" height="48" alt="" /></a>
+    </div>
+
+
+    <div style="border-top: 1px solid rgba(255,255,255,.15);margin-left: -46px;margin-right: -46px;margin-top: 20px;margin-bottom: 8px;"></div>
+    <br>
+    <h1 class="caption" trans="androidApp"></h1>
+    <div style="margin-left: -48px;margin-top:12px;">
+        <img src="https://raindrop.io/img/v3/how_android.png" height="330" style="display: block;" alt="">
+    </div>
+
+
+    <div style="border-top: 1px solid rgba(255,255,255,.15);margin-left: -46px;margin-right: -46px;margin-top: 20px;margin-bottom: 8px;"></div>
+    <br>
+    <h1 class="caption" trans="importBookmarks"></h1>
+    <div style="margin-left: -48px;margin-top:18px;">
+        <img src="https://raindrop.io/img/v3/how_import.png" height="330" style="display: block;" alt="">
+    </div-->
+</div>

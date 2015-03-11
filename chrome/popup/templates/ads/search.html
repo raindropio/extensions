@@ -1,0 +1,9 @@
+<div class="ok-button"><a href="" class="btn" data-color="dark" ng-click="ads.close()">OK</a></div>
+<div ng-switch="ads.lang">
+	<div class="light" ng-switch-when="ru_RU"><b>Ищите закладки</b> так, как вам удобно</div>
+	<div class="light" ng-switch-default><b>Find bookmarks</b> as you wish</div>
+</div>
+
+<div class="center" style="padding-top:12px;border-top:1px dashed rgba(255,255,255,.1);margin-top:10px">
+<img ng-src="img/ads/search_{{ads.lang == 'ru_RU' ? 'ru_RU' : 'en_US'}}.png" height="42" alt="" />
+</div>

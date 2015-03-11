@@ -1,0 +1,8 @@
+<div class="toolbar" ng-if="(!raindrops) || (collections.current.author)">
+<a href="" ng-click="collections.newBlankGroup()" trans="createGroup" trans-attr="title" class="fab e-desktop-hide" data-color="darkgrey" ng-hide="raindrops"><i class="icon" data-glyph="group_add"></i></a><a href="" ng-click="collections.openCreateNewSubCollection()" trans="createCollection" trans-attr="title" class="fab" data-color="green" ng-show="collections.current._id>0 || ads"><i class="icon" data-glyph="folder_add"></i></a><a href="" trans="saveBookmark" trans-attr="title" class="fab-big" ng-click="bookmarkWorker.saveCurrentPage()" ng-hide="bookmarkWorker.lastSaved._id">
+	<i class="icon fb-origin" data-glyph="plus"></i>
+	<i class="icon fb-hover" data-glyph="star"></i>
+</a><a href="" trans="saveBookmark" trans-attr="edit" class="fab-big" ng-click="actions.openBookmark(bookmarkWorker.lastSaved._id)" ng-show="bookmarkWorker.lastSaved._id">
+	<i class="icon" data-glyph="check"></i>
+</a>
+</div>

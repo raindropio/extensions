@@ -1,0 +1,21 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "."
+		},
+		{
+			"follow_symlinks": true,
+			"path": "../firefox"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "../safari/safari.safariextension"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "../../markup"
+		}
+	]
+}

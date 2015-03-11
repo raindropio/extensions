@@ -1,0 +1,27 @@
+<div class="table">
+    <div class="row" bo-class="{'screenshot': item.media[item.coverId].screenshot}"
+         bo-style="{'background-color': (item.cover ? false : (item.domain|domainCover:'.15') ) }">
+        <div class="cell">
+            <i class="icon" bo-if="!item.cover" bo-attr bo-attr-data-glyph="'type-'+item.type"></i>
+            <img class="grid-item-cover" bo-if="item.cover" bo-src="'http://raindrop.io:5000/img?url='+(item.cover | fixURL | uriencode)+'&width='+(230 | retina)+')'" alt="">
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell">
+            <img class="avatar" bo-src="'https://www.google.com/s2/favicons?domain='+item.domain" alt="" />
+            <div class="title">
+                <span bo-html="item.title | truncate : 50 | highlight: searchbox.search"></span>
+                <span class="item-tags" bo-if="item.tags">
+                    <a href="" ng-repeat="tag in item.tags" bindonce ng-click="searchbox.add('#'+tag)">#<span bo-text="tag"></span></a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="" class="icon-item-type" ng-click="raindrops.checkItem($index)"><span class="icon" bo-attr bo-attr-data-glyph="'item-'+item.type"></span><span class="icon" data-glyph="item-edit"></span></a>
+<a bo-href="item.link" bo-attr bo-attr-target="( user.me.config.ex_open_links_in_new_tab ? '_parent' : '_blank' )" class="item-link e-desktop-hide" safari-link></a>
+
+<a href="" ng-click="viewer.open(item,$event)"  ng-dblclick="viewer.open(item,{shiftKey:true})" class="item-link e-desktop-show" trans="openInBrowserWithShift" trans-attr="title"></a>
+<!--          style="{{(item.cover ? 'background-image: url(http://raindrop.io:5000/img?url='+(item.cover | fixURL | uriencode)+'&width='+(230 | retina)+')' : 'background-color:'+(item.domain|domainCover:'.15') )}}" -->
+<!-- bo-attr bo-attr-title='(item.type | translate) + ": " + item.title + "\n" + item.link'-->

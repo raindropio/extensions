@@ -1,0 +1,59 @@
+<section class="side-section" ng-show="(tags.items|filter:searchbox.filter).length">
+	<div class="label">
+		<span class="row">
+			<span class="cell"><span class="title" trans="tags"></span></span>
+			<span class="cell">&nbsp;</span>
+		</span>
+	</div>
+	<ul class="items">
+		<li class="item mini" ng-repeat="tag in tags.items | filter: searchbox.filter" bindonce>
+			<div class="item-wrap">
+				<span class="cell">
+					<span class="cover icon" data-glyph="tag"></span>
+					<span class="title" bo-text="tag._id"></span>
+				</span>
+				<span class="cell">
+					<span class="count" bo-text="tag.count"></span>
+				</span>
+			</div><a href="" ng-click="searchbox.add(tag._id)" class="link"></a>
+		</li>
+	</ul>
+</section>
+
+<section class="side-section" ng-show="(sites.items|filter:searchbox.filter).length">
+	<div class="label">
+		<span href="" class="row">
+			<span class="cell"><span class="title" trans="sites"></span></span>
+			<span class="cell">&nbsp;</span>
+		</span>
+	</div>
+	<ul class="items">
+		<li class="item mini" ng-repeat="site in sites.items | filter: searchbox.filter" bindonce>
+			<div class="item-wrap">
+				<span class="cell">
+					<span class="cover icon" data-glyph="collection-cover" bo-style="{'background-image':'url(https://www.google.com/s2/favicons?domain='+site._id+')'}"></span>
+					<span class="title" bo-text="site._id"></span>
+				</span>
+				<span class="cell">
+					<span class="count" bo-text="site.count"></span>
+				</span>
+			</div><a href="" ng-click="searchbox.add(site._id)" class="link"></a>
+		</li>
+	</ul>
+</section>
+
+<section class="side-section">
+	<ul class="items">
+		<li class="item mini" ng-repeat="s in stat.items" bindonce>
+			<div class="item-wrap">
+				<span class="cell">
+					<span class="cover icon" data-glyph="{{s._id}}"></span>
+					<span class="title" bo-text="s._id + 's' | translate"></span>
+				</span>
+				<span class="cell">
+					<span class="count" bo-text="s.count"></span>
+				</span>
+			</div><a href="" ng-click="searchbox.add((s._id+'s' | translate))" class="link"></a>
+		</li>
+	</ul>
+</section>

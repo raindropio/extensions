@@ -1,0 +1,9 @@
+<strong class="caption">
+	<span class="pull-right">
+		<select class="ajaxed" ng-model="raindrops.sort" ng-change="raindrops.reset(true); raindrops.load()">
+			<option value="lastUpdate" trans="byDate"></option><option value="title" trans="byTitle"></option>
+		</select>
+		<a href="" class="icon" data-glyph="{{collections.current.view}}" ng-click="collections.setView( (collections.current.view=='list'?'grid':'list') )"></a>
+	</span>
+	{{collections.current.count}} {{'elements' |sclon:collections.current.count | translate}}
+</strong>

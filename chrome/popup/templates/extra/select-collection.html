@@ -1,0 +1,36 @@
+<div class="select-collection">
+    <ul>
+        <li ng-if="showSystemCollections">
+            <a href="" class="item item-sub" style="margin-left:0" ng-class="{'active': parent.$id == -1}" ng-click="select('collection',-1)"><span class="cover icon" data-glyph="collection-cover" style="background-image:url('img/icon-inbox.png')"></span> <span trans="defaultCollection--1"></span></a>
+        </li>
+
+        <li ng-repeat="(key,g) in base">
+            <a href="" class="item item-group" ng-class="{'active': group==key && !parent.$id}" ng-click="select('group',key)" ng-if="enableGroups">{{g.title}}</a>
+            <span class="item item-group" ng-hide="enableGroups">{{g.title}}</span>
+
+            <div ng-switch on="g.collections.length &gt; 0 && enableCollections">
+                <div ng-switch-when="true">
+                    <div ng-init="parentId = 'group'+key;" ng-include="'multi-level-item'"></div>
+                </div>
+            </div>
+        </li>
+
+        <li ng-if="showSystemCollections">
+            <a href="" class="item item-sub" style="margin-left:0" ng-class="{'active': parent.$id == -99}" ng-click="select('collection',-99)"><span class="cover icon" data-glyph="collection-cover" style="background-image:url('img/icon-trash.png')"></span> <span trans="defaultCollection--99"></span></a>
+        </li>
+    </ul>
+
+    <script id="multi-level-item", type='text/ng-template'>
+        <ul>
+            <li ng-repeat="item in items | filter:{parent: parentId}:true" ng-hide="disableId == item._id">
+                <a href="" class="item item-sub" ng-class="{'active': item._id == parent.$id}" ng-click="select('collection',item._id)"><span class="cover icon" data-glyph="collection-cover" background-cover="::item.cover[0]"></span> {{item.title}}</a>
+                <div ng-switch on="item.havechildrens">
+                    <div ng-switch-when="true">
+                        <div ng-init="parentId = item._id;" ng-include="'multi-level-item'"></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </script>
+
+</div>

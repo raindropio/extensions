@@ -1,0 +1,54 @@
+{
+    "savePage": {
+        "message": "Guardar página en Raindrop.io",
+        "description": "Guardar página en Raindrop.io"
+    },
+    "saveToInbox": {
+        "message": "Guardar en la bandeja de entrada (Raindrop.io)",
+        "description": "Guardar en la bandeja de entrada (Raindrop.io)"
+    },
+    "saveLink": {
+        "message": "Guarde la página",
+        "description": "Guarde la página"
+    },
+    "saveImage": {
+        "message": "Guardar imagen en Raindrop.io",
+        "description": "Guardar imagen en Raindrop.io"
+    },
+    "myBookmarks": {
+        "message": "Mis colecciones",
+        "description": "Mis colecciones"
+    },
+    "appName": {
+        "message": "Raindrop.Io - marcadores inteligentes",
+        "description": "Raindrop.Io - marcadores inteligentes"
+    },
+    "appDesc": {
+        "message": "Una hermosa manera de recordar lo más importante.",
+        "description": "Una hermosa manera de recordar lo más importante."
+    },
+    "firstRun": {
+        "message": "Para comenzar a utilizar Raindrop.io sólo tienes que actualizar la página actual y haga clic en nuevo.",
+        "description": "Para comenzar a utilizar Raindrop.io sólo tienes que actualizar la página actual y haga clic en nuevo."
+    },
+    "refreshPage": {
+        "message": "Actualizar la página actual",
+        "description": "Actualizar la página actual"
+    },
+    "support": {
+        "message": "Soporte",
+        "description": "Soporte"
+    },
+    "afterUpdateTitle": {
+        "message": "Se ha actualizado la extensión",
+        "description": "Se ha actualizado la extensión"
+    },
+    "afterUpdate": {
+        "message": "Tenemos varias nuevas características, mejoras y correcciones. ¿Quieres ver lo que es nuevo en esta versión?",
+        "description": "Tenemos varias nuevas características, mejoras y correcciones. ¿Quieres ver lo que es nuevo en esta versión?"
+    },
+    "seeChangeLog": {
+        "message": "Leer más...",
+        "description": "Leer más..."
+    }
+}

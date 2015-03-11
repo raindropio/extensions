@@ -1,0 +1,91 @@
+<div class="top">
+	<div class="top-wrap"><div class="top-wrap-wrap">
+		<div class="header header-height">
+			<div class="table table-max">
+				<div class="cell">
+					<a href="" tab-index="2" class="icon" data-glyph="back" ng-click="actions.goBack();"></a>
+					<!--#/bookmarks/{{collections.current._id}}?noAnim=true-->
+				</div>
+				<div class="cell cell-max">
+					<h1 class="caption"><span trans="saveBookmark" ng-show="worker.status=='new'"></span><span trans="edit" ng-show="worker.status=='edit'"></span></h1>
+				</div>
+				<div class="cell">
+					<button autofocus focus-element tab-index="1" id="actionClose" class="icon" data-glyph="close" ng-click="actions.close()"></button>
+				</div>
+			</div>
+		</div>
+
+		<div class="cover-slider" ng-show="form.cover>=0">
+			<div class="cell">
+				<a href="" tab-index="4" class="icon" data-glyph="left" ng-click="worker.left()" ng-class="{'invisible':!form.coverEnabled || form.media.length<2}"></a>
+			</div>
+			<div class="cell cell-max">
+				<img ng-repeat="(k,cover) in form.media" ng-if="form.cover==k && cover.link" ng-src="{{cover.link|fixURL}}" class="cover-item" alt="" />
+				<a href="" tab-index="5" class="make-screenshot" ng-show="form.cover==form.media.length-1 && form.haveScreenshot==false" ng-click="worker.capturePage()">
+					
+				</a>
+			</div>
+			<div class="cell">
+				<a href="" tab-index="3" class="icon" data-glyph="right" ng-click="worker.right()" ng-class="{'invisible':!form.coverEnabled || form.media.length<2}"></a>
+			</div>
+		</div>
+
+		<div class="top-cover" ng-show="form.media[form.cover].link" background-cover="form.media[form.cover].link" background-cover-watch="true"><div class="top-cover-wrap"></div></div>
+	</div></div>
+</div>
+
+<div class="content no-animation" data-color="white"><div class="cell"><scrollable>
+	<div class="" style="padding-top:59px;">
+		<form ng-submit="worker.save()" class="edit-form">
+			<h6 class="caption" trans="title"></h6>
+			<div class="edit-form-block" style="min-height: 24px;">
+				<textarea list="" class="extra form-title" required tab-index="6" msd-elastic ng-model="form.title" placeholder="{{'enterTitle'|translate}}" maxlength="100"></textarea>
+			</div>
+
+			
+			<h6 class="caption" trans="description"></h6>
+			<div class="edit-form-block" style="min-height: 21px;">
+				<textarea list="" class="extra form-description" tab-index="7" msd-elastic ng-model="form.excerpt" placeholder="{{'enterDescription'|translate}}" maxlength="100"></textarea>
+			</div>
+
+			
+			<h6 class="caption" trans="tags"></h6>
+			<div class="edit-form-block">
+				<extra-search ng-if="!worker.loading" class="extra-search-tags" keys="form.tags" allowed-type="tag" placeholder="addTag" autocomplete="complete.tags"></extra-search>
+			</div>
+
+			
+			<h6 class="caption">
+				<ul class="mini-changer pull-right">
+					<li ng-class="{'active':worker.collectionMode=='select'}" ng-click="worker.collectionMode='select'; worker.changed=true;">{{'select'|translate}}</li></li>
+					<li ng-class="{'active':worker.collectionMode=='create'}" ng-click="worker.collectionMode='create'; worker.changed=true;">{{'create'|translate}}</li></li>
+				</ul>
+				<div trans="collection"></div><div class="clear"></div>
+			</h6>
+			<div class="edit-form-block" ng-switch="worker.collectionMode" disable-animate>
+				<div class="extra-select" ng-switch-when="select">
+					<i class="icon" data-glyph="collection-cover" background-cover="collections.getById(form.collectionId).cover[0]" background-cover-watch="true"></i>
+					<select required tab-index="8" class="select-padding" ng-model="form.collectionId">
+						<option value="-1" trans="defaultCollection--1"></option>
+						<optgroup ng-repeat="items in collections.items | orderBy:'sort'" label="{{items.title}}">
+							<option ng-repeat="item in items.collections" value="{{item._id}}" ng-selected="form.collectionId==item._id">{{item.title}}</option>
+						</optgroup>
+						<option value="-99" trans="defaultCollection--99" ng-if="form.collectionId==-99"></option>
+					</select>
+				</div>
+
+				<input class="extra" type="text" autofocus focus-element="select" ng-switch-when="create" ng-model="worker.collectionText" trans="createCollection" trans-attr="placeholder" required />
+			</div>
+
+			<div class="table table-max table-middle">
+				<div class="cell cell-max center" ng-class="{'invisible':!worker.changed}">
+					<input tab-index="9" class="btn" style="display:block;width:100%;" data-color="green" autofocus type="submit" trans="saveChanges" trans-attr="value" ng-hide="worker.loading" />
+					<span ng-show="worker.loading" class="spinner"><img src="img/icon-loading.png" alt="" /></span>
+				</div>
+				<div class="cell center" ng-show="form.id" style="padding-left:12px;">
+					<a href="" ng-click="worker.removeItem();" tab-index="10" class="icon" data-glyph="remove"></a>
+				</div>
+			</div>
+		</form>
+	</div>
+</scrollable></div></div>

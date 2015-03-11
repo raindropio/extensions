@@ -1,0 +1,43 @@
+<span class="spinner"><img src="img/loading.png" alt="" /></span><br><br>
+<h2 trans="importInProgress"></h2>
+
+<div class="block">
+	<div class="row">
+		<div class="cell">
+		<div class="iconblox" ng-show="covers.cId<=data.items.length-1 && covers.show">
+			<header>
+				<div class="small-header" trans="selectIconForCollection"></div>
+				{{data.items[covers.cId].folder}}
+			</header>
+			<article>
+				<div>
+					<a href="" ng-repeat="(i,cover) in covers.items" ng-click="covers.setCover(i)"><img ng-src="http://raindrop.io{{covers.path}}{{cover}}.png" height="48" width="48" alt="" /></a>
+				</div>
+			</article>
+		</div>
+		</div>
+
+
+		<div class="cell">
+			<p class="info-block" trans="longImport"></p>
+			<p class="warning-block" trans="warning"></p>
+
+			<br>
+
+			<div class="borderbox" style="cursor:default">
+				<div class="small-header" ng-show="data.index>=0">
+					<span style="float:right">{{data.index}} <span trans="of"></span> {{data.count}} <span trans="bookmarks"></span></span>
+				<span ng-show="saver.elapsed">
+					<span trans="elapsed"></span> {{saver.elapsed}}
+				</span>
+				</div>
+
+				<progress max="{{data.count}}" value="{{data.index}}" style="width:100%;margin-top:4px;display:block;"></progress>
+			</div>
+		</div>
+		<!--Br>
+		<center>
+			<a href="#/" trans="cancel" class="simple-link"></a>
+		</center-->
+	</div>
+</div>

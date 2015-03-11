@@ -1,0 +1,18 @@
+<div class="table">
+    <div class="cell last-child">
+        <img class="simple-icon" bo-src="'http://raindrop.io:5000/favicon?url='+item.domain" alt="" />
+    </div>
+    <div class="cell first-child">
+        <div class="title"><span bo-html="item.title | highlight: searchbox.search"></span> <span class="item-tags" bo-if="item.tags"><a href="" ng-repeat="tag in item.tags" bindonce ng-click="searchbox.add('#'+tag)">#<span bo-text="tag"></span></a>&nbsp;</span></div>
+        <div class="description">
+            <span class="subinfo" bo-html="item.domain"></span>
+        </div>
+    </div>
+
+</div>
+
+<a href="" class="icon-item-type" ng-click="raindrops.checkItem($index)"><span class="icon" bo-attr bo-attr-data-glyph="'item-'+item.type"></span><span class="icon" data-glyph="item-edit"></span></a>
+<a bo-href="item.link" bo-attr bo-attr-target="( user.me.config.ex_open_links_in_new_tab ? '_parent' : '_blank' )" class="item-link e-desktop-hide" safari-link></a>
+
+<a href="" ng-click="viewer.open(item,$event)" ng-dblclick="viewer.open(item,{shiftKey:true})" class="item-link e-desktop-show" trans="openInBrowserWithShift" trans-attr="title"></a>
+<!-- bo-attr bo-attr-title='(item.type | translate) + ": " + item.title + "\n" + item.link'-->

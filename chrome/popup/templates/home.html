@@ -1,0 +1,187 @@
+<div id="windowSidebarContent">
+	<div id="homeSidebar">
+	<div class="markup">
+	<div class="top">
+		<div class="top-wrap"><div class="top-wrap-wrap">
+			<div class="e-desktop-hide">
+				<div class="header">
+					<div class="table table-max">
+						<div class="cell cell-max">
+							<a href="#/settings" trans="settings" trans-attr="title" tab-index="1" class="icon" data-glyph="config"></a>
+							<span ng-class="::{'like-a-boss':user.me.pro}">
+							<a href="https://raindrop.io/user/{{::user.me._id}}" target="_blank" desktop-browser trans="profile" trans-attr="title" tab-index="1" class="icon" data-glyph="account"></a>
+							</span>
+						</div>
+						<div class="cell">
+							<a href="#/bookmarks/0" trans="smartSearch" trans-attr="title" class="icon" data-glyph="search-alt"></a>
+
+							<a href="#/help" trans="help" trans-attr="title" class="icon" data-glyph="help"></a>
+
+							<button id="actionClose" tab-index="2" class="icon" data-glyph="close" ng-click="actions.close()"></button>
+						</div>
+					</div>
+
+					<div class="center" style="padding-top: 20px;margin-bottom: -4px;" ng-if="ads.items.length==0">
+						<span class="icon" data-glyph="home-logo"></span>
+					</div>
+
+				</div>
+
+				<div class="ads" ng-if="ads.items.length>0">
+					<div class="ads-wrap">
+						<div class="ad" ng-repeat="ad in ads.items" ng-if="ad.id" data-color="{{ad.color}}" ng-include="'templates/ads/'+ad.id+'.html'"></div>
+					</div>
+				</div>
+
+				<div class="home-hover-zone">
+					<div class="home-header"></div>
+					<div ng-include="'templates/extra/toolbar.html'"></div>
+				</div>
+			</div>
+
+			<div class="e-desktop-show">
+				<div class="header">
+					<div class="table table-max">
+						<div class="cell cell-max">
+							<window-actions></window-actions>
+						</div>
+						<div class="cell">
+							<a href="" ng-click="collections.addContextMenu()" trans="add" trans-attr="title" class="icon" data-glyph="plus-sidebar"></a>
+							<a href="" ng-click="actions.refresh()" trans="refresh" trans-attr="title" class="icon" data-glyph="refresh"></a>
+							<a href="#/settings" trans="settings" trans-attr="title" class="icon" data-glyph="config"></a>
+							<span ng-class="::{'like-a-boss':user.me.pro}">
+							<a href="" ng-click="user.userContextMenu()" trans="profile" trans-attr="title" class="icon" data-glyph="account"></a>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div></div>
+	</div>
+
+	<ng-include ng-if="bookmarkWorker.lastSaved._id" src="'templates/extra/allready.html'"></ng-include>
+
+	<div class="content"><div class="cell">
+		<scrollable>
+			<section class="side-section">
+				<ul class="items">
+					<li class="item" id="cItem-0" desktop-drop="-1" ui-sref-active="active">
+						<div class="item-wrap">
+							<span class="cell">
+								<span class="cover icon" data-glyph="collection-cover"></span>
+								<span class="title" trans="allBookmarks"></span>
+							</span>
+							<span class="cell">
+								<span class="count">{{complete.allCount}}</span>
+							</span>
+						</div><a ui-sref="app.bookmarks({cId: 0})" class="link"></a>
+					</li>
+				</ul>
+			</section>
+
+			<div class="side-sections">
+				<section class="side-section" ng-repeat="items in collections.items | orderBy: 'sort'" ng-class="{'hidden': items.hidden}">
+					<div class="label" data-mode="{{items.mode}}" ng-if="items.id!='default'" ng-class="{'hover':items.hover}" ng-mouseover="items.hover=true" ng-mouseleave="items.hover=false">
+						<div class="row">
+							<a href="" ng-click="items.hidden=!items.hidden;collections.saveGroups();" class="cell">
+								<span class="title">{{items.title}}</span> <i class="icon hidden-status" data-glyph="triangle"></i>
+							</a>
+							<span class="cell actions">
+								<span class="icon move-top" ng-click="collections.moveGroup(items,'top')" data-glyph="top" trans="moveUp" trans-attr="title"></span>
+								<span class="icon move-bottom" ng-click="collections.moveGroup(items,'bottom')" data-glyph="bottom" trans="moveDown" trans-attr="title"></span>
+
+								<a href="#collection?group={{items.index}}" class="icon" data-glyph="plus-arrow" trans="createCollection" trans-attr="title"></a>
+								<span class="icon" data-glyph="edit" ng-click="collections.setEditGroup(items,'edit');" trans="edit" trans-attr="title"></span>
+								<span class="icon" data-glyph="remove-alt" ng-click="collections.removeGroup(items);" trans="remove" trans-attr="title"></span>
+							</span>
+						</div>
+						<form ng-submit="collections.setEditGroup(items,'');">
+							<input class="edit-group-title" type="text" autofocus ng-model="items.title" ui-keyup="{'esc': 'collections.setEditGroup(items,false);'}" ng-blur="collections.setEditGroup(items,'');" />
+						</form>
+					</div>
+					<ul class="items" dnd-list="items.collections">
+						<li class="item nohover" ng-repeat="item in items.collections" bindonce bo-attr bo-attr-id="'cItem-'+item._id" ng-context-menu="collections.contextMenu"
+							ng-class="{'hover':item.hover, 'active': item._id == collections.current._id}" dnd-draggable="item" dnd-moved="items.collections.splice($index, 1); item.hover=true; collections.saveGroups();"
+							dnd-selected="collections.openCollection(item)" ng-mouseover="item.hover=true" ng-mouseleave="item.hover=false"
+							desktop-drop="{{::item._id}}">
+							<div class="item-wrap">
+								<span class="cell">
+									<span class="cover icon" data-glyph="collection-cover" background-cover="::item.cover[0]"></span>
+									<span class="title">{{::item.title}}</span>
+								</span>
+								<span class="cell">
+									<span class="stat">
+										<i class="icon" data-glyph="viewer" bo-if="item.collaborators && !item.author"></i>
+										<i class="icon" data-glyph="member" bo-if="item.collaborators && item.author"></i>
+										<i class="icon" data-glyph="public" bo-show="item.public"></i> <span class="count">{{::item.count}}</span>
+									</span>
+									<span class="actions">
+										<i class="icon context-menu-show" data-glyph="more" trans="edit" trans-attr="sharing"></i>
+
+										<!--i class="icon" data-glyph="person-add" ng-mousedown="collections.contextMenu[1][1]({item:item});" trans="edit" trans-attr="sharing"></i>
+										<i class="icon" data-glyph="edit" ng-mousedown="collections.contextMenu[0][1]({item:item});" trans="edit" trans-attr="title"></i-->
+									</span>
+								</span>
+							</div>
+						</li>
+
+						<li class="item" ng-hide="items.collections.length">
+							<div class="item-wrap">
+								<a href="#/collection?group={{items.index}}" class="cell no-collections-placeholder">
+									<span class="cover icon" data-glyph="plus-arrow"></span>
+									<span class="title" trans="createCollection{{(items.id!='default'?'OrDrag':'First')}}"></span>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</section>
+			</div>
+
+
+			<section class="side-section">
+				<ul class="items">
+					<li class="item" id="cItem--1" desktop-drop="-1" ui-sref-active="active">
+						<div class="item-wrap">
+							<span class="cell">
+								<span class="cover icon" data-glyph="collection-cover"></span>
+								<span class="title" trans="defaultCollection--1"></span>
+							</span>
+							<span class="cell">
+								<span class="count"></span>
+							</span>
+						</div><a ui-sref="app.bookmarks({cId: -1})" class="link"></a>
+					</li>
+					<li class="item" id="cItem--99" desktop-drop="-99" ui-sref-active="active">
+						<div class="item-wrap">
+							<span class="cell">
+								<span class="cover icon" data-glyph="collection-cover"></span>
+								<span class="title" trans="defaultCollection--99"></span>
+							</span>
+							<span class="cell">
+								<span class="count"></span>
+							</span>
+						</div><a ui-sref="app.bookmarks({cId: -99})" class="link"></a>
+					</li>
+				</ul>
+			</section>
+		</scrollable>
+	</div></div>
+
+	<div class="footer ng-scope" ng-if="::(!user.me.pro)">
+		<a href="https://raindrop.io/static/love" target="_blank" desktop-browser class="footer-wrap cell" style="background: #566281;">
+			<img src="img/pro-buy.png" class="pull-right" height="72" style="margin-top: -21px;" alt="" />
+			<b style="font-size: 16px;font-weight:600;display:block;padding-top:3px;color:white" trans="footerProAd"></b>
+			<span trans="footerProAdD"></span>
+		</a>
+	</div>
+	</div>
+
+
+	</div>
+
+	<div id="homeContent">
+	<div class="markup" ui-view></div>
+	</div>
+
+	<div id="homeView" ng-if="viewer.enabled"><div class="markup" ng-include="'templates/views/view.html'"></div></div>
+</div>

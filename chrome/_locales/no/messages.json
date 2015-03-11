@@ -1,0 +1,55 @@
+{
+  "savePage": {
+    "message": "Lagre til Raindrop.io",
+    "description": "Lagre til Raindrop.io"
+  },
+  "saveToInbox": {
+    "message": "Lagre til Inbox (Raindrop.io)",
+    "description": "Lagre til Inbox (Raindrop.io)"
+  },
+  "saveLink": {
+    "message": "Lagre til Raindrop.io",
+    "description": "Lagre til Raindrop.io"
+  },
+  "saveImage": {
+    "message": "Lagre dette bildet til Raindrop.io",
+    "description": "Lagre dette bildet til Raindrop.io"
+  },
+  "myBookmarks": {
+    "message":	"My bookmarks",
+    "description": "My bookmarks"
+  },
+  "appName": {
+    "message": "Raindrop.io - Smarte Bokmerker",
+    "description": "Raindrop.io - Smarte Bokmerker"
+  },
+  "appDesc": {
+    "message": "En vakker måte å huske det viktigste.",
+    "description":"En vakker måte å huske det viktigste."
+  },
+
+  "firstRun": {
+    "message":	"For start using Raindrop.io you just need to refresh current page and click again.",
+    "description": "First run"
+  },
+  "refreshPage": {
+    "message":	"Refresh current page",
+    "description": "Refresh"
+  },
+  "support": {
+    "message":	"Support",
+    "description": "Support"
+  },
+  "afterUpdateTitle": {
+    "message":	"The extension has been updated",
+    "description": "afterUpdateTitle"
+  },
+  "afterUpdate": {
+    "message":	"We have several new features, improvements and bug fixes. Want to see what's new in this version?",
+    "description": "afterUpdate"
+  },
+  "seeChangeLog": {
+    "message":	"Read more...",
+    "description": "seeChangeLog"
+  }
+}

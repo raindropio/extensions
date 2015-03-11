@@ -1,0 +1,14 @@
+{
+  "always-on-top": false,
+  "blurhide": false,
+  "dock": true,
+  "height": 622,
+  "left": 845,
+  "popup": {
+    "clickMode": "save"
+  },
+  "top": 93,
+  "tray": true,
+  "width": 1075,
+  "first-start": false
+}

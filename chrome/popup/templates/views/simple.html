@@ -1,0 +1,25 @@
+<div class="list-view">
+    <article class="folder" ng-repeat="item in childs.items" bindonce ng-context-menu="collections.contextMenu" desktop-drop="{{::item._id}}">
+        <div class="table">
+            <div class="cell folder-bg last-child">
+                <span class="cover icon" data-glyph="collection-cover" background-cover="::item.cover[0]"></span>
+            </div>
+            <div class="cell first-child">
+                <div bo-text="item.title"></div>
+                <span class="subinfo" bo-text="item.count + ' ' + ('elements' | sclon:item.count | translate)"></span>
+            </div>
+        </div>
+
+        <a href="" class="icon-item-more context-menu-show"><span class="icon" data-glyph="more-gray"></span></a>
+        <a bo-href="'#/bookmarks/'+item._id" class="item-link"></a>
+    </article>
+
+	<span>
+	<article ng-repeat="item in raindrops.items" id="raindrop{{::item._id}}" bindonce bo-attr bo-attr-data-type="item.type" ng-class="{'active':item.check, 'new':item.new, 'viewing': viewer.item._id == item._id}" ng-context-menu="raindrops.contextMenu">
+        <a href="" class="icon-item-more context-menu-show"><span class="icon" data-glyph="more-gray"></span></a>
+        <ng-include src="'templates/views/simple-item.html'"></ng-include>
+    </article>
+	</span>
+
+    <ng-include src="'templates/extra/no-bookmarks.html'"></ng-include>
+</div>

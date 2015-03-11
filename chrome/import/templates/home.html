@@ -1,0 +1,145 @@
+<div class="block index-block">
+	<div class="row">
+		<div class="cell index-sidebar">
+
+		</div>
+
+		<div class="cell index-content">
+			<div ng-show="data.browser.show">
+				<a href="#/browser" class="button">
+					<img ng-src="img/{{data.browser.current}}.png" class="browser-icon-{{data.browser.current}}" width="24" alt="" />
+					<span trans="browserBookmarks"></span>
+				</a>
+				<br>
+
+			</div>
+			<div ng-hide="data.browser.show">
+				<div class="small-header" style="margin-bottom:13px;" trans="browserBookmarks"></div>
+				<span class="button">
+					<input type="file" class="filezone filelocal" data-vendor="Chrome" />
+					<img src="img/chrome.png" width="22" height="22" alt="" />
+					<span>Google Chrome</span>
+				</span>
+				<br>
+
+				<span class="button">
+					<input type="file" class="filezone filelocal" data-vendor="Firefox" />
+					<img src="img/firefox.png" width="22" height="22" alt="" />
+					<span>Firefox</span>
+				</span>
+				<br>
+
+				<span class="button">
+					<input type="file" class="filezone filelocal" data-vendor="Safari" />
+					<img src="img/safari.png" width="22" height="22" alt="" />
+					<span>Safari</span>
+				</span>
+				<br>
+
+				<span class="button">
+					<input type="file" class="filezone filelocal" data-vendor="Opera" />
+					<img src="img/opera.png" width="22" height="22" alt="" />
+					<span>Opera</span>
+				</span>
+				<br>
+			</div>
+
+			<br>
+			<div class="small-header" style="margin-bottom:13px;" trans="otherServices"></div>
+
+			<span class="button">
+				<a href="http://help.getpocket.com/customer/portal/articles/482643-how-can-i-back-up-or-export-my-list-" target="_blank" class="info" desktop-browser></a>
+				<input type="file" class="filezone filelocal" data-vendor="Pocket" accept="text/html" />
+				<img src="img/pocket.png" width="22" height="22" alt="" />
+				<span>Pocket</span>
+			</span>
+			<br>
+			<span class="button">
+				<a href="https://www.instapaper.com/user/export" target="_blank" class="info" desktop-browser></a>
+				<input type="file" class="filezone filelocal" data-vendor="Instapaper" accept="text/html" />
+				<img src="img/instapaper.png" width="22" height="22" alt="" />
+				<span>Instapaper</span>
+			</span>
+			<br>
+			<span class="button">
+				<a href="https://www.readability.com/account/export" target="_blank" class="info" desktop-browser></a>
+				<input type="file" class="filezone filereadability" data-vendor="Readability" />
+				<img src="img/readability.png" width="22" height="22" alt="" />
+				<span>Readability</span>
+			</span>
+			<br>
+			<span class="button">
+				<a href="https://kippt.com/extras/export" target="_blank" class="info" desktop-browser></a>
+				<input type="file" class="filezone filelocal" data-vendor="Kippt" accept="text/html" />
+				<img src="img/kippt.png" width="22" height="22" alt="" />
+				<span>Kippt</span>
+			</span>
+			<br>
+			<span class="button">
+				<a href="http://export.delicious.com/settings/bookmarks/export" target="_blank" class="info" desktop-browser></a>
+				<input type="file" class="filezone filelocal" data-vendor="Delicious" accept="text/html" />
+				<img src="img/delicious.png" width="22" height="22" alt="" />
+				<span>Delicious</span>
+			</span>
+			<br>
+			<span class="button">
+				<a href="https://www.diigo.com/tools/export" target="_blank" class="info" desktop-browser></a>
+				<input type="file" class="filezone filelocal" data-vendor="Diigo" accept="text/html" />
+				<img src="img/diigo.png" width="22" height="22" alt="" />
+				<span>Diigo (Delicious Format)</span>
+			</span>
+			<br>
+			<span class="button">
+				<a href="https://www.diigo.com/tools/export" target="_blank" class="info" desktop-browser></a>
+				<input type="file" class="filezone filelocal" data-vendor="Pinboard" accept="text/html" />
+				<img src="img/pinboard.png" width="22" height="22" alt="" />
+				<span>Pinboard (Netscape Format)</span>
+			</span>
+			<br>
+			<span class="button">
+				<a href="https://dragdis.com/Account/Settings/export" target="_blank" class="info" desktop-browser></a>
+				<input type="file" class="filezone filelocal" data-vendor="Dragdis" accept="text/html" />
+				<img src="img/dragdis.png" width="22" height="22" alt="" />
+				<span>Dragdis</span>
+			</span>
+			<br>
+			<span class="button">
+				<a href="https://tools.dropmark.com/export" target="_blank" class="info" desktop-browser></a>
+				<input type="file" class="filezone filelocal" data-vendor="Dropmark" accept="text/html" />
+				<img src="img/dropmark.png" width="22" height="22" alt="" />
+				<span>Dropmark</span>
+			</span>
+			<br><br>
+			<div class="small-header" style="margin-bottom:13px;" trans="universal"></div>
+
+			<span class="button">
+				<input type="file" class="filezone filelocal" data-vendor="Import" />
+				<img src="img/file.png" width="13" height="16" style="padding:3px 5px;box-sizing:content-box;" alt="" />
+				<span trans="fromFile"></span> (*.html)
+			</span>
+				<br>
+
+			<a href="#/resetdata" trans="resetData" class="simple-link" style="display:block"></a>
+		</div>
+	</div>
+</div>
+
+<div class="index-bg">
+
+	<div class="block">
+		<div class="cell">
+			<div class="index-text">
+			<a href="https://raindrop.io/app"><img src="img/logo.png" height="96" alt="" /></a>
+			<h1 trans="importBookmarks"></h1>
+			<h2><span trans="to"></span> Raindrop.io</h2>
+
+			<br>
+			<div class="profile">
+				<img ng-src="{{user.email_MD5 ? 'https://www.gravatar.com/avatar/'+user.email_MD5+'?d=mm&s=96' : 'https://raindrop.io/svg/default-avatar.svg'}}" alt="" width="48" height="48" />
+				<p><span trans="hi"></span> <abbr>{{user.fullName}}</abbr><span trans="hiD"></span></p>
+			</div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,53 @@
+<div class="top"><div class="top-wrap"><div class="top-wrap-wrap">
+    <div class="header">
+        <div class="table table-max">
+            <div class="cell">
+                <a href="" ng-click="viewer.close()" trans="back" trans-attr="title" class="icon" data-glyph="back"></a>
+            </div>
+            <div class="cell cell-max">
+
+            </div>
+            <div class="cell">
+                <a href="" ng-click="actions.openBookmark(viewer.item._id)" trans="edit" trans-attr="title" class="icon" data-glyph="edit"></a>
+                <a href="{{viewer.item.link}}" desktop-browser trans="openInBrowser" trans-attr="title" class="icon" data-glyph="open-browser"></a>
+                <!--a href="" trans="moveSelectedBookmarks" trans-attr="title" class="icon" data-glyph="move-collection"></a>
+                <a href="" trans="remove" trans-attr="title" class="icon" data-glyph="remove-alt"></a-->
+
+                <a href="" ng-click="viewer.share()" class="icon" data-glyph="share"></a>
+            </div>
+        </div>
+    </div>
+</div></div></div>
+
+<div class="content" data-color="white">
+    <div class="anim-translate cell" style="position: relative;"><scrollable>
+        <div class="view-area">
+            <header>
+                <h1 class="light-font" id="post-title"><a href="{{viewer.item.link}}" desktop-browser>{{viewer.item.title}}</a></h1>
+                <address>{{viewer.item.type | translate}} <img id="post-favicon" ng-src="https://www.google.com/s2/favicons?domain={{viewer.item.domain}}" alt="" /> {{viewer.item.domain}}</address>
+            </header>
+
+            <div ng-switch="viewer.item.type">
+                <div ng-switch-default>
+                    <article ng-show="viewer.item.html" ng-bind-html="viewer.item.html"></article>
+                    <article class="center" ng-hide="viewer.item.html">
+                        <br><br>
+                        <span class="spinner"><img src="img/icon-loading.png" alt="" /></span>
+                        <br><br>
+                    </article>
+                </div>
+
+                <article ng-switch-when="link">
+                    <a href="{{viewer.item.link}}" desktop-browser class="view-note">
+                        <span class="view-note-image" ng-if="viewer.item.cover"><img src="{{viewer.item.cover | fixURL}}" alt="" /></span>
+                        <span ng-bind="viewer.item.excerpt || ('noDescription' | translate) "></span>
+                    </a>
+                </article>
+            </div>
+
+            <footer>
+                <a href="{{viewer.item.link}}" desktop-browser class="post-link">{{viewer.item.link}}</a>
+            </footer>
+        </div>
+    </scrollable></div>
+</div>

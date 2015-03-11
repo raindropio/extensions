@@ -1,0 +1,2 @@
+В popup.html срезаем все JS, убираем ng-csp.
+Копируем все кроме browsers/popup.js

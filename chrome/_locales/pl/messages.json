@@ -1,0 +1,54 @@
+{
+    "savePage": {
+        "message": "Zapisz stronę do Raindrop.io",
+        "description": "Zapisz stronę do Raindrop.io"
+    },
+    "saveToInbox": {
+        "message": "Zapisz do skrzynki odbiorczej (Raindrop.io)",
+        "description": "Zapisz do skrzynki odbiorczej (Raindrop.io)"
+    },
+    "saveLink": {
+        "message": "Zapisz stronę",
+        "description": "Zapisz stronę"
+    },
+    "saveImage": {
+        "message": "Zapisz obraz do Raindrop.io",
+        "description": "Zapisz obraz do Raindrop.io"
+    },
+    "myBookmarks": {
+        "message": "Moje zakładki",
+        "description": "Moje zakładki"
+    },
+    "appName": {
+        "message": "Raindrop.io - Inteligentne Zakładki",
+        "description": "Raindrop.io - Inteligentne Zakładki"
+    },
+    "appDesc": {
+        "message": "Zapamiętywanie ważnych rzeczy w atrakcyjny sposób.",
+        "description": "Zapamiętywanie ważnych rzeczy w atrakcyjny sposób."
+    },
+    "firstRun": {
+        "message": "Aby zacząć używać Raindrop.io musisz tylko odświeżyć aktualną stronę i kliknąć ponownie.",
+        "description": "Aby zacząć używać Raindrop.io musisz tylko odświeżyć aktualną stronę i kliknąć ponownie."
+    },
+    "refreshPage": {
+        "message": "Odśwież bieżącą stronę",
+        "description": "Odśwież bieżącą stronę"
+    },
+    "support": {
+        "message": "Wsparcie",
+        "description": "Wsparcie"
+    },
+    "afterUpdateTitle": {
+        "message": "Rozszerzenie zostało zaktualizowane",
+        "description": "Rozszerzenie zostało zaktualizowane"
+    },
+    "afterUpdate": {
+        "message": "Wprowadziliśmy kilka nowych funkcji, ulepszeń oraz poprawek błędów. Chciałbyś zobaczyć, co jest nowego w tej wersji?",
+        "description": "Wprowadziliśmy kilka nowych funkcji, ulepszeń oraz poprawek błędów. Chciałbyś zobaczyć, co jest nowego w tej wersji?"
+    },
+    "seeChangeLog": {
+        "message": "Czytaj więcej...",
+        "description": "Czytaj więcej..."
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "savePage": {
+        "message": "Sla pagina op naar Raindrop.io",
+        "description": "Sla pagina op naar Raindrop.io"
+    },
+    "saveToInbox": {
+        "message": "Opslaan in postvak in (Raindrop.io)",
+        "description": "Opslaan in postvak in (Raindrop.io)"
+    },
+    "saveLink": {
+        "message": "Pagina opslaan",
+        "description": "Pagina opslaan"
+    },
+    "saveImage": {
+        "message": "Afbeelding opslaan naar Raindrop.io",
+        "description": "Afbeelding opslaan naar Raindrop.io"
+    },
+    "myBookmarks": {
+        "message": "Mijn bladwijzers",
+        "description": "Mijn bladwijzers"
+    },
+    "appName": {
+        "message": "Raindrop.io - Slimme bladwijzers",
+        "description": "Raindrop.io - Slimme bladwijzers"
+    },
+    "appDesc": {
+        "message": "Een prachtige manier om de meest belangrijke zaken te onthouden.",
+        "description": "Een prachtige manier om de meest belangrijke zaken te onthouden."
+    },
+    "firstRun": {
+        "message": "Om te starten met Raindrop.io moet u de huidige pagina vernieuwen en opnieuw klikken.",
+        "description": "Om te starten met Raindrop.io moet u de huidige pagina vernieuwen en opnieuw klikken."
+    },
+    "refreshPage": {
+        "message": "Huidige pagina vernieuwen",
+        "description": "Huidige pagina vernieuwen"
+    },
+    "support": {
+        "message": "Ondersteuning",
+        "description": "Ondersteuning"
+    },
+    "afterUpdateTitle": {
+        "message": "De extensie is bijgewerkt",
+        "description": "De extensie is bijgewerkt"
+    },
+    "afterUpdate": {
+        "message": "We hebben verschillende nieuwe functies, verbeteringen en bug fixes. Wil je zien wat er nieuw is in deze versie?",
+        "description": "We hebben verschillende nieuwe functies, verbeteringen en bug fixes. Wil je zien wat er nieuw is in deze versie?"
+    },
+    "seeChangeLog": {
+        "message": "Lees meer...",
+        "description": "Lees meer..."
+    }
+}
