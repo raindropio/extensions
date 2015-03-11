@@ -1,5 +1,24 @@
 {
-  "name"    : "Raindrop",
-  "version" : "3.4.1",
-  "main"    : "main.js"
+  "name": "Raindrop",
+  "version": "3.4.1",
+  "main": "main.js",
+  "dependencies": {
+    "body-parser": "~1.10.0",
+    "connect": "~3.3.3",
+    "applescript": "~0.2.1",
+    "cheerio": "~0.18.0",
+    "fetch": "~0.3.6",
+    "node-read": "~0.1.6",
+    "encoding": "~0.1.11",
+    "request": "~2.51.0",
+    "sanitizer": "~0.1.2",
+    "string": "~3.0.0",
+    "validator": "~3.24.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
 }
