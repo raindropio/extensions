@@ -5,6 +5,7 @@ HOST: http://raindrop.io:1505/v1
 Please note that you must [register your application](https://raindrop.io/app/profile) and authenticate with OAuth or use your API client id and secret when making requests.
 But API methods with **Public** label not require authentication.
 
+# Group Users
 ## User [/user/{user_id}]
 ### Retrieve [GET]
 
@@ -30,7 +31,7 @@ But API methods with **Public** label not require authentication.
         }
 
 ## User actions [/userConfig]
-### Save groups [PUT]
+### Update groups [PUT]
 
 + Request (application/json)
 
@@ -62,6 +63,43 @@ But API methods with **Public** label not require authentication.
             "result": true
         }
         
+## Tags [/tags]
+### Retrieve [GET]
++ Response 200 (application/json)
+
+        {
+            "items":[
+                {"_id":"angular","count":8}
+            ],
+            "result": true
+        }
+        
+## Sites [/sites]
+### Retrieve [GET]
++ Response 200 (application/json)
+
+        {
+            "items":[
+                {"_id":"dribbble.com","count":70}
+            ],
+            "result": true
+        }
+        
+## Statistics [/stat]
+### Retrieve [GET]
++ Response 200 (application/json)
+
+        {
+            "items":[
+                {"_id":"link","count":455},
+                {"_id":"article","count":150},
+                {"_id":"image","count":95},
+                {"_id":"video","count":14}
+            ],
+            "result": true
+        }
+
+# Group Collections        
 
 ## Collections [/collections/{user_id}{?parent}]
 ### Retrieve collections list [GET]
@@ -194,6 +232,7 @@ But API methods with **Public** label not require authentication.
         }
 
 
+# Group Bookmarks
 
 ## Bookmarks [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
 ### Retrive and/or search bookmarks [GET]
@@ -308,3 +347,6 @@ But API methods with **Public** label not require authentication.
         {
             "result": true
         }
+
+
+
