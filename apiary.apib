@@ -1,0 +1,194 @@
+FORMAT: 1A
+HOST: http://raindrop.io:1505/v1
+
+# Raindrop.io API 1.0
+Please note that you must [register your application](https://raindrop.io/app/profile) and authenticate with OAuth or use your API client id and secret when making requests.
+But API methods with **Public** label not require authentication.
+
+## User [/user/{user_id}]
+### Retrieve user [GET]
+
++ Parameters
+    + user_id (number,optional) ... By default current user.
+
++ Response 200 (application/json)
+
+        {
+            "user": {
+                "_id": 32,
+                "email": "User's email",
+                "fullName": "User's full name",
+                "groups": [ /*Array of groups*/
+                    {
+                        "title": "Group name",
+                        "collections": [1,2,3], /*id's of collections which are in this group*/
+                        "hidden": false /*Group collapsed or not*/
+                    }
+                ]
+            },
+            "result": true
+        }
+
+## User actions [/userConfig]
+### Save groups [PUT]
+
++ Request (application/json)
+
+        {
+            "groups": [
+                {
+                    "title":"Group name",
+                    "collections": [1,2,3],
+                    "hidden": false
+                }
+            ]
+        }
+
++ Response 200 (application/json)
+
+        {
+            "user": {
+                "_id": 32,
+                "email": "User's email",
+                "fullName": "User's full name",
+                "groups": [
+                    {
+                        "title": "Group name",
+                        "collections": [1,2,3],
+                        "hidden": false
+                    }
+                ]
+            },
+            "result": true
+        }
+        
+
+## Collections [/collections/{user_id}{?parent}]
+### Retrieve collections list [GET]
++ Parameters
+    + user_id (number, optional) ... By default current user
+    + parent (number, optional) ... Parent collection id. By default root collections.
+
++ Response 200 (application/json)
+
+        {
+            "items":[
+                {
+                    _id: 9,
+                    title: "Collection title",
+                    user.$id: 32,
+                    excerpt: "Description",
+                    count: 1,
+                    created: Date,
+                    lastUpdate: Date,
+                    public: true,
+                    view: "grid"/"list",
+                    cover: ["/img/templates/basketball.png"],
+                    parent.$id: 0
+                }
+            ],
+            "result": true
+        }
+        
+## Collection [/collection/{id}]
+### Retrieve [GET]
++ Parameters
+    + id (number, required) ... Collection id
+    
++ Response 200 (application/json)
+
+        {
+            "item": {
+                "_id": 9,
+                "title": "Collection title",
+                "user.$id": 32,
+                "excerpt": "Description",
+                "count": 1,
+                "created": Date,
+                "lastUpdate": Date,
+                "public": true,
+                "view": "grid"/"list",
+                "cover": ["/img/templates/basketball.png"],
+                "parent.$id": 0
+            },
+            "result": true
+        }
+        
+### Create [POST]
++ Parameters
+    + id (optional) ... Not required
+
++ Request (application/json)
+
+        {
+            "title", /*Collection title*/
+            "excerpt", /*Description (optional)*/
+            "public", /*Public collection or not. By default false (boolean, optional)*/
+            "view", /*View style ("list"/"grid"). By default "list". (optional)*/
+            "parentId", /*"root" or id of parent collection (optional)*/
+            "cover_path" /*name of icon. For example "airplane". Entire list of icons in API docs. (optional) */
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "item": {
+                "_id": 9,
+                "title": "Collection title",
+                "user.$id": 32,
+                "excerpt": "Description",
+                "count": 1,
+                "created": Date,
+                "lastUpdate": Date,
+                "public": true,
+                "view": "grid"/"list",
+                "cover": ["/img/templates/basketball.png"],
+                "parent.$id": 0
+            },
+            "result": true
+        }
+        
+        
+### Update [PUT]
++ Parameters
+    + id (number, required) ... Collection id
+    
++ Request (application/json)
+
+        {
+            "title", /*Collection title*/
+            "excerpt", /*Description (optional)*/
+            "public", /*Public collection or not. By default false (boolean, optional)*/
+            "view", /*View style ("list"/"grid"). By default "list". (optional)*/
+            "parentId", /*"root" or id of parent collection (optional)*/
+            "cover_path" /*name of icon. For example "airplane". Entire list of icons in API docs. (optional) */
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "item": {
+                "_id": 9,
+                "title": "Collection title",
+                "user.$id": 32,
+                "excerpt": "Description",
+                "count": 1,
+                "created": Date,
+                "lastUpdate": Date,
+                "public": true,
+                "view": "grid"/"list",
+                "cover": ["/img/templates/basketball.png"],
+                "parent.$id": 0
+            },
+            "result": true
+        }
+        
+### Delete [DELETE]
++ Parameters
+    + id (number, required) ... Collection id
+    
++ Response 200 (application/json)
+        
+        {
+            "result": true
+        }
