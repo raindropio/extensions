@@ -6,7 +6,7 @@ Please note that you must [register your application](https://raindrop.io/app/pr
 But API methods with **Public** label not require authentication.
 
 ## User [/user/{user_id}]
-### Retrieve user [GET]
+### Retrieve [GET]
 
 + Parameters
     + user_id (number,optional) ... By default current user.
@@ -114,7 +114,7 @@ But API methods with **Public** label not require authentication.
             "result": true
         }
         
-### Create [POST /collection]
+### Create [POST]
 + Parameters
     + id (optional) ... Not required
 
@@ -196,7 +196,7 @@ But API methods with **Public** label not require authentication.
 
 
 ## Bookmarks [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
-### Retrive bookmarks from collection [GET]
+### Retrive and/or search bookmarks [GET]
 + Parameters
     + collection_id (number, required) ... Collection id. Reserved id's: 0 - all bookmarks; -1 - inbox; -99 - trash;
     + search (array, optional) ... For example: [{"key":"tag","val":"angular"}, {"key":"type","val":"article"}]. Available *keys*: word, type, tag, domain. Field *val* is query for type of key.
@@ -227,4 +227,84 @@ But API methods with **Public** label not require authentication.
                 type: "article", /* article/image/video/link */
                 user.$id: 32
             ]
+        }
+
+## Bookmark [/bookmark/{id}]
+### Retrieve [GET]
++ Parameters
+    + id (number, required) ... Bookmark id
+
++ Response 200 (application/json)
+
+        {
+            "result": true,
+            "author": true, /* if current user is owner */
+            "item": [
+                _id: 2,
+                collection.$id: 210296,
+                cover: "http://img.com/img.jpg", /* cover image */
+                coverId: null, /* cover index from media array */
+                domain: "google.com",
+                excerpt: "Description",
+                lastUpdate: Date,
+                link: "http://google.com/about.html", /* url */
+                media: [{type: "image", link: "http://img.com/img.jpg"}], /* array of images */
+                html: "<b>Html content</b>",
+                next: 3, /* next bookmark id */
+                prev: 1, /* previous bookmark id */
+                removed: false, /* removed or not */
+                tags: ["angular","js"],
+                title: "Title",
+                type: "article", /* article/image/video/link */
+                user.$id: 32
+            ]
+        }
+        
+### Create [POST]
++ Parameters
+    + id (number, optional) ... Not required
+    
++ Request (application/json)
+
+        {
+            collection.$id: 210296, /* collection id (optional) */
+            cover: "URL", /* cover image (optional) */
+            coverId: null, /* cover index from media array (optional) */
+            excerpt: "Description", /* (optional) */
+            media: [{type: "image", link: "http://img.com/img.jpg"}], /* array of images (optional) */
+            tags: ["angular","js"], /* (optional) */
+            title: "Title",
+            type: "article" /* article/image/video/link (optional) */
+        }
+        
++ Response 200 (application/json)
+
+### Update [PUT]
++ Parameters
+    + id (number, required) ... Bookmark id
+    
++ Request (application/json)
+
+        {
+            collection.$id: 210296, /* collection id (optional) */
+            cover: "URL", /* cover image (optional) */
+            coverId: null, /* cover index from media array (optional) */
+            excerpt: "Description", /* (optional) */
+            media: [{type: "image", link: "http://img.com/img.jpg"}], /* array of images (optional) */
+            tags: ["angular","js"], /* (optional) */
+            title: "Title",
+            type: "article" /* article/image/video/link (optional) */
+        }
+        
++ Response 200 (application/json)
+
+
+### Delete [DELETE]
++ Parameters
+    + id (number, required) ... Bookmark id
+    
++ Response 200 (application/json)
+        
+        {
+            "result": true
         }
