@@ -258,6 +258,23 @@ But API methods with **Public** label not require authentication.
             "result": true
         }
 
+### Invite by email [POST]
++ Parameters
+    + id (number, required) ... Collection id
+    
++ Request (application/json)
+
+        {
+            "accesslevel": "member", /* "member" or "viewer" */
+            "emails": "one@mail.com, two@mail.com" /* emails separated by comma */
+        }
+
++ Response 200 (application/json)
+
+        {
+            "result": true,
+            "emails": ["one@mail.com", "two@mail.com"]
+        }
 
 # Group Bookmarks
 
