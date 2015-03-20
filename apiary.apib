@@ -114,7 +114,7 @@ But API methods with **Public** label not require authentication.
             "result": true
         }
         
-### Create [POST]
+### Create [POST /collection]
 + Parameters
     + id (optional) ... Not required
 
@@ -193,3 +193,12 @@ But API methods with **Public** label not require authentication.
             "result": true
         }
 
+
+
+## Bookmarks [/bookmarks/{collection_id}{?search}{?page}{?perpage}]
+### Retrive bookmarks from collection [GET]
++ Parameters
+    + collection_id (number, required) ... Collection id. Reserved id's: 0 - all bookmarks; -1 - inbox; -99 - trash;
+    + search (array, optional) ... For example: [{"key":"tag","val":"angular"}, {"key":"type","val":"article"}]. Available *keys*: word, type, tag, domain. Field *val* is query for type of key.
+    + perpage (number, optional) ... How many bookmarks per page. Max 40.
+    + page (number, optional) ... 0,1,2,3,4...
