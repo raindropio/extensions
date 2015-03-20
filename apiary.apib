@@ -226,6 +226,38 @@ But API methods with **Public** label not require authentication.
             "result": true
         }
 
+## Collaborators [/collection/{collection_id}/collaborators]
+### Retrieve collaborators of collection [GET]
++ Parameters
+    + id (number, required) ... Collection id
+    
++ Response 200 (application/json)
+
+        {
+            "items": [
+                {
+                    _id: 32,
+                    email: "owner@owner.com",
+                    fullName: "User Name",
+                    me: true,
+                    role: "owner"
+                },
+                {
+                    _id: 47840,
+                    email: "member@collaborator.com",
+                    fullName: "User Name",
+                    role: "member"
+                },
+                {
+                    _id: 47840,
+                    email: "viewer@viewer.com",
+                    fullName: "User Name",
+                    role: "viewer"
+                }
+            ]
+            "result": true
+        }
+
 
 # Group Bookmarks
 
