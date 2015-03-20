@@ -195,10 +195,36 @@ But API methods with **Public** label not require authentication.
 
 
 
-## Bookmarks [/bookmarks/{collection_id}{?search}{?page}{?perpage}]
+## Bookmarks [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
 ### Retrive bookmarks from collection [GET]
 + Parameters
     + collection_id (number, required) ... Collection id. Reserved id's: 0 - all bookmarks; -1 - inbox; -99 - trash;
     + search (array, optional) ... For example: [{"key":"tag","val":"angular"}, {"key":"type","val":"article"}]. Available *keys*: word, type, tag, domain. Field *val* is query for type of key.
     + perpage (number, optional) ... How many bookmarks per page. Max 40.
     + page (number, optional) ... 0,1,2,3,4...
+    + sort (string, optional) ... Sorting: "lastUpdate" (by date) or "title" (alphabetical)
+
++ Response 200 (application/json)
+
+        {
+            "result": true,
+            "author": true, /* if current user is owner */
+            "items": [
+                _id: 2,
+                collection.$id: 210296,
+                cover: "http://img.com/img.jpg", /* cover image */
+                coverId: null, /* cover index from media array */
+                domain: "google.com",
+                excerpt: "Description",
+                lastUpdate: Date,
+                link: "http://google.com/about.html", /* url */
+                media: [{type: "image", link: "http://img.com/img.jpg"}], /* array of images */
+                next: 3, /* next bookmark id */
+                prev: 1, /* previous bookmark id */
+                removed: false, /* removed or not */
+                tags: ["angular","js"],
+                title: "Title",
+                type: "article", /* article/image/video/link */
+                user.$id: 32
+            ]
+        }
