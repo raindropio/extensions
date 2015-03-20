@@ -30,7 +30,7 @@ But API methods with **Public** label not require authentication.
             "result": true
         }
 
-## User actions [/userConfig]
+## Current user actions [/userConfig]
 ### Update groups [PUT]
 
 + Request (application/json)
@@ -46,22 +46,17 @@ But API methods with **Public** label not require authentication.
         }
 
 + Response 200 (application/json)
+        
+### Change language [PUT]
+
++ Request (application/json)
 
         {
-            "user": {
-                "_id": 32,
-                "email": "User's email",
-                "fullName": "User's full name",
-                "groups": [
-                    {
-                        "title": "Group name",
-                        "collections": [1,2,3],
-                        "hidden": false
-                    }
-                ]
-            },
-            "result": true
+            "lang": "en_US"
         }
+        
++ Response 200 (application/json)
+
         
 ## Tags [/tags]
 ### Retrieve [GET]
