@@ -6,7 +6,7 @@ The first version of the Raindrop.io API is an exciting step forward towards mak
 
 Build something great.
 
-# Authentication
+# Oauth
 The Raindrop.io API uses the OAuth 2.0 protocol for simple, but effective authentication and authorization.
 The one thing to keep in mind is that all requests to the API must be made over SSL (https:// not http://).
 
@@ -87,6 +87,14 @@ Once the user has authenticated and then authorized your application, Instagram 
 `http://your-redirect-uri#access_token=ACCESS-TOKEN`
 Simply grab the access_token off the URL fragment and you’re good to go. If the user chooses not to authorize your application, you’ll receive the same error response as in the explicit flow
 
+# Authentication
+There are two ways to authenticate through Raindrop.io API.
+
+### OAuth2 Token (sent in a header)
+`curl -H "Authorization: Bearer OAUTH_TOKEN" https://raindrop.io/v1/user`
+
+### OAuth2 Token (sent as a parameter)
+`curl https://api.dribbble.com/v1/user?access_token=OAUTH_TOKEN`
 
 # Group Users
 ## User [/user/{user_id}]
