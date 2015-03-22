@@ -94,7 +94,16 @@ There are two ways to authenticate through Raindrop.io API.
 `curl -H "Authorization: Bearer OAUTH_TOKEN" https://raindrop.io/v1/user`
 
 ### OAuth2 Token (sent as a parameter)
-`curl https://api.dribbble.com/v1/user?access_token=OAUTH_TOKEN`
+`curl https://raindrop.io/v1/user?access_token=OAUTH_TOKEN`
+
+# Errors
+Every response from API have **result** boolean field. Also some methods have **error** string field.
+```
+{
+    "result": false,
+    "error": "CollaboratorsIncorrectToken"
+}
+```
 
 # Group Users
 ## User [/user/{user_id}]
