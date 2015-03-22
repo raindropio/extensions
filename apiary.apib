@@ -107,6 +107,9 @@ Every response from API have **result** boolean field. Also some methods have **
 
 # Group Users
 ## User [/user/{user_id}]
+Get currently logged user or a specified id.
+> If you getting specified id response *email* field will be MD5 hash. For example you can use it for Gravatar URL.
+
 ### Retrieve [GET]
 
 + Parameters
@@ -326,7 +329,19 @@ Every response from API have **result** boolean field. Also some methods have **
             "result": true
         }
 
+## Childrens [/childrens]
+Getting all collections with positive parent_id field.
+### Retrieve all childrens [GET]
++ Response 200 (application/json)
+        
+        {
+            "items": [],
+            "result": true
+        }
+
 ## Collaborators [/collection/{collection_id}/collaborators]
+Working with shared collections and their members/collaborators.
+
 ### Retrieve collaborators of collection [GET]
 + Parameters
     + id (number, required) ... Collection id
@@ -358,7 +373,7 @@ Every response from API have **result** boolean field. Also some methods have **
             "result": true
         }
 
-### Invite by email [POST]
+### Invite collaborator by email [POST]
 + Parameters
     + id (number, required) ... Collection id
     
