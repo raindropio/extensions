@@ -5,6 +5,88 @@ HOST: http://raindrop.io:1505/v1
 Please note that you must [register your application](https://raindrop.io/app/profile) and authenticate with OAuth or use your API client id and secret when making requests.
 But API methods with **Public** label not require authentication.
 
+# Authentication
+The Raindrop.io API uses the OAuth 2.0 protocol for simple, but effective authentication and authorization.
+The one thing to keep in mind is that all requests to the API must be made over SSL (https:// not http://).
+
+<br>
+#### Do you need to authenticate?
+Some API not require authentication (public collections or public bookmarks). However, other requests require authentication - specifically requests made on behalf of a user. Authenticated requests require an access_token. These tokens are unique to a user and should be stored securely. Access tokens may expire at any time in the future.
+
+## Receiving an *access_token*
+In order to receive an *access_token*, you must do the following:
+
+1.  Direct the user to our authorization url.
+    - If the user is not logged in, they will be asked to log in.
+    - The user will be asked if they would like to grant your application access to her Raindrop.io data.
+2.  The server will redirect the user in one of two ways that you choose:
+    - **Server-side flow (reccommended)**: Redirect the user to a URI of your choice. Take the provided **code** parameter and exchange it for an *access_token* by POSTing the code to our access_token url.
+    - **Implicit flow**: Instead of handling a code, we include the access_token as a fragment (#) in the URL. This method is less secure, but allows applications without any server component to receive an access_token.
+
+## Server-side (Explicit) Flow
+Using the server-side flow is quite easy. Simply follow these steps:
+
+### Step One: Direct your user to our authorization URL
+`https://raindrop.io/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=code`
+
+At this point, we present the user with a login screen and then a confirmation screen where to grant your app access to her Raindrop.io data.
+
+### Step Two: Receive the redirect from Raindrop.io
+Once a user authorizes your application, we issue a redirect to your redirect_uri with a code parameter to use in step three.
+`http://your-redirect-uri?code=CODE`
+
+> Note that the host and path components of your redirect URI must match exactly (including trailing slashes) your registered redirect_uri.
+
+If your request for approval is denied by the user, then we will redirect the user to your redirect_uri with the following parameters:
+- **error**: access_denied
+
+`http://your-redirect-uri?error=access_denied`
+
+> It is your responsibility to fail gracefully in this situation and display a corresponding error message to your user.
+
+### Step Three: Request the access_token
+Now you need to exchange the **code** you have received in the previous step for an access token. In order to make this exchange, you simply have to POST this code, along with some app identification parameters, to our *access_token* endpoint. These are the required parameters:
+- **client_id**: your client id
+- **client_secret**: your client secret
+- **grant_type**: **authorization_code** is currently the only supported value
+- **redirect_uri**: the redirect_uri you used in the authorization request. Note: this has to be the same value as in the authorization request.
+- **code**: the exact code you received during the authorization step.
+
+This is a sample request:
+
+```
+curl -F 'client_id=CLIENT_ID' \
+    -F 'client_secret=CLIENT_SECRET' \
+    -F 'grant_type=authorization_code' \
+    -F 'redirect_uri=AUTHORIZATION_REDIRECT_URI' \
+    -F 'code=CODE' \
+    https://raindrop.io/oauth/access_token
+```
+
+If successful, this call will return a neatly packaged OAuth Token that you can use to make authenticated calls to the API:
+
+```
+{
+    "access_token": "Ny5EStPDZFpk2HnnEPdg6o79MFNciCD5"
+}
+```
+
+Even though the access token does not specify an expiration time, your app should handle the case that either the user revokes access, or Raindrop.io expires the token after some period of time. In this case, your meta of your responses will contain an “error_type=OAuthAccessTokenError”. In other words: **do not** assume your access_token is valid forever.
+
+## Client-Side (Implicit) Authentication
+If you are building an app that does not have a server component (a purely javascript app, for instance), you will notice that it is impossible to complete step three above to receive your access_token without also having to store the secret on the client. You should **never** pass or store your client_id secret onto a client. For these situations there is the Implicit Authentication Flow.
+
+### Step One: Direct your user to our authorization URL
+`https://raindrop.io/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=token`
+
+At this point, we present the user with a login screen and then a confirmation screen where they grant your app’s access to their Raindrop.io data. Note that unlike the explicit flow the response type here is “token”.
+
+### Step Two: Receive the access_token via the URL fragment
+Once the user has authenticated and then authorized your application, Instagram redirects them to your redirect_uri with the access_token in the url fragment. It will look like this:
+`http://your-redirect-uri#access_token=ACCESS-TOKEN`
+Simply grab the access_token off the URL fragment and you’re good to go. If the user chooses not to authorize your application, you’ll receive the same error response as in the explicit flow
+
+
 # Group Users
 ## User [/user/{user_id}]
 ### Retrieve [GET]
@@ -275,8 +357,49 @@ But API methods with **Public** label not require authentication.
             "result": true,
             "emails": ["one@mail.com", "two@mail.com"]
         }
-        
-### Remove all collaborators [DEL]
+
+### Update collaborator access level [PUT]
++ Parameters
+    + id (number, required) ... Collection id
+    
++ Request (application/json)
+
+        {
+            "accesslevel": "member", /* "member" or "viewer" */
+            "userId": 32
+        }
+
++ Response 200 (application/json)
+
+        {
+            "result": true
+        }
+
+### Remove all collaborators [DELETE]
++ Parameters
+    + id (number, required) ... Collection id
+
++ Response 200 (application/json)
+
+        {
+            "result": true
+        }
+
+## Icons [/coverTemplates]
+Collection icon templates. Full path to icon will be "https://raindrop.io/{path}/{icon_name}.png". But when you create or update collection you need specify only *{icon_name}*, not full path.
+### Retrieve [GET]
++ Response 200 (application/json)
+
+        {
+            "result": true,
+            "items": {
+                "airplane",
+                "aquarium",
+                "attantion"
+            },
+            "path":"/img/templates/"
+        }
+
 
 # Group Bookmarks
 
