@@ -237,6 +237,8 @@ Count of bookmarks by type of authenticated user.
         }
         
 ## Collection [/collection/{id}]
+> You can access to public collection without *access_token*
+
 ### Retrieve [GET]
 + Parameters
     + id (number, required) ... Collection id
@@ -447,6 +449,8 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
 # Group Bookmarks
 
 ## Bookmarks [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
+> You can access to public collections bookmarks without *access_token*
+
 ### Retrive and/or search bookmarks [GET]
 + Parameters
     + collection_id (number, required) ... Collection id. Reserved id's: 0 - all bookmarks; -1 - inbox; -99 - trash;
@@ -481,6 +485,8 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
         }
 
 ## Bookmark [/bookmark/{id}]
+> You can access to bookmark from public collection without *access_token*
+
 ### Retrieve [GET]
 + Parameters
     + id (number, required) ... Bookmark id
