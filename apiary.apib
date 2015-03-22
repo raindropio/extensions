@@ -107,8 +107,8 @@ Every response from API have **result** boolean field. Also some methods have **
 
 # Group Users
 ## User [/user/{user_id}]
-Get currently logged user or a specified id.
-> If you getting specified id response *email* field will be MD5 hash. For example you can use it for Gravatar URL.
+Get authenticated user or a specific user id.
+> If you getting specific user id response *email* field will be MD5 hash. For example you can use it for Gravatar URL.
 
 ### Retrieve [GET]
 
@@ -134,7 +134,7 @@ Get currently logged user or a specified id.
         }
 
 ## User actions [/userConfig]
-Some methods available only for the current user.
+Some methods available only for the authenticated user.
 
 ### Update groups [PUT]
 
@@ -164,7 +164,7 @@ Some methods available only for the current user.
 
         
 ## Tags [/tags]
-All tags of current user sorted by frequency of use
+All tags of authenticated user sorted by frequency of use
 
 ### Retrieve [GET]
 + Response 200 (application/json)
@@ -177,7 +177,7 @@ All tags of current user sorted by frequency of use
         }
         
 ## Sites [/sites]
-All domains of current user sorted by frequency of use
+All domains of authenticated user sorted by frequency of use
 
 ### Retrieve [GET]
 + Response 200 (application/json)
@@ -190,7 +190,7 @@ All domains of current user sorted by frequency of use
         }
         
 ## Statistics [/stat]
-Count of bookmarks by type of current user.
+Count of bookmarks by type of authenticated user.
 
 ### Retrieve [GET]
 + Response 200 (application/json)
