@@ -206,6 +206,17 @@ Count of bookmarks by type of authenticated user.
         }
 
 # Group Collections        
+One collection have such fields:
+- **_id** - incremental id
+- **title** - name of collection
+- **excerpt** - description (optional)
+- **count** - count of bookmarks in this collection
+- **created** - date of creation
+- **lastUpdate** - date of last update
+- **public** - public (true) or private (false) collection
+- **view** - style of view as "list", "grid", "masonry" (pinterest style), "simple" (very simple list). In your interface you can support only "list" and "grid" styles. But bind "masonry" to "grid" and "simple" to "list" view style.
+- **cover** - array with one item. Icon of collection
+- **parent.$id** - parent collection id. If not specified root
 
 ## List [/collections/{user_id}{?parent}]
 ### Retrieve collections [GET]
@@ -342,7 +353,7 @@ Count of bookmarks by type of authenticated user.
         }
 
 ## Childrens [/childrens]
-Getting all collections with positive parent_id field.
+Getting all collections with positive parent_id field. Available only for users with PRO account.
 ### Retrieve all childrens [GET]
 + Response 200 (application/json)
         
