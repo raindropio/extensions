@@ -133,7 +133,9 @@ Get currently logged user or a specified id.
             "result": true
         }
 
-## Current user actions [/userConfig]
+## User actions [/userConfig]
+Some methods available only for the current user.
+
 ### Update groups [PUT]
 
 + Request (application/json)
@@ -162,6 +164,8 @@ Get currently logged user or a specified id.
 
         
 ## Tags [/tags]
+All tags of current user sorted by frequency of use
+
 ### Retrieve [GET]
 + Response 200 (application/json)
 
@@ -173,6 +177,8 @@ Get currently logged user or a specified id.
         }
         
 ## Sites [/sites]
+All domains of current user sorted by frequency of use
+
 ### Retrieve [GET]
 + Response 200 (application/json)
 
@@ -184,6 +190,8 @@ Get currently logged user or a specified id.
         }
         
 ## Statistics [/stat]
+Count of bookmarks by type of current user.
+
 ### Retrieve [GET]
 + Response 200 (application/json)
 
@@ -200,7 +208,9 @@ Get currently logged user or a specified id.
 # Group Collections        
 
 ## Collections [/collections/{user_id}{?parent}]
-### Retrieve collections list [GET]
+> You can access to public collections of specific user without *access_token*
+
+### Retrieve collections [GET]
 + Parameters
     + user_id (number, optional) ... By default current user
     + parent (number, optional) ... Parent collection id. By default root collections.
@@ -541,6 +551,7 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
 
 
 ### Delete [DELETE]
+When you delete bookmark from any collection it will be placed to user **Trash** collection. But if you try remove bookmark from Trash collection it will be removed permanently.
 + Parameters
     + id (number, required) ... Bookmark id
     
