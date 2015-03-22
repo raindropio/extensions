@@ -216,7 +216,7 @@ One collection have such fields:
 - **public** - public (true) or private (false) collection
 - **view** - style of view as "list", "grid", "masonry" (pinterest style), "simple" (very simple list). In your interface you can support only "list" and "grid" styles. But bind "masonry" to "grid" and "simple" to "list" view style.
 - **cover** - array with one item. Icon of collection
-- **parent.$id** - parent collection id. If not specified root
+- **parent.$id** - parent collection id. If not specified will be root collection
 
 ## List [/collections/{user_id}{?parent}]
 ### Retrieve collections [GET]
@@ -266,7 +266,7 @@ One collection have such fields:
                 "created": Date,
                 "lastUpdate": Date,
                 "public": true,
-                "view": "list", /* Can be "list", "grid", "masonry", "simple" */
+                "view": "list",
                 "cover": ["/img/templates/basketball.png"],
                 "parent.$id": 0
             },
@@ -280,10 +280,10 @@ One collection have such fields:
 + Request (application/json)
 
         {
-            "title", /*Collection title*/
-            "excerpt", /*Description (optional)*/
-            "public", /*Public collection or not. By default false (boolean, optional)*/
-            "view", /*View style ("list"/"grid"). By default "list". (optional)*/
+            "title",
+            "excerpt",
+            "public",
+            "view",
             "parentId", /*"root" or id of parent collection (optional)*/
             "cover_path" /*name of icon. For example "airplane". Entire list of icons in API docs. (optional) */
         }
@@ -315,10 +315,10 @@ One collection have such fields:
 + Request (application/json)
 
         {
-            "title", /*Collection title*/
-            "excerpt", /*Description (optional)*/
-            "public", /*Public collection or not. By default false (boolean, optional)*/
-            "view", /*View style ("list"/"grid"). By default "list". (optional)*/
+            "title",
+            "excerpt",
+            "public",
+            "view",
             "parentId", /*"root" or id of parent collection (optional)*/
             "cover_path" /*name of icon. For example "airplane". Entire list of icons in API docs. (optional) */
         }
@@ -458,6 +458,22 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
 
 
 # Group Bookmarks
+One bookmark have such fields:
+- **collection.$id** - where bookmark is placed. Can be any collection id or reserved id from this list: *-1* is Inbox, *-99* is Trash.
+- **cover** - cover image URL *(optional)*
+- **coverId** - cover index from media array *(optional)*
+- **domain** - link domain
+- **excerpt** - small description *(optional)*
+- **lastUpdate** - date of creation or last update
+- **link** - bookmark URL
+- **media** - array of releated images *(optional)*
+- **next** - next in the list bookmark id
+- **prev** - previous bookmark id
+- **tags** - array of tags *(optional)*
+- **title** - title
+- **type** - type of bookmark. Can be "link" (default), "article", "image" or "video"
+- **removed** - boolean
+- **html** - content of page
 
 ## List [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
 
@@ -479,19 +495,19 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
             "items": [
                 _id: 2,
                 collection.$id: 210296,
-                cover: "http://img.com/img.jpg", /* cover image */
-                coverId: null, /* cover index from media array */
+                cover: "http://img.com/img.jpg",
+                coverId: null,
                 domain: "google.com",
                 excerpt: "Description",
                 lastUpdate: Date,
-                link: "http://google.com/about.html", /* url */
-                media: [{type: "image", link: "http://img.com/img.jpg"}], /* array of images */
-                next: 3, /* next bookmark id */
-                prev: 1, /* previous bookmark id */
-                removed: false, /* removed or not */
+                link: "http://google.com/about.html",
+                media: [{type: "image", link: "http://img.com/img.jpg"}],
+                next: 3,
+                prev: 1,
+                removed: false,
                 tags: ["angular","js"],
                 title: "Title",
-                type: "article", /* article/image/video/link */
+                type: "article",
                 user.$id: 32
             ]
         }
@@ -512,20 +528,20 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
             "item": [
                 _id: 2,
                 collection.$id: 210296,
-                cover: "http://img.com/img.jpg", /* cover image */
-                coverId: null, /* cover index from media array */
+                cover: "http://img.com/img.jpg",
+                coverId: null,
                 domain: "google.com",
                 excerpt: "Description",
                 lastUpdate: Date,
-                link: "http://google.com/about.html", /* url */
-                media: [{type: "image", link: "http://img.com/img.jpg"}], /* array of images */
+                link: "http://google.com/about.html",
+                media: [{type: "image", link: "http://img.com/img.jpg"}],
                 html: "<b>Html content</b>",
-                next: 3, /* next bookmark id */
-                prev: 1, /* previous bookmark id */
-                removed: false, /* removed or not */
+                next: 3,
+                prev: 1,
+                removed: false,
                 tags: ["angular","js"],
                 title: "Title",
-                type: "article", /* article/image/video/link */
+                type: "article",
                 user.$id: 32
             ]
         }
