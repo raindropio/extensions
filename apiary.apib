@@ -134,7 +134,7 @@ Get authenticated user or a specific user id.
         }
 
 ## User actions [/userConfig]
-Some methods available only for the authenticated user.
+Only for the authenticated user.
 
 ### Update groups [PUT]
 
@@ -208,9 +208,9 @@ Count of bookmarks by type of authenticated user.
 # Group Collections        
 
 ## Collections [/collections/{user_id}{?parent}]
-> You can access to public collections of specific user without *access_token*
-
 ### Retrieve collections [GET]
+> You can retrieve public collections of specific user without *access_token*
+
 + Parameters
     + user_id (number, optional) ... By default current user
     + parent (number, optional) ... Parent collection id. By default root collections.
@@ -237,9 +237,9 @@ Count of bookmarks by type of authenticated user.
         }
         
 ## Collection [/collection/{id}]
-> You can access to public collection without *access_token*
-
 ### Retrieve [GET]
+> You can retrieve public collection without *access_token*
+
 + Parameters
     + id (number, required) ... Collection id
     
@@ -449,9 +449,10 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
 # Group Bookmarks
 
 ## Bookmarks [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
-> You can access to public collections bookmarks without *access_token*
 
 ### Retrive and/or search bookmarks [GET]
+> You can retrieve public collection bookmarks without *access_token*
+
 + Parameters
     + collection_id (number, required) ... Collection id. Reserved id's: 0 - all bookmarks; -1 - inbox; -99 - trash;
     + search (array, optional) ... For example: [{"key":"tag","val":"angular"}, {"key":"type","val":"article"}]. Available *keys*: word, type, tag, domain. Field *val* is query for type of key.
@@ -485,9 +486,10 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
         }
 
 ## Bookmark [/bookmark/{id}]
-> You can access to bookmark from public collection without *access_token*
 
 ### Retrieve [GET]
+> You can retrieve bookmark from public collection without *access_token*
+
 + Parameters
     + id (number, required) ... Bookmark id
 
