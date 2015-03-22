@@ -597,7 +597,22 @@ When you delete bookmark from any collection it will be placed to user **Trash**
         }
 
 
-## Parser [/parse]
+## Parser [/parse/{url}]
 Available only with *access_token*. You can use it for parse some URL and extract useful information from link. For example article body or video from Youtube.
 
 ### Parse specific URL [GET]
++ Parameters
+    + url (string, required) ... URL
+    
++ Response 200 (application/json)
+
+        {
+            "result":true,
+            "item":{
+                "title":"Raindrop.io — Все ваши статьи, фото, видео, ссылки из интернета и приложений в одном месте.",
+                "excerpt":"Все ваши статьи, фото, видео, ссылки из интернета и приложений в одном месте.",
+                "media":[{"type":"image","link":"http://raindrop.io/img/logotype-big.png"}],
+                "html":"",
+                "type":"link"
+            }
+        }
