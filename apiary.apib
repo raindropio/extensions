@@ -207,7 +207,7 @@ Count of bookmarks by type of authenticated user.
 
 # Group Collections        
 
-## Collections [/collections/{user_id}{?parent}]
+## List [/collections/{user_id}{?parent}]
 ### Retrieve collections [GET]
 > You can retrieve public collections of specific user without *access_token*
 
@@ -228,7 +228,7 @@ Count of bookmarks by type of authenticated user.
                     created: Date,
                     lastUpdate: Date,
                     public: true,
-                    view: "grid"/"list",
+                    view: "list", /* Can be "list", "grid", "masonry", "simple" */
                     cover: ["/img/templates/basketball.png"],
                     parent.$id: 0
                 }
@@ -236,7 +236,7 @@ Count of bookmarks by type of authenticated user.
             "result": true
         }
         
-## Collection [/collection/{id}]
+## One [/collection/{id}]
 ### Retrieve [GET]
 > You can retrieve public collection without *access_token*
 
@@ -255,7 +255,7 @@ Count of bookmarks by type of authenticated user.
                 "created": Date,
                 "lastUpdate": Date,
                 "public": true,
-                "view": "grid"/"list",
+                "view": "list", /* Can be "list", "grid", "masonry", "simple" */
                 "cover": ["/img/templates/basketball.png"],
                 "parent.$id": 0
             },
@@ -448,10 +448,10 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
 
 # Group Bookmarks
 
-## Bookmarks [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
+## List [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
 
 ### Retrive and/or search bookmarks [GET]
-> You can retrieve public collection bookmarks without *access_token*
+> You can retrieve bookmarks from public collection without *access_token*
 
 + Parameters
     + collection_id (number, required) ... Collection id. Reserved id's: 0 - all bookmarks; -1 - inbox; -99 - trash;
@@ -485,7 +485,7 @@ Collection icon templates. Full path to icon will be "https://raindrop.io/{path}
             ]
         }
 
-## Bookmark [/bookmark/{id}]
+## One [/bookmark/{id}]
 
 ### Retrieve [GET]
 > You can retrieve bookmark from public collection without *access_token*
