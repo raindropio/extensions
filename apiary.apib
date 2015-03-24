@@ -6,7 +6,7 @@ The first version of the Raindrop.io API is an exciting step forward towards mak
 
 Build something great.
 
-# Oauth
+# Group OAuth
 The Raindrop.io API uses the OAuth 2.0 protocol for simple, but effective authentication and authorization.
 The one thing to keep in mind is that all requests to the API must be made over SSL (https:// not http://).
 
@@ -87,7 +87,7 @@ Once the user has authenticated and then authorized your application, Instagram 
 `http://your-redirect-uri#access_token=ACCESS-TOKEN`
 Simply grab the access_token off the URL fragment and you’re good to go. If the user chooses not to authorize your application, you’ll receive the same error response as in the explicit flow
 
-# Authentication
+# Group Authentication
 There are two ways to authenticate through Raindrop.io API.
 
 ### OAuth2 Token (sent in a header)
@@ -96,7 +96,7 @@ There are two ways to authenticate through Raindrop.io API.
 ### OAuth2 Token (sent as a parameter)
 `curl https://raindrop.io/v1/user?access_token=OAUTH_TOKEN`
 
-# Errors
+# Group Errors
 Every response from API have **result** boolean field. Also some methods have **error** string field.
 ```
 {
@@ -218,7 +218,7 @@ One collection have such fields:
 - **cover** - array with one item. Icon of collection
 - **parent.$id** - parent collection id. If not specified will be root collection
 
-## List [/collections/{user_id}{?parent}]
+## Collections [/collections/{user_id}{?parent}]
 ### Retrieve collections [GET]
 > You can retrieve public collections of specific user without *access_token*
 
@@ -247,8 +247,8 @@ One collection have such fields:
             "result": true
         }
         
-## One [/collection/{id}]
-### Retrieve [GET]
+## Collection [/collection/{id}]
+### Retrieve collection [GET]
 > You can retrieve public collection without *access_token*
 
 + Parameters
@@ -273,7 +273,7 @@ One collection have such fields:
             "result": true
         }
         
-### Create [POST]
+### Create collection [POST]
 + Parameters
     + id (optional) ... Not required
 
@@ -308,7 +308,7 @@ One collection have such fields:
         }
         
         
-### Update [PUT]
+### Update collection [PUT]
 + Parameters
     + id (number, required) ... Collection id
     
@@ -342,7 +342,7 @@ One collection have such fields:
             "result": true
         }
         
-### Delete [DELETE]
+### Delete collection [DELETE]
 + Parameters
     + id (number, required) ... Collection id
     
@@ -475,7 +475,7 @@ One bookmark have such fields:
 - **removed** - boolean
 - **html** - content of page
 
-## List [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
+## Bookmarks [/bookmarks/{collection_id}{?search}{?page}{?perpage}{?sort}]
 
 ### Retrive and/or search bookmarks [GET]
 > You can retrieve bookmarks from public collection without *access_token*
@@ -512,9 +512,9 @@ One bookmark have such fields:
             ]
         }
 
-## One [/bookmark/{id}]
+## Bookmark [/bookmark/{id}]
 
-### Retrieve [GET]
+### Retrieve bookmark [GET]
 > You can retrieve bookmark from public collection without *access_token*
 
 + Parameters
@@ -546,7 +546,7 @@ One bookmark have such fields:
             ]
         }
         
-### Create [POST]
+### Create bookmark [POST]
 + Parameters
     + id (number, optional) ... Not required
     
@@ -565,7 +565,7 @@ One bookmark have such fields:
         
 + Response 200 (application/json)
 
-### Update [PUT]
+### Update bookmark [PUT]
 + Parameters
     + id (number, required) ... Bookmark id
     
@@ -585,8 +585,9 @@ One bookmark have such fields:
 + Response 200 (application/json)
 
 
-### Delete [DELETE]
+### Delete bookmark [DELETE]
 > When you delete bookmark from any collection it will be placed to user **Trash** collection. But if you try remove bookmark from Trash collection it will be removed permanently.
+
 + Parameters
     + id (number, required) ... Bookmark id
     
