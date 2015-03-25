@@ -78,7 +78,7 @@ RainDropPanzer.Desktop = {
 						}
 						else {
 							if (mimeType=='html') mimeType=undefined;
-							var jqxhr = $.get(e.data.params.url, function (html) {
+							var jqxhr = $.get(data.params.url, function (html) {
 								RainDropPanzer.run(function (item) {
 									document.getElementById(RainDropPanzer.divId + "-iframe").contentWindow.postMessage({
 										action: 'setHTML',
