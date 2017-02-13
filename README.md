@@ -1,13 +1,14 @@
 # Raindrop.io Browser Extension
-##Install dependencies
-Highly recommend to user Yarn to install dependencies, it prevent any inconsistencies!
-`yarn`
+###Install dependencies
+Highly recommend to user `yarn` to install dependencies, it prevent any inconsistencies!
 
-##Build for Chrome
+###Build for Chrome
 `npm run build`
 
-##Build for Firefox
+###Build for Firefox
 `npm run build-firefox`
 
-##Build for Opera
+###Build for Opera
 `npm run build-opera`
+
+###Need help with Edge!
