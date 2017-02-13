@@ -1,0 +1,19 @@
+@require "../const.styl";
+
+pageGap = (defaultGap+10px);
+
+.page.forbidden-page {
+	background: url("../../assets/start.png");
+	background-size: 100% auto;
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	padding: (pageGap - 4px) pageGap;
+	padding-bottom: 126px;
+	
+	--accentColor: colorRed;
+	
+	p {
+		font-size: 16px;
+		color: darken(white, 60%)
+	}
+}

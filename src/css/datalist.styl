@@ -1,0 +1,57 @@
+.datalist {
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	
+	.datalistItems {
+		bottom:26px;left:4px;
+		padding: (tagPaddingVertical) 0;
+		overflow: hidden;
+		overflow-y: auto;
+		position: absolute;
+		z-index: 100;
+		background: white;
+		border-radius: 2px;
+		box-shadow: 0 0 0 var(--thin-border) var(--thin-border-color), 0 10px 30px rgba(0,0,0,.2);
+		
+		figure {
+			cursor: pointer;
+			display: flex;
+			white-space: nowrap;
+			padding: tagPaddingVertical tagPaddingHorizontal;
+			
+			.title {
+				flex:1;
+			}
+			.count {
+				opacity: .5;
+				margin-top: .5px;
+				margin-left: 16px;
+				font-size: 11px;
+				font('semibold');
+				text-align: right;
+				
+				&:empty {
+					display:none;
+				}
+			}
+			
+			&.active {
+				background: var(--accentColor, colorTheme);
+				color: white;
+				
+				.count {
+					opacity:1;
+				}
+			}
+			
+			&:hover {
+				background-image: linear-gradient(to top, rgba(0,0,0,0.07) 0%, rgba(0,0,0,0.07) 100%);
+			}
+		}
+	}
+	
+	.datalistItems:empty, &:not(.focus) .datalistItems {
+		display: none;
+	}
+}

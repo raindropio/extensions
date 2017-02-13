@@ -1,0 +1,72 @@
+@require "const.styl"
+
+.loading {
+	padding: defaultGap;
+	pointer-events: none;
+	position: relative;
+	overflow: hidden;
+	
+	.svgIcon, .svgIcon svg {
+		display: block;
+		width: auto;
+		height: auto;
+	}
+	
+	.label {
+		display: block;
+		margin-top: -15px;
+		opacity: .3;
+	}
+	
+	.glow {
+		position: absolute;
+		left: 0;
+		top: -20%;
+		bottom: -20%;
+		width: 60px;
+		background: white;
+		filter: blur(30px);
+		animation: glow .9s ease-in-out infinite;
+		z-index: 2;
+	}
+}
+
+@keyframes glow {
+	0% {
+		left: -15%;
+	}
+	100% {
+		left: 110%;
+	}
+}
+
+#httpload {
+	animation: fadeInWithDelay .3s ease-in-out;
+	position: fixed;
+	top: defaultGap +3px; left: defaultGap + 3px;
+	width: 14px;
+	height: 14px;
+	background: var(--accentColor, colorTheme);
+	border-radius: 50%;
+	overflow: hidden;
+	pointer-events: none;
+	color: white;
+	text-align: center;
+	z-index:999;
+	box-shadow: inset 0 0 0 var(--thin-border, 1px) var(--thin-border-color, rgba(0,0,0,.1)), 0 0 0 7px white;
+	
+	.svgIcon {
+		vertical-align: 1px;
+		will-change: transform;
+		animation: httploadIndicator .9s ease-in-out infinite;
+	}
+}
+
+@keyframes httploadIndicator {
+	0% {
+		transform: rotate(0)
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

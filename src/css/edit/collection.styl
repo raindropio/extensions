@@ -1,0 +1,65 @@
+@require "../const.styl";
+
+.ce-actions:focus, .ce-actions:hover {
+	outline: none;
+	
+	.bookmarkCollection {
+		.title {
+			border-color: var(--accentColorLighten, rgba(colorTheme,.5));
+		}
+	}
+}
+
+.ce-actions:hover {
+	background: colorLightGray;
+}
+
+.ce-actions:active {
+	filter: brightness(0.95);
+	opacity: .9;
+}
+
+.bookmarkCollection {
+	//box-shadow: inset 0 var(--thin-border-minus, -1px) 0px var(--thin-border-color, rgba(0,0,0,.1));
+	user-select: none;
+	min-height: collectionBlockHeight;
+	display: flex;
+	align-items: center;
+	padding: 0 defaultGap;
+	cursor: pointer;
+	color: var(--accentColor, colorTheme);
+	
+	.collectionIcon {
+		margin-right: defaultGap;
+		
+		&.svgIcon {
+			margin-top:-1px;
+		}
+	}
+	
+	.text {
+		font('semibold');
+		font-size: 14px;
+		display: flex;
+		min-width: 0;
+		
+		.arrowIcon {
+			flex-shrink: 0;
+			border-bottom: 1px dotted transparent;
+			padding-left: 4px;
+			margin-left: 1px;
+		}
+		
+		.status {
+			color: black;
+			textOverflow();
+			flex-shrink: 0;
+		}
+		
+		.title {
+			textOverflow()
+			border-bottom: 1px dotted transparent;
+			padding-bottom: 1px;
+		}
+	}
+}

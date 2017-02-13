@@ -1,0 +1,74 @@
+layoutWidth			= 300px
+
+colorTheme 			= #4A90E2
+colorLink			= #478FE3
+colorRed 			= #E6473A
+colorGreen 			= #35D2B6
+colorLightGray		= #FBFBFB
+colorGray 			= darken(white,50%)
+colorDarkGray		= darken(white,70%)
+colorFocus			= var(--accentColorLighten, lighten(colorTheme,50%))
+
+defaultGap				= 14px
+bookmarkCoverSize 		= 50px
+tagGap					= 4px
+tagPaddingVertical		= 1px
+tagPaddingHorizontal	= 5px
+collectionBlockHeight	= 48px
+maxHeight 				= 600px
+minHeight				= 48px
+scrollBarWidth			= 11px
+
+appearDuration			= 1.5s
+
+//collections
+rem($value)
+	$value
+
+font(name)
+	if (name == "semibold")
+		font-weight: var(--font-semibold,500);
+	if (name == "light")
+		font-weight: var(--font-light,300);
+
+defaultPlaceholder()
+	&::-webkit-input-placeholder {
+        color: colorGray;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+		overflow: hidden;
+    }
+    &:-moz-placeholder {
+	    color: colorGray;
+	    opacity: 1;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+			overflow: hidden;
+	}
+	&::-moz-placeholder {
+	    color: colorGray;
+	    opacity: 1;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+			overflow: hidden;
+	}
+	&:-ms-input-placeholder {
+	    color: colorGray;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+			overflow: hidden;
+	}
+	
+textOverflow() {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+defaultOutline() {
+	outline-style: dotted;
+	outline-width: 1px;
+	outline-offset: -2px;
+	outline-color: colorFocus;
+}

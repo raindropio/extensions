@@ -1,0 +1,33 @@
+@require "const.styl";
+
+macFont()
+	letter-spacing: -0.2px;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+
+body, input, textarea, button, datalist, option {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+#app.mac {
+	macFont()
+	
+	input, textarea, button, datalist, option {
+		macFont()
+	}
+}
+
+body {
+	font-size: 13px;
+}
+
+.sub-info {
+	color: colorGray;
+}
+
+.subheader {
+	color: colorGray;
+	font("semibold");
+	font-size: 11px;
+	margin:0;padding:0;
+}

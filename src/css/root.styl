@@ -1,0 +1,131 @@
+@require "const.styl";
+@require "normalize.styl";
+@require "animations.styl";
+@require "fonts.styl";
+@require "colors.styl";
+@require "icons.styl";
+@require "form.styl";
+@require "select.styl";
+@require "datalist.styl";
+@require "buttons.styl";
+@require "layout.styl";
+@require "page.styl";
+@require "dialog.styl";
+@require "pro.styl";
+
+* {
+	box-sizing: border-box;
+	outline-offset: -2px;
+}
+
+html,body {
+	overflow:hidden;
+}
+
+body {
+	> canvas {
+        visibility: hidden;
+        position: fixed;
+		top: -5000vh;
+		left: -5000vw;
+    }
+}
+
+:root {
+	--font-light: 300;
+	--font-semibold: 500;
+	--thin-border-minus: -1px;
+	--thin-border: 1px;
+	--thin-border-color: rgba(0,0,0,.1);
+	--thin-border-color-plus: rgba(0,0,0,.15);
+	
+	--max-width: layoutWidth;
+	--min-height: minHeight;
+	--max-height: maxHeight;
+}
+
+::selection {
+    background: var(--accentColorLighten30, rgba(colorTheme,.3));
+    color: black;
+}
+
+::-moz-selection {
+    background: var(--accentColorLighten30, rgba(colorTheme,.3));
+    color: black;
+}
+
+*:focus {
+	defaultOutline()
+}
+
+section, figure {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: colorLink;
+
+	&:active {
+		outline:none;
+	}
+}
+
+#app {
+	background: colorLightGray;
+	overflow: hidden;
+	width: var(--max-width, layoutWidth);
+	min-height: var(--min-height, minHeight);
+	transition: min-height .15s ease-in-out;
+	//animation: fadeIn .4s ease-in-out;
+	
+	#app-body {	
+		background: white;
+	}
+	
+	::-webkit-scrollbar {
+        width: 0;
+        height: scrollBarWidth;
+        width: scrollBarWidth;
+        will-change: width;
+        background: transparent;
+        transition: width .2s ease-in-out;
+        background: rgba(0,0,0,.05)
+    }
+    ::-webkit-scrollbar * {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        //border-radius: scrollBarWidth;
+        border: 2px solid rgba(0,0,0,0);
+        border-radius: scrollBarWidth;
+        box-shadow: inset 0px 0px 0px scrollBarWidth rgba(0,0,0,.15);
+        transition: box-shadow .2s ease-in-out;
+    }
+
+    ::-webkit-scrollbar-button{
+        width: 0;
+        height: 0;
+        display: none;
+    }
+    
+    &.retina {
+		--thin-border-minus: -0.5px;
+		--thin-border: 0.5px;
+		--thin-border-color: rgba(0,0,0,.15);
+		--thin-border-color-plus: rgba(0,0,0,.2);
+	}
+
+    /*&.firefox *, &.firefox {
+    	animation: none !important;
+    	transition: none !important;
+    }*/
+	
+	&.is-modal {
+		--max-width: 100vw;
+		height: 100vh;
+		--max-height: 100vh;
+	}
+}

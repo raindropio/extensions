@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>normal-check-active</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-201.000000, -41.000000)" fill="#000000">
+            <g id="normal-more-copy-2" transform="translate(202.000000, 42.000000)">
+                <path d="M9,18 C13.9705627,18 18,13.9705627 18,9 C18,4.02943725 13.9705627,0 9,0 C4.02943725,0 0,4.02943725 0,9 C0,13.9705627 4.02943725,18 9,18 Z M7.12871287,11.39 L4.74822489,8.98570714 C4.36233252,8.59595585 3.74029526,8.59230179 3.34364717,8.99291636 L3.70585778,8.62708364 C3.31602329,9.02081648 3.3103245,9.65267612 3.70037986,10.0456873 L6.42833301,12.7943127 C6.81514213,13.184053 7.44702556,13.1785042 7.82723709,12.7944905 L14.3014758,6.25550947 C14.6872601,5.86586735 14.6794112,5.22926002 14.2941422,4.84380927 L14.6563528,5.20619073 C14.2665183,4.81617236 13.6396507,4.81395277 13.2461385,5.21140008 L7.12871287,11.39 Z" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

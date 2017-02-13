@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="270px" height="20px" viewBox="0 0 270 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>loading</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Current" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.08">
+        <g id="Loading" transform="translate(-14.000000, -14.000000)" fill="#000000">
+            <path d="M48,19 L284,19 L284,21 L48,21 L48,19 Z M48,28 L166,28 L166,30 L48,30 L48,28 Z M14,15.9907951 C14,14.8913093 14.8982124,14 15.9907951,14 L32.0092049,14 C33.1086907,14 34,14.8982124 34,15.9907951 L34,32.0092049 C34,33.1086907 33.1017876,34 32.0092049,34 L15.9907951,34 C14.8913093,34 14,33.1017876 14,32.0092049 L14,15.9907951 Z" id="loading"></path>
+        </g>
+    </g>
+</svg>

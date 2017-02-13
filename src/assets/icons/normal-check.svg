@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>normal-check</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-108.000000, -41.000000)" fill="#000000">
+            <path d="M115,55 C114.744078,55 114.488155,54.9023689 114.292893,54.7071068 L112.292893,52.7071068 C111.902369,52.3165825 111.902369,51.6834175 112.292893,51.2928932 C112.683418,50.9023689 113.316582,50.9023689 113.707107,51.2928932 L115,52.5857864 L121.292893,46.2928932 C121.683418,45.9023689 122.316582,45.9023689 122.707107,46.2928932 C123.097631,46.6834175 123.097631,47.3165825 122.707107,47.7071068 L115.707107,54.7071068 C115.511845,54.9023689 115.255922,55 115,55 Z" id="Combined-Shape"></path>
+        </g>
+    </g>
+</svg>

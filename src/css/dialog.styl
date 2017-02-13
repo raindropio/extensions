@@ -1,0 +1,138 @@
+dialogContentAnimStep0() {
+	transform: translateY(200vh);
+}
+dialogContentAnimStep100() {
+	transform: translateY(0);
+}
+
+@keyframes dialogShow {
+	0% {
+		opacity:0;
+	}
+	100% {
+		opacity:1;
+	}
+}
+
+@keyframes dialogContentShow {
+	0% {
+		dialogContentAnimStep0()
+	}
+	100% {
+		dialogContentAnimStep100()
+	}
+}
+
+.dialog {
+	position: fixed;
+	left:0;top:0;right:0;bottom:0;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	background: rgba(0,0,0,.2);
+	z-index:999;
+	transition: opacity .25s ease-in-out;
+	opacity: 0;
+	padding: 0 defaultGap;
+
+	&.showing {
+		opacity: 1;
+		animation: dialogShow .25s ease-in-out;
+
+		.dialog-content {
+			dialogContentAnimStep100()
+			animation: dialogContentShow .4s ease-in-out;
+		}
+	}
+}
+
+
+#app.dialog-mode {
+	#app-body {
+		
+	}
+}
+
+.dialog-content {
+	will-change: transform;
+	dialogContentAnimStep0()
+	transition: transform .25s ease-in-out;
+	width: 100%;
+	background: white;
+	box-shadow: 0 0 0 var(--thin-border) rgba(0,0,0,.1), 0 5px 15px rgba(0,0,0,.1);
+	padding: (defaultGap/2) 0;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+
+	h2 {
+		margin:0;padding:0;
+		font('semibold');
+		font-size: 15px;
+		padding: (defaultGap/2) defaultGap;
+		//padding-bottom: 0;
+	}
+	
+	p {
+		margin:0;
+		padding: defaultGap; 
+		//padding-top:0;
+		opacity: rgba(0,0,0,.7);
+		line-height: 16px;
+		
+		&:empty {
+			display:none;
+		}
+		
+		ul {
+			margin: 0px;
+			padding: 0;
+			padding-left: defaultGap + 2px;
+		}
+		
+		li {
+			margin-bottom: 10px;
+			
+			&:last-child {
+				margin-bottom:0;
+			}
+		}
+	}
+	
+	menu, menu > li {
+		padding:0;
+		margin:0;
+		list-style:none;
+	}
+
+	b.highlight {
+		color: var(--accentColor, colorTheme);
+	}
+	
+	menu {
+		.dialog-item-separator {
+			box-shadow: 0 var(--thin-border) 0 var(--thin-border-color);
+			height: 1px;
+			margin: (defaultGap/2) 0;
+		}
+		
+		a {
+			padding: (defaultGap/2) defaultGap;
+			display: block;
+			cursor: pointer;
+			color: black;
+			font-size: 14px;
+
+			&:hover {
+				background: rgba(0,0,0,.05);
+				color: var(--accentColor, colorTheme);
+			}
+
+			&:focus {
+				outline: none;
+				background: var(--accentColor, colorTheme);
+				color: white;
+			}
+
+		}
+	}
+}

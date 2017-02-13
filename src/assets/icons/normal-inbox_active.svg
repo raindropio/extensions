@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>inbox_active</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons" transform="translate(-47.000000, -86.000000)" fill="#000000">
+            <path d="M66,96 L66,100.5 C66,101.88 64.88,103 63.5,103 L50.5,103 C49.1,103 48,101.9 48,100.5 L48,96 L55,96 L55,97 C55,97.56 55.44,98 56,98 L58,98 C58.56,98 59,97.55 59,97 L59,96 L66,96 Z" id="Shape"></path>
+            <path d="M64.6,95.5 L66,95.5 L63.84,90.8 C63.37,89.8 62.1,89 61,89 L53,89 C51.9,89 50.63,89.8 50.16,90.8 L48,95.5 L49.4,95.5 L50.94,91.8 C51.34,90.8 52.48,90 53.48,90 L60.52,90 C61.52,90 62.65,90.8 63.06,91.8 L64.59,95.5 L64.6,95.5 Z" id="Shape" opacity="0.6"></path>
+        </g>
+    </g>
+</svg>

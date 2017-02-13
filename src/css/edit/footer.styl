@@ -1,0 +1,19 @@
+@require "../const.styl";
+
+.footer {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	background: colorLightGray;
+	box-shadow: inset 0 var(--thin-border, 1px) 0px var(--thin-border-color, rgba(0,0,0,.1));
+	padding: 4px (defaultGap/2 - 1px);
+
+	.max {
+		flex:1;
+	}
+
+	.button {
+		color: colorGray;
+		padding: 0 (defaultGap/2);
+	}
+}

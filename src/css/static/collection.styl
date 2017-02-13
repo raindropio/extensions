@@ -1,0 +1,15 @@
+@require "../const.styl"
+
+.collection-page {
+	animation: fadeInTranslateVertical .25s ease-in-out;
+	background: colorLightGray;
+	max-height: var(--max-height, maxHeight);
+	display: flex;
+	flex-direction: column;
+	transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+	
+	&.anim-closing {
+		transform: translateY(-5px);
+		opacity:0;
+	}
+}

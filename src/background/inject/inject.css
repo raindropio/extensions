@@ -1,0 +1,100 @@
+@keyframes raindropDragAreaAppear {
+	0% {
+		transform: translateX(60px);
+	}
+	30% {
+		transform: translateX(60px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@keyframes raindropDragAreaIconArrow {
+	0% {
+		transform: translateY(-2px);
+		opacity: .7;
+	}
+	70% {
+		transform: translateY(8px);
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(-2px);
+		opacity: .7;
+	}
+}
+
+/*Icons*/
+#raindrop-drag-area-icon-wrap {
+	overflow: hidden !important;
+	position: relative !important;
+}
+
+#raindrop-drag-area-icon-wrap svg {
+	display: block;
+}
+
+#raindrop-drag-area-icon-arrow {
+	position: absolute !important;
+	left: 12px !important;
+    top: 7px !important;
+	z-index: 1 !important;
+	animation: raindropDragAreaIconArrow 1.2s ease-in-out infinite !important;
+	fill: white !important;
+	transition: fill .2s ease-in-out !important;
+}
+#raindrop-drag-area-icon-cloud {
+	fill: #3F86D8 !important;
+	transition: fill .2s ease-in-out !important;
+}
+
+
+
+/*Idle*/
+#raindrop-drag-area {
+	all: initial !important;
+	animation: raindropDragAreaAppear .3s ease-in-out !important;
+	position: fixed !important;
+	top: 50% !important;
+	right: -14px !important;
+	width: 50px !important;
+	height: 46px !important;
+	background: white !important;
+	box-shadow: 0 10px 20px 0 rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.06) !important;
+	border-top-left-radius: 2px !important;
+	border-bottom-left-radius: 2px !important;
+	z-index: 99999999999999999999 !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	overflow: hidden !important;
+	box-sizing: border-box !important;
+	opacity: 1 !important;
+	margin-top: -23px !important;
+	padding:0 !important;
+	transition: opacity .2s ease-in-out, right .2s ease-in-out, transform .2s ease-in-out, background .2s ease-in-out, box-shadow .2s ease-in-out !important;
+}
+#raindrop-drag-area * {
+	pointer-events: none !important;
+}
+
+/*Closing*/
+#raindrop-drag-area.raindrop-drag-area-is-closing {
+	transform: translateX(60px) !important;
+	opacity: 0 !important;
+}
+
+/*Over*/
+#raindrop-drag-area.raindrop-drag-area-is-over {
+	background: #3F86D8 !important;
+	box-shadow: 0 30px 60px 0 rgba(0,0,0,0.15) !important;
+	right: -1px !important;
+}
+
+#raindrop-drag-area.raindrop-drag-area-is-over #raindrop-drag-area-icon-cloud {
+	fill: white !important;
+}
+#raindrop-drag-area.raindrop-drag-area-is-over #raindrop-drag-area-icon-arrow {
+	fill: #3F86D8 !important;
+}

@@ -1,0 +1,21 @@
+.selectBlank {
+	position: relative;
+	overflow: hidden;
+
+	* {
+		pointer-events: none;
+	}
+	
+	select {
+		pointer-events: auto;
+		opacity:0;
+		position: absolute;
+		left:0;top:0;right:0;bottom:0;
+		width:100%;height:100%;
+		z-index:1;
+		cursor: pointer;
+		appearance: none;
+		font-size: 13px;
+		color: black;
+	}
+}

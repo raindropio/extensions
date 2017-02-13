@@ -1,0 +1,53 @@
+@require "../const.styl"
+
+collectionsSelectorDefaultBoxShadow = inset 0 var(--thin-border, 1px) 0px var(--thin-border-color, rgba(0,0,0,.1))
+collectionsSelectorHeight = 40px;
+
+.collections-selector {
+	display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    
+	> form {
+		background: colorLightGray;
+		transition: background .2s ease-in-out, box-shadow .2s ease-in-out;
+		height: collectionBlockHeight;//collectionBlockHeight;
+		display: flex;
+		align-items: stretch;
+		position: relative;
+		z-index:2;
+		flex-shrink: 0;
+		
+		.collections-selector-find {
+			//animation: fadeInSearch .25s ease-in-out;
+			flex:1;
+			display: flex;
+			align-items: stretch;
+			//margin-left: -1px;
+				
+			input {
+				background: transparent;
+				defaultPlaceholder()
+				font-size: 14px;
+				flex:1;
+				margin:0;bottom:0;border:0;box-shadow:none;
+				padding: defaultGap;
+				padding-left: 0;
+				margin-top: -2px;
+			}
+			
+			.button {
+				height: collectionBlockHeight;
+				padding: defaultGap;
+				padding-right: (defaultGap + 2px);
+				align-self: center;
+			}
+		}
+	}
+	
+	&.focus > form {
+		background: white;
+		box-shadow: 0 2px 4px rgba(0,0,0,.07);
+	}
+}

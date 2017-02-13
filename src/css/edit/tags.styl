@@ -1,0 +1,95 @@
+.tags {
+	padding: 0 (defaultGap - tagGap);
+	padding-bottom: defaultGap;
+	margin: (tagGap * -1) 0;
+	
+	.tag-icon {
+		position: absolute;
+		margin-left: 9px;
+		margin-top: 9px;
+		pointer-events: none;
+		opacity: .5;
+	}
+
+	.field-tag {
+		margin: tagGap;
+		
+		input {
+			display: block;
+			max-width: (layoutWidth - (defaultGap*2) - (tagPaddingHorizontal*2));
+			padding-left: tagPaddingHorizontal + 13px;
+		}
+	}
+
+	.tag-item {
+		vertical-align: top;
+		user-select: none;
+		cursor: pointer;
+		margin: tagGap;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 2px;
+		padding: tagPaddingVertical tagPaddingHorizontal;
+		padding-bottom: (tagPaddingVertical+1px);
+
+		.svgIcon {
+			overflow: hidden;
+			margin-top:2px;
+			opacity: .7;
+			margin-left: (tagGap);
+			margin-right: -2px;
+		}
+
+		&:hover .svgIcon {opacity:1;}
+	}
+
+	.tag-suggested:active, .tag-active {
+		background: var(--accentColor, colorTheme);
+		color: white;
+	}
+
+	.tag-active:active {
+		background-color: var(--accentColorDarken, darken(colorTheme,15%));
+	}
+
+	.tag-suggested {
+		color: var(--accentColor, colorTheme);
+		position: relative;
+		transition: background .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
+		padding-right: (tagPaddingHorizontal+2px);
+		//background: var(--accentOverlay, rgba(colorTheme,.06));
+		box-shadow: inset 0 0 0 var(--thin-border, 1px) var(--accentColorLighten30, rgba(colorTheme,.3));
+
+		.svgIcon {
+			position: absolute;
+			right:-1px;
+			top:-1px;
+			transition: opacity .15s ease-in-out, transform .15s ease-in-out;
+		}
+
+		&:not(:hover) .svgIcon {
+			opacity:0;
+			trasition: none;
+		}
+
+		&:hover:not(:active) {
+			
+			box-shadow: inset 0 0 0 var(--thin-border, 1px) var(--accentColorLighten20, rgba(colorTheme,.2));
+		}
+	}
+}
+
+.tag-enter/*, .tag-leave.tag-leave-active*/ {
+	opacity: 0.001;
+	transform: translateX(-3px);
+}
+
+.tag-enter.tag-enter-active/*, .tag-leave.tag-leave-active*/ {
+	transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+}
+
+.tag-enter.tag-enter-active/*, .tag-leave*/ {
+	opacity: 1;
+	transform: translateX(0);
+}

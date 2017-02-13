@@ -1,0 +1,79 @@
+@require "../const.styl";
+
+.edit-page {
+	display: flex;
+    flex-direction: column;
+	max-height: var(--max-height, maxHeight);
+	transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+	//animation: fadeIn .2s ease-in-out;
+		
+	&.edit-page-closing {
+		transform: translateY(-5px);
+		opacity:0;
+	}
+
+	.edit-page-separator {
+		height: 1px;
+		position: relative;
+		z-index: 3;
+		background-image: linear-gradient(to left, rgba(0,0,0,.03) 0%, rgba(0,0,0,.1) 50%, rgba(0,0,0,.03) 100%);
+		//margin: 0 defaultGap;
+		//box-shadow: 0 var(--thin-border, 1px) 0px var(--thin-border-color, rgba(0,0,0,.1));
+	}
+	
+	.edit-page-about {
+		flex-shrink: 0;
+	}
+	
+	&.edit-page-appear {
+		animation: fadeInTranslateBackward .3s ease-in-out;
+	}
+	
+	&.edit-page-appeartop {
+		animation: fadeInTranslateVerticalBackward .3s ease-in-out;
+	}
+
+	/*.edit-page-about {
+		max-height: 150px;
+		overflow: hidden;
+		will-change: max-height, opacity;
+		transition: max-height .25s linear, opacity .25s ease-in-out, background .25s ease-in-out;
+	}
+	
+	&.edit-page-show-collections {
+		.edit-page-about {
+			max-height: 0;
+			opacity: 0;
+			background: rgba(0,0,0,.3);
+		}
+	}*/
+	
+	@require "info.styl";
+	@require "tags.styl";
+	@require "collection.styl";
+	@require "actions.styl";
+	@require "footer.styl";
+}
+
+#app.firefox {
+	.edit-page .card {
+		animation: none !important;
+	}
+	
+	.edit-page .saveBadge {
+		animation: fadeOutWithDelay appearDuration ease-in-out !important;
+		opacity:0;
+		transform: rotateX( 0 ) !important;
+		
+		&:before {
+			display: none !important;
+		}
+	}
+	
+	.edit-page-already {
+		.saveBadge {
+			animation: none !important;
+			opacity:0 !important;
+		}
+	}
+}

@@ -1,0 +1,91 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "default_locale": "en",
+  "description": "__MSG_appDesc__",
+  "homepage_url": "https://raindrop.io",
+  "author": "Mussabekov Rustem",
+  "short_name": "Raindrop",
+  "version": "6.0.0",
+
+  "omnibox": { "keyword" : "r" },
+
+  "applications": {
+    "remove": "it"
+  },
+
+  "sidebar_action": {
+    "remove": "it"
+  },
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+
+  "browser_action": {
+    "default_title": "__MSG_saveToRaindrop__",
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "assets/idle_16.png",
+      "19": "assets/idle_19.png",
+      "32": "assets/idle_32.png",
+      "38": "assets/idle_38.png",
+      "48": "assets/idle_48.png",
+      "64": "assets/idle_64.png"
+    }
+  },
+
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "windows": "Ctrl+Shift+C",
+        "mac": "Command+Shift+C",
+        "chromeos": "Ctrl+Shift+C",
+        "linux": "Ctrl+Shift+C"
+      }
+    },
+    "show-bookmarks": {
+      "description": "__MSG_myBookmarks__",
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "windows": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A",
+        "chromeos": "Ctrl+Shift+A",
+        "linux": "Ctrl+Shift+A"
+      }
+    }
+  },
+
+  "icons" : {
+    "16": "assets/icon-16.png",
+    "32": "assets/icon-32.png",
+    "48" : "assets/icon-48.png",
+    "96" : "assets/icon-96.png",
+    "128" : "assets/icon-128.png"
+  },
+
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "bookmarks",
+    "tabs",
+    "*://*/*",
+    "<all_urls>"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["inject.js"],
+      "css": ["inject.css"]
+    }
+  ],
+
+  "web_accessible_resources": [
+    "assets/*.png"
+  ],
+
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,58 @@
+.field {
+	resize: none;
+	border:0;
+	margin:0;
+	padding:0;
+	box-shadow: none;
+	display: block;
+	width: 100%;
+	line-height: 16px;
+	max-height: 64px;
+
+	&.size-medium {
+		//font('semibold');
+		font-size: 15px;
+		line-height: 18px;
+		max-height: 54px;
+	}
+
+	&.field-tag {
+		width: auto;
+		
+		input {
+			border:0;
+			margin:0;
+			padding:0;
+			box-shadow: inset 0 0 0 var(--thin-border,1px) var(--thin-border-color-plus, rgba(0,0,0,.15));
+			display: inline-block;
+			width: auto;
+			border-radius: 2px;
+			padding: tagPaddingVertical tagPaddingHorizontal;
+			padding-bottom: (tagPaddingVertical+1px);
+			defaultPlaceholder()
+
+			&:focus {
+				box-shadow: inset 0 0 0 var(--thin-border,1px) var(--accentColorLighten, lighten(colorTheme,50%)),
+							0 0 0 2px var(--accentColorLighten10, rgba(colorTheme,.1));
+			}
+		}
+	}
+}
+
+input, textarea {
+	&:focus {
+		outline: none;
+	}
+	&::-webkit-scrollbar {
+		background: transparent !important;
+	}
+}
+
+datalist, option {
+	font-size: 14px;
+	font-weight: normal;
+}
+
+input::-webkit-calendar-picker-indicator {
+	display: none;
+}

@@ -1,0 +1,85 @@
+@require "const.styl";
+
+buttonSize = 24px;
+
+.button {
+	cursor: pointer;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 13px;
+	height: buttonSize;
+	text-decoration: none;
+	
+	.button-label {
+		textOverflow()
+	}
+	
+	&.accent {
+		font('semibold')
+	}
+	
+	&.normal, &.primary {
+		padding: 4px 8px;
+		border-radius: 3px;
+	}
+
+	&.normal {
+		background: white;
+		color: black;
+		box-shadow: inset 0 var(--thin-border-minus, -1px) 0 0 var(--thin-border-color-plus, rgba(0,0,0,.15)),
+					inset 0 0 0 var(--thin-border, 1px) var(--thin-border-color-plus, rgba(0,0,0,.15)),
+					0 var(--thin-border, 1px) 0 0 rgba(0,0,0,.05);
+	}
+	
+	&.primary, &.normal:active {
+		background: var(--accentColor, colorTheme);
+		
+		box-shadow: inset 0 0 0 var(--thin-border, 1px) var(--accentColor, colorTheme),
+					0 var(--thin-border, 1px) 0 0 rgba(0,0,0,.05);
+					
+		background-image: linear-gradient(to top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 100%);
+		color: white;
+		//font-weight: 500;
+	}
+
+	&.normal, &.primary {
+		&:active {
+			background-color: var(--accentColorDarken, darken(colorTheme,15%));
+			box-shadow: inset 0 0 0 var(--thin-border, 1px) darken(colorTheme,15%);
+		}
+	}
+	
+	&.link {
+		color: var(--accentColor, colorLink);
+		
+		&:active {
+			color: var(--accentColorDarken, darken(colorLink,15%));
+		}
+	}
+
+	&.gray {
+		color: colorGray;
+
+		&:hover {
+			color: colorLink;
+		}
+		
+		&:active {
+			color: darken(colorLink,15%);
+		}
+	}
+	
+	&.circle {
+		padding: 0;
+		width: 27px;
+		height: 27px;
+		border-radius: 27px;
+	}
+}
+
+.button-icon-left {
+	margin-right: 6px;
+}

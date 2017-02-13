@@ -1,0 +1,144 @@
+.info {
+	display: flex;
+	padding: defaultGap;
+	padding-top: 0;
+	//padding-right: (defaultGap - 4px);
+	
+	.text {
+		flex: 1;
+		padding-right: defaultGap;
+		
+		textarea {
+			background: transparent;
+			transition: height .2s ease-in-out;
+		}
+
+		.field-title {
+			margin-top: -4px;
+			margin-bottom: 4px;
+		}
+
+		textarea.field-description {
+			font-size: 14px;
+			display: block;
+			color: colorDarkGray;
+			margin-bottom: -2px;
+			transition: height .2s ease-in-out;
+
+			defaultPlaceholder()
+
+			&.field-description-empty {
+				height: 16px !important;
+				//color: transparent;
+		    }
+		}
+	}
+	
+	.cover-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: bookmarkCoverSize;
+		max-height: bookmarkCoverSize;
+		//height: 100%;
+		overflow: hidden;
+		//border-radius: 2px;
+		position: relative;
+		user-select: none;
+
+		.cover-button {
+			z-index:1;
+			opacity:0;
+			transition: opacity .1s ease-in-out, transform .3s ease-in-out;
+			//transform: scale(1.1) rotate(-40deg) translateX(-1px);
+			position: absolute;
+			left:0;right:0;bottom:0;top:0;
+			cursor: pointer;
+			display: flex;
+			align-items: flex-start;
+			justify-content: flex-end;
+			padding: defaultGap;
+
+			.button {
+				pointer-events: none;
+			}
+			.svgIcon {
+				margin-left:1px;
+				margin-top:1px;
+			}
+		}
+
+		&:hover .cover-button, .cover-button:focus {
+			opacity:1;
+			//transform: scale(1) rotate(0) translateX(0);
+		}
+		
+		&:hover {
+			filter: brightness(0.97);
+		}
+		
+		&:active {
+			filter: brightness(0.9);
+			
+			.cover-button {
+				opacity: .8;
+			}
+		}
+		
+		&:before {
+			content: "";
+			position: absolute;
+			left:0;right:0;bottom:0;top:0;
+			box-shadow: inset 0 0 0 var(--thin-border, 1px) var(--thin-border-color, rgba(0,0,0,.1));
+		}
+	}
+	
+	.cover {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		
+		&.cover-scale-down {
+			object-fit: scale-down;
+		}
+		
+		&.cover-placeholder {
+			background: var(--accentOverlay, lighten(colorTheme, 94%));
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			
+			.svgIcon {
+				color: var(--accentColor, colorTheme);
+				opacity: .3;
+			}
+		}
+	}
+}
+
+
+
+.info {
+	flex-direction: column;
+	
+	.text {
+		order:2;
+		padding-right:0;
+	}
+	
+	.cover-wrap {
+		width: 100vw;
+		height: 80px;
+		max-height: 100%;
+		margin:0 (defaultGap*-1);
+		margin-bottom: defaultGap;
+		background: colorLightGray;
+		
+		&:before {
+			box-shadow:none;
+			box-shadow: inset 0 var(--thin-border, 1px) 0 var(--thin-border-color, rgba(0,0,0,.1)),
+						inset 0 var(--thin-border-minus, -1px) 0 var(--thin-border-color, rgba(0,0,0,.1));
+		}
+	}
+}
