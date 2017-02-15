@@ -62,10 +62,13 @@ const Drag = {
 		this.elem.classList.remove(dragAreaID+'-is-over')
 	},
 
-	onGlobalDragStart() {
-		this.showing = true;
+	onGlobalDragStart(e) {
+		var link = e.dataTransfer.getData("text/uri-list");
+		if ((link)&&(link!=window.location.href)) {
+			this.showing = true;
 
-		this.render();
+			this.render();
+		}
 	},
 
 	onGlobalDragEnd() {

@@ -129,7 +129,7 @@ module.exports = {
 				plugins.push(
 					new GenerateJsonPlugin(
 						'_locales/'+code+"/messages.json", {
-							appName: keyVal("Raindrop.io"),
+							appName: keyVal("Raindrop.io: "+t("saveButtonForWeb")),
 							appDesc: keyVal(t("saveButtonForWeb")),
 							hotkey: keyVal(t("helpHotKey")),
 
