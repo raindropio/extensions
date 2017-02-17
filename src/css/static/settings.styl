@@ -1,0 +1,59 @@
+@require "../const.styl";
+
+gapLeft = defaultGap+32px;
+
+.settings-links {
+	margin:0;padding:(defaultGap/2) 0;
+	
+	li {
+		margin:0;padding:0;list-style:none;
+	}
+	
+	.item {
+		a {
+			display: block;
+			padding: (defaultGap/2) defaultGap;
+			padding-left: gapLeft;
+		}
+		
+		&:hover {
+			background: rgba(0,0,0,.05);
+		}
+	}
+	
+	.separator {
+		box-shadow: inset 0 var(--thin-border, 1px) 0px var(--thin-border-color, rgba(0,0,0,.1));
+		height: 1px;
+		margin: (defaultGap/2) 0;
+	}
+}
+
+.settings-group {
+	padding-top: defaultGap;
+	padding-bottom: (defaultGap/4);
+	padding-left: gapLeft;
+	font("semibold");
+	opacity: .5;
+}
+
+.settings-parameter {
+	display: flex;
+	padding: (defaultGap/4) defaultGap;
+	padding-left: gapLeft;
+	
+	.spl {
+		width: 30px;
+		text-align: center;
+		margin-left: -30px;
+	}
+	
+	.title {
+		flex:1;
+		font-size: 14px;
+	}
+	
+	.sp-text-inline {
+		width: 40px;
+		margin: -3px 0;
+	}
+}
