@@ -1,42 +1,8 @@
 @require "../const.styl"
 
 .cover-page {
-	animation: fadeInTranslate .3s ease-in-out;
-	background: colorLightGray;
-	max-height: var(--max-height, maxHeight);
-	display: flex;
-	flex-direction: column;
-	
-	header {
-		padding-left: (defaultGap - 1px);
-		background: white;
-		box-shadow: 0 var(--thin-border, 1px) 0 var(--thin-border-color, rgba(0,0,0,.1));
-		position: relative;
-		z-index: 1;
-		display: flex;
-		align-items: center;
-		flex-shrink: 0;
-		height: collectionBlockHeight;
-		
-		.button {
-			margin-left: (defaultGap * -1);
-			padding: (defaultGap / 2) defaultGap;
-			box-sizing: content-box;
-		}
-		
-		.title {
-			margin-top: -2px;
-			font-size: 15px;
-			flex:1;
-		}
-	}
-
 	.cover-page-items {
-		flex:1;
 		padding: (defaultGap/2);
-		min-height: 150px;
-		overflow: hidden;
-		overflow-y: auto;
 	}
 	
 	article {

@@ -11,6 +11,7 @@ import ErrorRoute from './error'
 import Edit from './edit'
 import Cover from './cover'
 import CollectionPicker from './collectionPicker'
+import Settings from './settings'
 
 let root;
 
@@ -25,6 +26,7 @@ const App = (
 		<Route path="/edit/:id" component={Edit}/>
 		<Route path="/cover/:id" component={Cover}/>
 		<Route path="/collection/:id" component={CollectionPicker}/>
+		<Route path="/settings" component={Settings}/>
 	</Route>
 );
 

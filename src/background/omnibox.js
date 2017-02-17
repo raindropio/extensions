@@ -23,6 +23,13 @@ const Omnibox = {
 	},
 
 	onChange(text, send) {
+		if (localStorage.getItem('omnibox-disabled')){
+			extension.omnibox.setDefaultSuggestion({
+				description: ""
+			})
+			send([])
+			return;
+		}
 		text = (text||"").trim();
 
 		extension.omnibox.setDefaultSuggestion({

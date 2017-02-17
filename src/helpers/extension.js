@@ -1,8 +1,10 @@
 import config from '../modules/config'
-var {sendMessageToBackground, extension, openTab, getCurrentTab, getHotkeysSettingsPage} = require('../background/extension').default
+var {getSetting, setSetting, sendMessageToBackground, extension, openTab, getCurrentTab, getHotkeysSettingsPage} = require('../background/extension').default
 
 const ExtensionHelper = {
 	getHotkeysSettingsPage: getHotkeysSettingsPage,
+	getSetting: getSetting,
+	setSetting: setSetting,
 
 	setStatus(obj) {
 		sendMessageToBackground(Object.assign({action: "setStatus"}, obj), ()=>{})

@@ -129,7 +129,7 @@ export default class Cover extends React.Component {
 
 
 		return (
-			<div className="cover-page">
+			<div className="common-page cover-page">
 				<header>
                     <Button href={"#"+this.state.linkBack} className="button link" icon="back,normal"/>
 					<div className="title">{t.s("cover")}</div>
@@ -138,7 +138,7 @@ export default class Cover extends React.Component {
 
                 <ThemeColor src={this.state.item.cover} cssBlock={ThemeColorHelper.generateCSS} />
 
-				<div className="cover-page-items">
+				<div className="common-page-content cover-page-items">
 					<Masonry ref="masonry" elementType="article" options={{transitionDuration: "0"}}>
 						{this.renderMakeScreenshot()}
 						{items}

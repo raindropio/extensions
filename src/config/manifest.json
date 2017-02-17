@@ -5,7 +5,7 @@
   "description": "__MSG_appDesc__",
   "homepage_url": "https://raindrop.io",
   "author": "Mussabekov Rustem",
-  "short_name": "Raindrop",
+  "short_name": "Raindrop.io",
   "version": "6.0.0",
 
   "omnibox": { "keyword" : "r" },

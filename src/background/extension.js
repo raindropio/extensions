@@ -28,6 +28,12 @@ var getCurrentTab = (callback)=>{
 		})
 }
 
+var sendMessageToBackground = (obj,callback)=>{
+	if (typeof webextension.runtime != "undefined"){
+		webextension.runtime.sendMessage(obj, callback);
+	}
+}
+
 const newTabRegex = [/^about\:(newtab|home)/i, /^chrome\:\/\/(newtab|startpage)/i/*, /^chrome-extension\:\/\//i*/];
 
 export default {
@@ -36,6 +42,7 @@ export default {
 	osName: os,
 	getCurrentTab: getCurrentTab,
 	newTabRegex: newTabRegex,
+	sendMessageToBackground: sendMessageToBackground,
 
 	openTab(url) {
 		if (typeof webextension.tabs != "undefined")
@@ -48,11 +55,6 @@ export default {
 			if (typeof webextension.tabs != "undefined")
 				webextension.tabs.sendMessage(tab.id, obj, callback);
 		});
-	},
-	sendMessageToBackground(obj,callback) {
-		if (typeof webextension.runtime != "undefined"){
-			webextension.runtime.sendMessage(obj, callback);
-		}
 	},
 	
 	openModal(urlSuffix, pos="center") {
@@ -114,5 +116,17 @@ export default {
 			case "opera": link = "opera://settings/configureCommands"; break;
 		}
 		return link;
+	},
+
+
+	//settings
+	getSetting(name) {
+		return new Promise((res)=>{
+			sendMessageToBackground({action: "getSetting", name: name}, res)
+		})
+	},
+
+	setSetting(name, value) {
+		sendMessageToBackground({action: "setSetting", name: name, value: value}, ()=>{})
 	}
 }

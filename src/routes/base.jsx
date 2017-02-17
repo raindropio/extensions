@@ -48,8 +48,10 @@ class Base extends React.Component {
         window.requestAnimationFrame = requestAnimationFrame;
 
         //fix mac
-        document.body.style.paddingBottom="1px"
-        setTimeout(()=>document.body.style.paddingBottom="0",300)
+        if ((classNames.indexOf("mac")!=-1)&&(__PLATFORM__=="chrome")){
+            document.body.style.paddingBottom="1px"
+            setTimeout(()=>document.body.style.paddingBottom="0",300)
+        }
 	}
 
 	render() {
