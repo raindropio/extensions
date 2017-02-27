@@ -14,7 +14,7 @@ export default class Type extends React.Component {
 		this.submit = this.submit.bind(this);
 
 		this.state = {
-			appbuild: false
+			appbuild: true
 		}
 	}
 
