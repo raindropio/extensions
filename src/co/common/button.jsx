@@ -54,6 +54,7 @@ export default class Button extends React.Component {
 			target: this.props.target,
 			className: this.props.className,
 			title: this.props.title,
+			autoFocus: this.props.autoFocus?true:false,
 			onClick: this.props.onClick,
 			onFocus: this.props.onFocus,
 			onBlur: this.props.onBlur,

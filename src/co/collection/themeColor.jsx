@@ -1,9 +1,7 @@
 import React from 'react'
 import network from 'network'
 import collectionsStore from '../../stores/collections'
-
-var colorThief = require('../../modules/color-thief');
-colorThief = new colorThief();
+import colorThief from '../../modules/color-thief'
 import colors from '../../modules/colors'
 
 export default class ThemeColor extends React.Component {

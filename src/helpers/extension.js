@@ -6,6 +6,10 @@ const ExtensionHelper = {
 	getSetting: getSetting,
 	setSetting: setSetting,
 
+	rerenderBrowserAction() {
+		sendMessageToBackground({action: "rerenderBrowserAction"}, ()=>{})
+	},
+
 	setStatus(obj) {
 		sendMessageToBackground(Object.assign({action: "setStatus"}, obj), ()=>{})
 	},

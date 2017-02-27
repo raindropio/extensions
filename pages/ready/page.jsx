@@ -17,8 +17,7 @@ export default class Page extends React.Component{
 			omniboxEnabled: extensionHelper.omniboxIsEnabled(),
 			userId: 0,
 			isPro: false,
-			showInvite: false,
-			fromFifth: (window.location.search=="?5")
+			showInvite: false
 		}
 	}
 
@@ -94,17 +93,6 @@ export default class Page extends React.Component{
 					<h1>✌️ The Raindrop.io Extension is ready to go</h1>
 					<h2>Learn how to use Raindrop.io in your browser</h2>
 				</header>
-
-				<div id="fromfifth" hidden={!this.state.fromFifth}>
-					Welcome to updated Raindrop.io Extension 6.0! Now it works only just as Clipper. We decided to simplify extension and concentrate on improving bookmark adding experience.<br/>
-					<br/>
-					As you remember our extension before 6 version allowed to browse your bookmarks in Sidebar-like panel. But because we made many tricks and hacks to make Sidebar work in browser, many users experienced crashes and ustable work.
-					And we can't continue to support Sidebar-like extension due to browsers limitations.<br />
-					<br/>
-					So now extension only allows to add new bookmarks. But this decision made extension super stable, fast and more simple and intuitive to use!<br /><br/>
-					To access your bookmarks please right click on extension button and select "My bookmarks". Or open new tab and just click on extension button. Or set hotkey in settings.<br/><br/>
-					We continue to work on better and fast way accessing your bookmarks.
-				</div>
 
 				<section className="blocks">
 					<article id="block-button">

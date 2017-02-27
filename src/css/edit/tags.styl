@@ -33,7 +33,7 @@
 		padding: tagPaddingVertical tagPaddingHorizontal;
 		padding-bottom: (tagPaddingVertical+1px);
 
-		.svgIcon {
+		.icon-close {
 			overflow: hidden;
 			margin-top:2px;
 			opacity: .7;
@@ -41,7 +41,7 @@
 			margin-right: -2px;
 		}
 
-		&:hover .svgIcon {opacity:1;}
+		&:hover .icon-close {opacity:1;}
 	}
 
 	.tag-suggested:active, .tag-active {
@@ -58,17 +58,17 @@
 		position: relative;
 		transition: background .15s ease-in-out, box-shadow .15s ease-in-out, color .15s ease-in-out;
 		padding-right: (tagPaddingHorizontal+2px);
-		//background: var(--accentOverlay, rgba(colorTheme,.06));
-		box-shadow: inset 0 0 0 var(--thin-border, 1px) var(--accentColorLighten30, rgba(colorTheme,.3));
+		background: var(--accentOverlay, rgba(colorTheme,.06));
+		//box-shadow: inset 0 0 0 var(--thin-border, 1px) var(--accentColorLighten30, rgba(colorTheme,.3));
 
-		.svgIcon {
+		.icon-close {
 			position: absolute;
 			right:-1px;
 			top:-1px;
 			transition: opacity .15s ease-in-out, transform .15s ease-in-out;
 		}
 
-		&:not(:hover) .svgIcon {
+		&:not(:hover) .icon-close {
 			opacity:0;
 			trasition: none;
 		}
@@ -76,6 +76,28 @@
 		&:hover:not(:active) {
 			
 			box-shadow: inset 0 0 0 var(--thin-border, 1px) var(--accentColorLighten20, rgba(colorTheme,.2));
+		}
+	}
+	
+	.tag-type {
+		border-radius: 30px;
+		padding-left: tagPaddingHorizontal+2px;
+		padding-right: tagPaddingHorizontal+2px;
+		
+		.icon-type {
+			margin-right: tagGap;
+			margin-top: 1px;
+		}
+		
+		.icon-close {
+			opacity:0;
+			margin-right:-14px;
+			transition: margin .2s ease-in-out, opacity .2s ease-in-out;
+		}
+		
+		&:hover .icon-close {
+			margin-right:0;
+			transition-delay: .2s;
 		}
 	}
 }

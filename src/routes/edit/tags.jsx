@@ -57,6 +57,7 @@ export default class Tags extends React.Component {
 
 	prepareState(props) {
 		return {
+			type: props.type||"link",
 			tags: (props.tags||[]).sort(),
 			suggestedTags: (props.suggestedTags||[]).sort(),
 		}
@@ -123,6 +124,10 @@ export default class Tags extends React.Component {
 		this.props.onChange({tags:_.uniq(tags)})
 	}
 
+	onRemoveType() {
+		this.props.onChange({type: "link"})
+	}
+
 	onEnter(e, callback) {
 		if (e.keyCode == 13)
 			callback()
@@ -142,7 +147,7 @@ export default class Tags extends React.Component {
 				suggestions.push(
 					<a className="tag-item tag-suggested" tabIndex="11" key={"s"+item} onClick={()=>this.onAddTag(item)} onKeyDown={(e)=>this.onEnter(e,()=>this.onAddTag(item))}>
 						{item}
-						<Icon name="add" micro />
+						<Icon name="add" micro className="icon-close" />
 					</a>
 				);
 		})
@@ -150,12 +155,24 @@ export default class Tags extends React.Component {
 		return suggestions;
 	}
 
+	renderType() {
+		if (this.state.type=="link") return null;
+
+		return (
+			<a className="tag-item tag-active tag-type" title={t.s("type")} tabIndex="11" onClick={()=>this.onRemoveType()} onKeyDown={(e)=>this.onEnter(e,()=>this.onRemoveType())}>
+				<Icon name={this.state.type} micro className="icon-type" />
+				{t.s(this.state.type)}
+				<Icon name="close" micro className="icon-close" />
+			</a>
+		);
+	}
+
 	renderTags() {
 		return this.state.tags.map((item, index)=>{
 			return (
-				<a className="tag-item tag-active" title={t.s("suggested")+" "+t.s("tags").toLowerCase()} tabIndex="11" key={"t"+item} onClick={()=>this.onRemoveTag(item)} onKeyDown={(e)=>this.onEnter(e,()=>this.onRemoveTag(item))}>
+				<a className="tag-item tag-active" title={t.s("tags")} tabIndex="11" key={"t"+item} onClick={()=>this.onRemoveTag(item)} onKeyDown={(e)=>this.onEnter(e,()=>this.onRemoveTag(item))}>
 					{item}
-					<Icon name="close" micro />
+					<Icon name="close" micro className="icon-close" />
 				</a>
 			);
 		})
@@ -167,7 +184,7 @@ export default class Tags extends React.Component {
 		return (
 			<a className="tag-item tag-suggested" title={t.s("suggested")+" "+t.s("tags").toLowerCase()} tabIndex="11" key="smore" onClick={()=>onlyPro.showAlert(2)} onKeyDown={(e)=>this.onEnter(e,()=>onlyPro.showAlert(2))}>
 				{t.s("more")}
-				<Icon name="add" micro />
+				<Icon name="add" micro className="icon-close" />
 			</a>
 		);
 	}
@@ -197,6 +214,7 @@ export default class Tags extends React.Component {
 								placeholder={t.s("addTag")+"…"}/>
 						</Datalist>
 
+						{this.renderType()}
 						{this.renderTags()}
 						{this.renderSuggestions()}
 						{this.renderNonPro()}

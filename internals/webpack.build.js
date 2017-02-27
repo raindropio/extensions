@@ -42,6 +42,7 @@ plugins.unshift(
 	new webpack.DefinePlugin({
 		__DEV__: JSON.stringify(false),
 		__PLATFORM__: JSON.stringify(global.platform),
+		__APPBUILD__: JSON.stringify(global.withAppBuild||false),
 		'process.env': {
 			'NODE_ENV': JSON.stringify('production')
 		}

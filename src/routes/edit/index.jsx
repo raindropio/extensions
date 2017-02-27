@@ -115,7 +115,7 @@ export default class Edit extends React.Component {
     renderCollection() {
     	return (
     		<a ref="selectCollection" className="ce-actions" tabIndex="1" autoFocus onClick={this.buttonCollectionSelect} onKeyPress={this.buttonCollectionSelect}><span className="card">
-				<Collection />
+				<Collection already={this.state.already} />
 			</span></a>
     	);
     }

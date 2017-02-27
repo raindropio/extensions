@@ -1,4 +1,6 @@
 import links from './links'
+import common from './common'
+import config from './config'
 var {extension, getCurrentTab, browserName, isNewTabPage, updateTabAndGoToRaindrop} = require('./extension').default
 
 var manifest = require('json!../config/manifest.json');
@@ -27,28 +29,33 @@ const button = {
 			if (!tab) return;
 			if (!tab.url) return;
 
-			if (isNewTabPage(tab.url)){
+			var isAppBuild = false;
+			//Is AppBuild
+			if (__APPBUILD__){
+				if (common.getSetting('appbuild'))
+					isAppBuild = true;
+			}
+
+			var buttonIcon="", buttonPopup="", buttonTitle="";
+
+			if ((isNewTabPage(tab.url))&&(!isAppBuild)) {
 				//Open Raindrop.io
-				extension.browserAction.setIcon({path: button.icons["idle"], tabId: tab.id});
-
-				extension.browserAction.setPopup({tabId: tab.id, popup: ""})
-				extension.browserAction.setTitle({tabId: tab.id, title: extension.i18n.getMessage("open")+" Raindrop.io"})
-
-				//extension.browserAction.setBadgeText({tabId: tab.id, text: ""});
+				buttonIcon = button.icons["idle"]
+				buttonTitle = extension.i18n.getMessage("open")+" Raindrop.io"
 			}
 			else{
 				var status = links.getStatus(tab.url);
-				var icon = button.icons[status];
+				buttonIcon = button.icons[status];
+				buttonPopup = popupPath
+				buttonTitle = extension.i18n.getMessage("saveToRaindrop")
 
-				extension.browserAction.setIcon({path: icon, tabId: tab.id});
-
-				extension.browserAction.setPopup({tabId: tab.id, popup: popupPath})
-				extension.browserAction.setTitle({tabId: tab.id, title: extension.i18n.getMessage("saveToRaindrop")})
-
-				/*extension.browserAction.setBadgeText({tabId: tab.id, text: (status=="saved"?"✔":"")});
-				extension.browserAction.setBadgeBackgroundColor({tabId: tab.id, color: "#4A90E2"})*/
+				if (isAppBuild)
+					buttonPopup = config.appBuildPage
 			}
 
+			extension.browserAction.setIcon({tabId: tab.id, path: buttonIcon});
+			extension.browserAction.setPopup({tabId: tab.id, popup: buttonPopup})
+			extension.browserAction.setTitle({tabId: tab.id, title: buttonTitle})
 			extension.browserAction.enable(tab.id);
 		})
 	}
@@ -56,6 +63,10 @@ const button = {
 
 const onMessage = (r, sender, sendResponse)=>{
 	switch(r.action){
+		case "rerenderBrowserAction":
+			button.render();
+		break;
+
 		case "setStatus":
 			getCurrentTab((tab)=>{
 				var obj = Object.assign({},r);

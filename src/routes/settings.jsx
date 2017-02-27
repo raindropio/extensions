@@ -6,6 +6,7 @@ import Button from '../co/common/button'
 import extensionHelper from '../helpers/extension'
 import extensionConfig from '../background/config'
 import config from '../modules/config'
+import dialogStore from '../stores/dialog'
 
 export default class Settings extends React.Component {
 	constructor(props) {
@@ -15,6 +16,7 @@ export default class Settings extends React.Component {
 		this.setKeyword = this.setKeyword.bind(this);
 
 		this.state = {
+			"appbuild": false,
 			"drag-disabled": false,
 			"omnibox-disabled": false,
 			"omnibox-keyword": extensionConfig.omnibox_keyword
@@ -22,6 +24,11 @@ export default class Settings extends React.Component {
 	}
 
 	componentDidMount() {
+		extensionHelper.getSetting("appbuild")
+			.then((isEnabled)=>{
+				this.setState({"appbuild": isEnabled?true:false})
+			})
+
 		extensionHelper.getSetting("drag-disabled")
 			.then((isDisabled)=>{
 				this.setState({"drag-disabled": isDisabled?true:false})
@@ -110,7 +117,20 @@ export default class Settings extends React.Component {
 
 		this.setState(obj);
 
-		extensionHelper.setSetting(key, obj[key])
+		extensionHelper.setSetting(key, obj[key]);
+
+		if (key=="appbuild"){
+			extensionHelper.rerenderBrowserAction();
+
+			dialogStore.onShow({
+				title: t.s('desktopNeedRestart'),
+				items: [
+					{title: t.s("refresh"), onClick: ()=>{
+						window.close();
+					}}
+				]
+			})
+		}
 	}
 
 	setKeyword(e) {
@@ -136,6 +156,11 @@ export default class Settings extends React.Component {
 					<div className="settings-group">
 						{t.s("extension")}
 					</div>
+
+					<label className="settings-parameter" hidden={!__APPBUILD__}>
+						<div className="spl"><input type="checkbox" name="appbuild" checked={this.state["appbuild"]} onClick={this.setSetting} onChange={()=>{}} /></div>
+						<div className="title">Mini Application</div>
+					</label>
 
 					<label className="settings-parameter">
 						<div className="spl"><input type="checkbox" name="drag-disabled" checked={!this.state["drag-disabled"]} onClick={this.setSetting} onChange={()=>{}} /></div>

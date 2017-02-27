@@ -1,15 +1,18 @@
+global.withAppBuild = true
+
 var commonConfig = require('./webpack.common.js')
 var webpack = require("webpack");
 var path = require("path");
 var WriteFilePlugin = require('write-file-webpack-plugin');
 
-process.env.NODE_ENV = "development";
+process.env.NODE_ENV = "development"
 
 //Plugins
 var plugins = commonConfig.plugins.concat([
 	new webpack.DefinePlugin({
 		__DEV__: JSON.stringify(true),
 		__PLATFORM__: JSON.stringify(global.platform||"chrome"),
+		__APPBUILD__: JSON.stringify(global.withAppBuild||false)
 	}),
 	new WriteFilePlugin(),
 ])

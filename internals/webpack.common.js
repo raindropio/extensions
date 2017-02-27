@@ -6,6 +6,16 @@ var GenerateJsonPlugin = require('generate-json-webpack-plugin');
 var SplitByPathPlugin = require('webpack-split-by-path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
+var copyFilesList = [
+	{ from: './background/opera/panel.html', to: 'panel.html' },
+	{ from: './background/inject/inject.css', to: 'inject.css' }
+]
+
+if (global.withAppBuild){
+	copyFilesList.push({from: '../pages/mini/mini.css', to: 'mini.css'})
+	copyFilesList.push({from: '../pages/mini/index.js', to: 'mini.js'})
+}
+
 const Common = {
 	plugins: [
 		//index.html
@@ -28,6 +38,16 @@ const Common = {
 			filename: "ready.html",
 			favicon: "./assets/extension/saved_64.png"
 		}),
+		//mini.html
+		new HtmlWebpackPlugin({
+			platform: global.platform||"",
+			template: '../pages/mini/index.ejs',
+			hash: false,
+			inject: 'head',
+			chunks: [],
+			filename: "mini.html",
+			favicon: "./assets/extension/saved_64.png"
+		}),
 		new ScriptExtHtmlWebpackPlugin({
 			defaultAttribute: 'defer'
 		}),
@@ -41,12 +61,7 @@ const Common = {
 			}
 		]),
 
-		new CopyWebpackPlugin([
-			{ from: './background/opera/panel.html', to: 'panel.html' },
-			{ from: './background/inject/inject.css', to: 'inject.css' },
-			//{ from: './background/bridge/jquery.js', to: 'jquery.js' },
-			//{ from: './background/bridge/parser.js', to: 'parser.js' }
-		]),
+		new CopyWebpackPlugin(copyFilesList),
 
 		new webpack.IgnorePlugin(/^(electron)$/),
 

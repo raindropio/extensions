@@ -1,4 +1,5 @@
 var {extension, openTab} = require('./extension').default
+var settingsCache = {};
 
 const R = {
 	init() {
@@ -12,11 +13,32 @@ const R = {
 				break;
 
 				case 'update':
-					if (details.previousVersion.indexOf('5')==0)
-						openTab('ready.html?5');
+					
 				break;
 			}
 		});
+	},
+
+	getSetting(key) {
+		if (typeof settingsCache[key] == "undefined")
+			settingsCache[key] = localStorage.getItem(key);
+
+		return settingsCache[key];
+	},
+
+	setSetting(key,val) {
+		var toDel = false;
+		if (typeof val == "boolean")
+			if (!val) toDel=true;
+
+		if (!toDel){
+			settingsCache[key] = val;
+			localStorage.setItem(key, val);
+		}
+		else{
+			delete settingsCache[key];
+			localStorage.removeItem(key);
+		}
 	}
 }
 
@@ -28,18 +50,11 @@ if (extension){
 	const onMessage = (r, sender, sendResponse)=>{
 		switch(r.action){
 			case "getSetting":
-				sendResponse(localStorage.getItem(r.name));
+				sendResponse(R.getSetting(r.name));
 			break;
 
 			case "setSetting":
-				var toDel = false;
-				if (typeof r.value == "boolean")
-					if (!r.value) toDel=true;
-
-				if (!toDel)
-					localStorage.setItem(r.name, r.value);
-				else
-					localStorage.removeItem(r.name);
+				R.setSetting(r.name, r.value);
 			break;
 		}
 	}

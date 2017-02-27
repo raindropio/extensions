@@ -3,7 +3,7 @@
 Highly recommend to user `yarn` to install dependencies, it prevent any inconsistencies!
 
 ###Build for Chrome
-`npm run build`
+`npm run build-chrome`
 
 ###Build for Firefox
 `npm run build-firefox`

@@ -125,8 +125,24 @@ export default class Start extends React.Component {
 	}
 
 	componentWillMount() {
-		this.login()
-		this.bookmark()
+		var isModal = (network.getSearchParam('modal') ? true : false);
+		var initApp = ()=>{
+			this.login()
+			this.bookmark()
+		}
+
+		if ((__APPBUILD__)||(!isModal)) {
+			extensionHelpers.getSetting("typeSelected")
+				.then((alreadySelected)=>{
+					console.log(alreadySelected)
+					if (!alreadySelected)
+						return window.location.hash = '#/type';
+
+					initApp();
+				})
+		}
+		else
+			initApp();
 	}
 
 	componentWillUnmount() {

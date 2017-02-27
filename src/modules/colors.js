@@ -1,7 +1,5 @@
 import network from './network'
-
-var colorThief = require('./color-thief');
-colorThief = new colorThief();
+import colorThief from './color-thief'
 
 var colorURLS = {};
 
@@ -41,6 +39,9 @@ export default {
             c[2] = parseInt(c[2]);
 
 	        var cp = _this.contrast(c);
+            if (cp[1]<=85)
+                c=[0,0,0];
+            else
 	        if (cp[0] == 'black') {
 	            c = _this.shadeRGBColor('rgb(' + c[0] + "," + c[1] + "," + c[2] + ')', (((100 / 256) * (cp[1] - 100)) / 100) * -1);
 	        }
@@ -95,6 +96,7 @@ export default {
             var c = "0,0,0";
 
             var finalColor = colorThief.getColor(e.target);
+            
             if (this.contrast(finalColor)[0]!="black")
                 c=this.getDarkPalette(finalColor);
             //try{c = this.getDarkPalette(colorThief.getColor(e.target));}catch(e){}
