@@ -1,6 +1,8 @@
 # Raindrop.io Browser Extension
 ###Install dependencies
-Highly recommend to user [`yarn`](https://yarnpkg.com) to install dependencies, it prevent any inconsistencies!
+Highly recommend to use [`yarn`](https://yarnpkg.com) to install dependencies, it prevents any inconsistencies! 
+
+Use `yarn install` to install the dependencies.
 
 
 ###Build for Chrome
