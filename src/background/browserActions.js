@@ -15,7 +15,7 @@ const button = {
 
 		for(var i in statuses)
 			for (var j in manifest.browser_action.default_icon)
-				statuses[i][j] = manifest.browser_action.default_icon[j].replace("idle", "/"+i);
+				statuses[i][j] = manifest.browser_action.default_icon[j].replace("idle", i);
 
 		statuses.idle = manifest.browser_action.default_icon;
 		if (__PLATFORM__=="firefox")
