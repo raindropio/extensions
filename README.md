@@ -3,12 +3,11 @@
 Highly recommend to user `yarn` to install dependencies, it prevent any inconsistencies!
 
 ###Build for Chrome
-`npm run build-chrome`
+`yarn run build`
 
 ###Build for Firefox
-`npm run build-firefox`
+`yarn`
+`yarn run build-firefox`
 
 ###Build for Opera
-`npm run build-opera`
-
-###Need help with Edge!
+`yarn run build-opera`

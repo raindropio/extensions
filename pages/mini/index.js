@@ -9,8 +9,8 @@ var sendMessageToIframe = function(m) {
 }
 
 var onMessage = function(e) {
-	if (e.origin!="https://raindrop.io")
-		return;
+	//if (e.origin!="https://raindrop.io")
+	//	return;
 
 	switch(e.data.action) {
 		case "currentTab":

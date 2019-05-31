@@ -135,8 +135,8 @@ export default class Page extends React.Component{
 						<p><img src={require("./assets/dropbox.png")} width="40" height="38" /> Dropbox backup</p>
 					</div>
 					<h2>
-						Just <a href={proPage}>$2 per month</a>.
-						<span hidden={this.state.showInvite}>Or invite 5 friends and <a href="" onClick={this.showInvite}>get year of PRO features for free!</a></span>
+						Just <a href={proPage}>$3 per month</a>.
+						{/*<span hidden={this.state.showInvite}>Or invite 5 friends and <a href="" onClick={this.showInvite}>get year of PRO features for free!</a></span>*/}
 					</h2>
 				</footer>
 

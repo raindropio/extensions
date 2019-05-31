@@ -6,12 +6,14 @@
   "scripts": {
     "startDev": "webpack-dev-server --config internals/webpack.dev.js --progress --colors --port 80 --hot --inline --no-info --display-error-details",
     "removeBuild": "rm -r build/chrome",
-    "dev": "export NODE_ENV=development | npm run removeBuild 2> /dev/null | npm run startDev",
-    "dev-http": "export NODE_ENV=development | npm run removeBuild 2> /dev/null | webpack-dev-server --config internals/webpack.dev.http.js --progress --colors --port 80 --hot --inline --no-info --display-error-details",
+    "dev": "export NODE_ENV=development && npm run removeBuild 2> /dev/null && npm run startDev",
+    "dev-http": "export NODE_ENV=development && npm run removeBuild 2> /dev/null && webpack-dev-server --config internals/webpack.dev.http.js --progress --colors --port 80 --hot --inline --no-info --display-error-details",
+    "build": "cd ../App && npm run clipper && cd ../Clipper && npm run build-chrome",
     "build-chrome": "export NODE_ENV=production | rm -r build/chrome 2> /dev/null | webpack --config internals/webpack.build.chrome.js",
-    "build-firefox": "export NODE_ENV=production | rm -r build/firefox 2> /dev/null | webpack --config internals/webpack.build.firefox.js",
+    "build-firefox": "npm run source && export NODE_ENV=production | rm -r build/firefox 2> /dev/null | webpack --config internals/webpack.build.firefox.js",
     "build-opera": "export NODE_ENV=production | rm -r build/opera 2> /dev/null | webpack --config internals/webpack.build.opera.js",
-    "source": "zip -FSr -q -X source.zip internals pages src .babelrc package.json yarn.lock HOW_TO_BUILD.md",
+    "build-all": "npm run build-chrome && npm run build-firefox && npm run build-opera",
+    "source": "zip -FSr -q -X source.zip internals pages src .babelrc package.json yarn.lock README.md",
     "git": "git add . && git commit -a -m \"6.0\" && git push --set-upstream origin master"
   },
   "devDependencies": {

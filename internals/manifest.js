@@ -17,16 +17,16 @@ var m = {
 		if (global.platform == "firefox")
 			return {gecko:{
 				id: "jid0-adyhmvsP91nUO8pRv0Mn2VKeB84@jetpack",
-				"strict_min_version": "49.0"
+				"strict_min_version": "56.0"
 			}};
 
 		return undefined;
 	},
 
 	sidebarAction: function(value) {
-		if (global.platform == "opera")
+		if (global.platform == "opera"/* || global.platform == "firefox"*/)
 			return {
-				"default_icon": "assets/idle_19.png",
+				"default_icon": "assets/dark_idle_19.png",
 				"default_title" : "__MSG_myBookmarksRaindrop__",
 				"default_panel": "panel.html"
 			};
@@ -62,8 +62,15 @@ var m = {
 		var temp = Object.assign({}, value);
 
 		if (global.platform == "firefox"){
-			for(var i in temp["default_icon"])
-				temp["default_icon"][i] = temp["default_icon"][i].replace('idle','firefox_idle');
+			temp.theme_icons = Object.keys(temp.default_icon).map(size=>{
+				return {
+					dark: temp.default_icon[size],
+					light: temp.default_icon[size].replace('dark', 'light'),
+					size: parseInt(size)
+				}
+			})
+			//for(var i in temp["default_icon"])
+			//	temp["default_icon"][i] = temp["default_icon"][i].replace('idle','firefox_idle');
 		}
 
 		return temp;

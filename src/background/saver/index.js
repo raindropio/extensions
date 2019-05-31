@@ -115,7 +115,7 @@ const Saver = {
 			type: "progress",
 			title: extension.i18n.getMessage("save")+" "+extension.i18n.getMessage("toRaindrop"),
 			message: extension.i18n.getMessage("loading")+" "+_.truncate(url.replace('https://','').replace('http://',''), {length: 25}),
-			iconUrl: 'assets/savedloading_'+extensionConfig.notificationIconSize+'.png',
+			//iconUrl: 'assets/savedloading_'+extensionConfig.notificationIconSize+'.png',
 			progress: progress,
 			priority: 0
 		}, url, "save")
@@ -129,7 +129,7 @@ const Saver = {
 			requireInteraction: true,
 			title: extension.i18n.getMessage((item.type||"link")+"Saved"),
 			message: item.title,
-			iconUrl: 'assets/saved_'+extensionConfig.notificationIconSize+'.png',
+			//iconUrl: 'assets/saved_'+extensionConfig.notificationIconSize+'.png',
 			buttons: [
 				{title: extension.i18n.getMessage("inCollection")+' "'+item.collectionTitle+'", '+extension.i18n.getMessage("edit")+"...", iconUrl: item.collectionDataURI},
 				{title: extension.i18n.getMessage("remove")}
@@ -153,7 +153,7 @@ const Saver = {
 			requireInteraction: true,
 			title: extension.i18n.getMessage((item.type||"link")+"RemovedPermament"),
 			message: item.title,
-			iconUrl: 'assets/saved_'+extensionConfig.notificationIconSize+'.png',
+			//iconUrl: 'assets/saved_'+extensionConfig.notificationIconSize+'.png',
 			buttons: [{title: extension.i18n.getMessage("restore")}]
 		}
 
@@ -168,7 +168,7 @@ const Saver = {
 			priority: 2,
 			requireInteraction: true,
 			title: extension.i18n.getMessage("saveError"),
-			iconUrl: 'assets/error_'+extensionConfig.notificationIconSize+'.png',
+			//iconUrl: 'assets/error_'+extensionConfig.notificationIconSize+'.png',
 			message: ""
 		}
 

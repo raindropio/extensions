@@ -7,7 +7,7 @@ var manifest = require('json!../config/manifest.json');
 var popupPath = manifest.browser_action.default_popup;
 
 const button = {
-	icons: {},
+	/*icons: {},
 
 	initIcons() {
 		var idle = manifest.browser_action.default_icon;
@@ -18,11 +18,15 @@ const button = {
 				statuses[i][j] = manifest.browser_action.default_icon[j].replace("idle", "/"+i);
 
 		statuses.idle = manifest.browser_action.default_icon;
-		if (__PLATFORM__=="firefox")
+		if (__PLATFORM__=="firefox"){
 			for(var i in statuses.idle)
 				statuses.idle[i] = statuses.idle[i].replace("idle","firefox_idle");
+
+			for(var i in statuses.saved)
+				statuses.idle[i] = statuses.idle[i].replace("saved","firefox_saved");
+		}
 		button.icons = statuses;
-	},
+	},*/
 
 	render() {
 		getCurrentTab((tab)=>{
@@ -36,16 +40,18 @@ const button = {
 					isAppBuild = true;
 			}
 
-			var buttonIcon="", buttonPopup="", buttonTitle="";
+			var /*buttonIcon="",*/buttonBadge="", buttonPopup="", buttonTitle="";
 
 			if ((isNewTabPage(tab.url))&&(!isAppBuild)) {
 				//Open Raindrop.io
-				buttonIcon = button.icons["idle"]
+				//buttonIcon = button.icons["idle"]
 				buttonTitle = extension.i18n.getMessage("open")+" Raindrop.io"
 			}
 			else{
 				var status = links.getStatus(tab.url);
-				buttonIcon = button.icons[status];
+				if (status == 'saved')
+					buttonBadge = '★'
+				//buttonIcon = button.icons[status];
 				buttonPopup = popupPath
 				buttonTitle = extension.i18n.getMessage("saveToRaindrop")
 
@@ -53,7 +59,8 @@ const button = {
 					buttonPopup = config.appBuildPage
 			}
 
-			extension.browserAction.setIcon({tabId: tab.id, path: buttonIcon});
+			//extension.browserAction.setIcon({tabId: tab.id, path: buttonIcon});
+			extension.browserAction.setBadgeText({text: buttonBadge})
 			extension.browserAction.setPopup({tabId: tab.id, popup: buttonPopup})
 			extension.browserAction.setTitle({tabId: tab.id, title: buttonTitle})
 			extension.browserAction.enable(tab.id);
@@ -105,5 +112,9 @@ if (extension){
 	extension.tabs.onActivated.removeListener(onTabUpdate);
 	extension.tabs.onActivated.addListener(onTabUpdate);
 
-	button.initIcons();
+	//button.initIcons();
+	extension.browserAction.setBadgeBackgroundColor({color: '#0087EA'})
+	try{
+		extension.browserAction.setBadgeTextColor({color: '#FFFFFF'})
+	}catch(e){}
 }

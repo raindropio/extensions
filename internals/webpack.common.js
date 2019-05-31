@@ -14,6 +14,9 @@ var copyFilesList = [
 if (global.withAppBuild){
 	copyFilesList.push({from: '../pages/mini/mini.css', to: 'mini.css'})
 	copyFilesList.push({from: '../pages/mini/index.js', to: 'mini.js'})
+
+	if (global.appBuildLocal)
+		copyFilesList.push({from: '../appbuild/**/*', to: 'appbuild'})
 }
 
 const Common = {
@@ -26,7 +29,7 @@ const Common = {
 			hash: false,
 			inject: 'head',
 			chunks: ['main', 'languages'],
-			favicon: "./assets/extension/saved_64.png"
+			favicon: "./assets/extension/icon-48.png"
 		}),
 		//ready.html
 		new HtmlWebpackPlugin({
@@ -36,7 +39,7 @@ const Common = {
 			inject: 'head',
 			chunks: ['ready', 'languages'],
 			filename: "ready.html",
-			favicon: "./assets/extension/saved_64.png"
+			favicon: "./assets/extension/icon-48.png"
 		}),
 		//mini.html
 		new HtmlWebpackPlugin({
@@ -46,7 +49,9 @@ const Common = {
 			inject: 'head',
 			chunks: [],
 			filename: "mini.html",
-			favicon: "./assets/extension/saved_64.png"
+			favicon: "./assets/extension/icon-48.png",
+
+			raindropURL: (global.appBuildLocal ? "appbuild/index.html?is_clipper=1" : "https://raindrop.io/app?is_clipper=1")
 		}),
 		new ScriptExtHtmlWebpackPlugin({
 			defaultAttribute: 'defer'

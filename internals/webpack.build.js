@@ -43,6 +43,7 @@ plugins.unshift(
 		__DEV__: JSON.stringify(false),
 		__PLATFORM__: JSON.stringify(global.platform),
 		__APPBUILD__: JSON.stringify(global.withAppBuild||false),
+		__APPBUILD_LOCAL__: JSON.stringify(global.appBuildLocal||false),
 		'process.env': {
 			'NODE_ENV': JSON.stringify('production')
 		}
@@ -51,7 +52,7 @@ plugins.unshift(
 
 //Loaders
 var loaders = commonConfig.loaders;
-loaders.img.loaders.push('image-webpack?{pngquant:{optimizationLevel: 7, quality: "65-90", speed: 2}, mozjpeg: {quality: 80}}');
+//loaders.img.loaders.push('image-webpack?{pngquant:{optimizationLevel: 7, quality: "65-90", speed: 2}, mozjpeg: {quality: 80}}');
 loaders.stylus.loader = ExtractTextPlugin.extract("stylus", "css-loader!postcss-loader!stylus-loader");
 
 /*loaders.stylus.loader = ExtractTextPlugin.extract({

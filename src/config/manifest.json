@@ -27,12 +27,12 @@
     "default_title": "__MSG_saveToRaindrop__",
     "default_popup": "index.html",
     "default_icon": {
-      "16": "assets/idle_16.png",
-      "19": "assets/idle_19.png",
-      "32": "assets/idle_32.png",
-      "38": "assets/idle_38.png",
-      "48": "assets/idle_48.png",
-      "64": "assets/idle_64.png"
+      "16": "assets/dark_idle_16.png",
+      "19": "assets/dark_idle_19.png",
+      "32": "assets/dark_idle_32.png",
+      "38": "assets/dark_idle_38.png",
+      "48": "assets/dark_idle_48.png",
+      "64": "assets/dark_idle_64.png"
     }
   },
 

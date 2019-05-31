@@ -12,7 +12,8 @@ var plugins = commonConfig.plugins.concat([
 	new webpack.DefinePlugin({
 		__DEV__: JSON.stringify(true),
 		__PLATFORM__: JSON.stringify(global.platform||"chrome"),
-		__APPBUILD__: JSON.stringify(global.withAppBuild||false)
+		__APPBUILD__: JSON.stringify(global.withAppBuild||false),
+		__APPBUILD_LOCAL__: JSON.stringify(global.appBuildLocal||false)
 	}),
 	new WriteFilePlugin(),
 ])
