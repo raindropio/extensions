@@ -33,7 +33,12 @@ const Omnibox = {
 		text = (text||"").trim();
 
 		extension.omnibox.setDefaultSuggestion({
-			description: (text ? "<match>"+_.escape(text)+"</match>" : extension.i18n.getMessage("findBookmark"))
+			description: (
+				text ? (
+					__PLATFORM__!='firefox' ? "<match>"+_.escape(text)+"</match>" : 'Raindrop.io: ' + text
+				)
+				: extension.i18n.getMessage("findBookmark")
+			)
 		})
 
 		if (!text) return;
@@ -49,7 +54,7 @@ const Omnibox = {
 						var matched = search.highlight(_.escape(item.title+(item.description?". "+item.description:"")), sRegex);
 						items.push({
 							content: item.link,
-							description: (item.hideLink ? "" : "<url>"+search.highlight(_.escape(item.link), sRegex)+"</url> ")+matched
+							description: ( (item.hideLink || __PLATFORM__=='firefox') ? "" : "<url>"+search.highlight(_.escape(item.link), sRegex)+"</url> ")+matched
 						})
 					})
 				}

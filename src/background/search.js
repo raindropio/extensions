@@ -36,7 +36,7 @@ const Search = {
 	},
 
 	highlight(text,searchRegex) {
-		if (!searchRegex)
+		if (!searchRegex || __PLATFORM__=='firefox')
 			return text;
 
 		var r = new RegExp(searchRegex,'gi');

@@ -13,7 +13,7 @@
     "build-firefox": "npm run source && export NODE_ENV=production | rm -r build/firefox 2> /dev/null | webpack --config internals/webpack.build.firefox.js",
     "build-opera": "export NODE_ENV=production | rm -r build/opera 2> /dev/null | webpack --config internals/webpack.build.opera.js",
     "build-all": "npm run build-chrome && npm run build-firefox && npm run build-opera",
-    "source": "zip -FSr -q -X source.zip internals pages src .babelrc package.json yarn.lock README.md",
+    "source": "zip -FSr -q -X build/source.zip internals pages src .babelrc package.json yarn.lock README.md",
     "git": "git add . && git commit -a -m \"6.0\" && git push --set-upstream origin master"
   },
   "devDependencies": {
