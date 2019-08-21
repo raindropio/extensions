@@ -1,6 +1,5 @@
 var home = "raindrop.io";
-var host = "https://"+home,
-    apiPrefix = "/api/";
+var host = "https://"+home;
 
 if(typeof window != "undefined"){
     if (window.location.protocol.indexOf('http')==0)
@@ -10,8 +9,8 @@ if(typeof window != "undefined"){
 module.exports = {
     home: home,
 	host: host,
-    apiPrefix: host + apiPrefix,
-    screenshotService: host + "/screenshot/?url=",
+    apiPrefix: "https://api.raindrop.io/v1/",
+    screenshotService: "https://stella.raindrop.io/imager/screenshot.jpg?width=460&url=",
     contentTypes: ["link", "article", "image", "video"],
 
     proPage: host + "/app#/settings/upgrade?_k=b0zk8r",

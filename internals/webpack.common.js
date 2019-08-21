@@ -51,7 +51,7 @@ const Common = {
 			filename: "mini.html",
 			favicon: "./assets/extension/icon-48.png",
 
-			raindropURL: (global.appBuildLocal ? "appbuild/index.html?is_clipper=1" : "https://raindrop.io/app?is_clipper=1")
+			raindropURL: (global.appBuildLocal ? "appbuild/index.html?is_clipper=1" : "https://app.raindrop.io/?is_clipper=1")
 		}),
 		new ScriptExtHtmlWebpackPlugin({
 			defaultAttribute: 'defer'
