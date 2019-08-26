@@ -29,9 +29,8 @@ const button = {
 	},*/
 
 	render() {
-		getCurrentTab((tab)=>{
-			if (!tab) return;
-			if (!tab.url) return;
+		getCurrentTab((tab={})=>{
+			const { url='' } = tab
 
 			var isAppBuild = false;
 			//Is AppBuild
@@ -42,13 +41,13 @@ const button = {
 
 			var /*buttonIcon="",*/buttonBadge="", buttonPopup="", buttonTitle="";
 
-			if ((isNewTabPage(tab.url))&&(!isAppBuild)) {
+			if ((isNewTabPage(url))&&(!isAppBuild)) {
 				//Open Raindrop.io
 				//buttonIcon = button.icons["idle"]
 				buttonTitle = extension.i18n.getMessage("open")+" Raindrop.io"
 			}
 			else{
-				var status = links.getStatus(tab.url);
+				var status = links.getStatus(url);
 				if (status == 'saved')
 					buttonBadge = '★'
 				//buttonIcon = button.icons[status];

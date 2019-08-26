@@ -85,6 +85,16 @@ var m = {
 		}
 
 		return temp;
+	},
+
+	permissions: function(value) {
+		let temp = [...value]
+
+		//Firefox do not support 'activeTab' as expected
+		if (global.platform == "firefox")
+			temp = temp.map(v=>v=='activeTab' ? 'tabs' : v)
+
+		return temp
 	}
 }
 
@@ -103,6 +113,7 @@ module.exports = {
 						case "content_security_policy": value = m.contentSecurity(value); 	break;
 						case "browser_action": 			value = m.browserAction(value); 	break;
 						case "commands": 				value = m.commands(value); 	break;
+						case "permissions":				value = m.permissions(value); 	break;
 					}
 
 					return value;
@@ -136,7 +147,7 @@ module.exports = {
 				plugins.push(
 					new GenerateJsonPlugin(
 						'_locales/'+code+"/messages.json", {
-							appName: keyVal("Raindrop.io: "+t("saveButtonForWeb")),
+							appName: keyVal("Raindrop.io"),
 							appDesc: keyVal(t("saveButtonForWeb")),
 							hotkey: keyVal(t("helpHotKey")),
 
