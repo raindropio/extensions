@@ -116,4 +116,6 @@ if (extension){
 	try{
 		extension.browserAction.setBadgeTextColor({color: '#FFFFFF'})
 	}catch(e){}
+
+	button.render();
 }
