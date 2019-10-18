@@ -69,7 +69,7 @@
   "permissions": [
     "contextMenus",
     "notifications",
-    "activeTab"
+    "tabs"
   ],
 
   "content_scripts": [

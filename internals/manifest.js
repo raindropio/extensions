@@ -91,8 +91,8 @@ var m = {
 		let temp = [...value]
 
 		//Firefox do not support 'activeTab' as expected
-		if (global.platform == "firefox")
-			temp = temp.map(v=>v=='activeTab' ? 'tabs' : v)
+		//if (global.platform == "firefox")
+		//	temp = temp.map(v=>v=='activeTab' ? 'tabs' : v)
 		
 		// maybe need also:
 		// "*://*/*",
