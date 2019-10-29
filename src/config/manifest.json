@@ -70,7 +70,8 @@
     "contextMenus",
     "notifications",
     "activeTab",
-    "https://api.raindrop.io/"
+    "https://api.raindrop.io/",
+    "https://stella.raindrop.io/"
   ],
 
   "optional_permissions": [
