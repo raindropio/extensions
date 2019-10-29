@@ -99,9 +99,9 @@ export default class Page extends React.Component{
 						<p>When you find something interesting on the web, just click to add bookmark</p>
 					</article>
 
-					<article id="block-drag">
+					{/*<article id="block-drag">
 						<p>Drag image or link from page and drop it into appeared ☁️️ in the right corner</p>
-					</article>
+		</article>*/}
 
 					<article id="block-hotkey" hidden={!this.state.hotkeyEnabled}>
 						<p>

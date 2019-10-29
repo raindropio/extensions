@@ -42,3 +42,16 @@ var onMessage = function(e) {
 
 window.removeEventListener("message", onMessage, false);
 window.addEventListener("message", onMessage, false);
+
+
+//tabs permission
+window.onload = function() {
+	webextension.permissions.contains({permissions: ['tabs']}, function(result) {
+		if (result){
+			localStorage.setItem('tabs-permissions-ignore', '1')
+		} else {
+			if (localStorage.getItem('tabs-permissions-ignore')!='1')
+				document.querySelector('#settings').classList.add('show-badge')
+		}
+	})
+}

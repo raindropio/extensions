@@ -3,6 +3,7 @@ import t from 't'
 import Button from '../../co/common/button'
 import Icon from '../../co/common/icon'
 
+import extension from '../../helpers/extension'
 import bookmarkActions from '../../actions/bookmark'
 
 var _ = {
@@ -23,6 +24,16 @@ export default class Footer extends React.Component {
 		return {
 			isRemoved: (props.collectionId == -99)
 		}
+	}
+
+	componentDidMount() {
+		Promise.all([
+			extension.permissions.enabled('tabs'),
+			extension.permissions.ignored('tabs')
+		]).then(([ enabled, ignored ])=>{
+			if (!enabled && !ignored)
+				this.setState({ tabsPermissionsNeed: true })
+		})
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -66,11 +77,13 @@ export default class Footer extends React.Component {
 
 				<div className="max"/>
 
-				<Button href="https://raindrop.io" target="_blank" className="button link" tabIndex="1002">
+				<Button href="https://app.raindrop.io" target="_blank" className="button link" tabIndex="1002">
 					{t.s("myAccount")}
 				</Button>
 
 				<Button className="button gray accent"  tabIndex="1010" icon="config,normal" href="#/settings" />
+
+				{this.state.tabsPermissionsNeed && <a className="badge" href="#/settings">+1</a>}
 			</section>
 		);
 	}

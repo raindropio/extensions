@@ -15,7 +15,7 @@ const Saver = {
 		if (data.type!="save")
 			return;
 
-		if (__PLATFORM__!="chrome"){
+		
 			var state="";
 			if (typeof urlState[data.id] != "undefined")
 				state = urlState[data.id];
@@ -38,7 +38,6 @@ const Saver = {
 					this.save(data.id);
 				break;
 			}
-		}
 
 		notifications.close(id);
 	},
@@ -125,15 +124,16 @@ const Saver = {
 		urlState[item.link] = {step: "success", id: item._id};
 
 		var n = {
+			type: 'image',
 			priority: 2,
 			requireInteraction: true,
 			title: extension.i18n.getMessage((item.type||"link")+"Saved"),
-			message: item.title,
+			message: item.title+"\n"+extension.i18n.getMessage("clickToEdit")
 			//iconUrl: 'assets/saved_'+extensionConfig.notificationIconSize+'.png',
-			buttons: [
-				{title: extension.i18n.getMessage("inCollection")+' "'+item.collectionTitle+'", '+extension.i18n.getMessage("edit")+"...", iconUrl: item.collectionDataURI},
+			/*buttons: [
+				{title: extension.i18n.getMessage("edit"), iconUrl: item.collectionDataURI},
 				{title: extension.i18n.getMessage("remove")}
-			]
+			]*/
 		}
 
 		if (item.already)

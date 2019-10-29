@@ -16,6 +16,7 @@ const Helpers = {
 				if (e)console.log(e)
 				res("");
 			}
+			img.crossOrigin = true
 			img.src = network.thumb(url, 100);
 		})
 	}

@@ -69,15 +69,12 @@
   "permissions": [
     "contextMenus",
     "notifications",
-    "tabs"
+    "activeTab",
+    "https://api.raindrop.io/"
   ],
 
-  "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "js": ["inject.js"],
-      "css": ["inject.css"]
-    }
+  "optional_permissions": [
+    "tabs"
   ],
 
   "web_accessible_resources": [

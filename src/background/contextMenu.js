@@ -35,7 +35,7 @@ const contextMenus = {
 			case contextMenus.ids.savePage:
 			case contextMenus.ids.saveLink:
 			case contextMenus.ids.saveImage:
-				var url = info.linkUrl;
+				var url = info.srcUrl || info.linkUrl;
 				if (url)
 					saver.save(url)
 				else

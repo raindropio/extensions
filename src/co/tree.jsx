@@ -380,9 +380,9 @@ export default class Tree extends React.Component {
 				);
 			});
 
-			groups.push(
+			/*groups.push(
 				<Examples key="examples" fromId={newElemId} selected={this.state.selected} onClick={this.createNewFromExample} />
-			);
+			);*/
 		}
 
 		//SEARCH

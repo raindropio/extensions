@@ -91,7 +91,7 @@ module.exports = {
             else if (s.indexOf('http://raindrop.io')==0)
                 return s;
             else
-                return config.host+"/makethumb/?url=" + encodeURIComponent(s) + "&width=" + width;
+                return "https://stella.raindrop.io/imager/thumb.jpg?url=" + encodeURIComponent(s) + "&width=" + width;
         }
         else
             return "about:blank";

@@ -91,13 +91,24 @@ var m = {
 		let temp = [...value]
 
 		//Firefox do not support 'activeTab' as expected
-		//if (global.platform == "firefox")
-		//	temp = temp.map(v=>v=='activeTab' ? 'tabs' : v)
+		if (global.platform == "firefox")
+			temp = temp.map(v=>v=='activeTab' ? 'tabs' : v)
 		
 		// maybe need also:
 		// "*://*/*",
 		// "<all_urls>"
 		
+
+		return temp
+	},
+
+	optional_permissions: function(value) {
+		let temp = [...value]
+
+		//Firefox do not support 'activeTab' as expected
+		//so keep `tabs` in permissions, not in optional_permissions
+		if (global.platform == 'firefox')
+			temp = []
 
 		return temp
 	}
@@ -119,6 +130,7 @@ module.exports = {
 						case "browser_action": 			value = m.browserAction(value); 	break;
 						case "commands": 				value = m.commands(value); 	break;
 						case "permissions":				value = m.permissions(value); 	break;
+						case "optional_permissions":	value = m.optional_permissions(value); 	break;
 					}
 
 					return value;
@@ -180,6 +192,7 @@ module.exports = {
 
 							remove: keyVal(t('remove')),
 							edit: keyVal(t('edit')),
+							clickToEdit: keyVal(t('alreadyInCollectionD')),
 							restore: keyVal(t('restore')),
 							inCollection: keyVal(_.capitalize(t('inCollection'))),
 							unsorted: keyVal(t("defaultCollection--1")),

@@ -14,6 +14,7 @@ export default class Settings extends React.Component {
 
 		this.setSetting = this.setSetting.bind(this);
 		this.setKeyword = this.setKeyword.bind(this);
+		this.requestPermission = this.requestPermission.bind(this);
 
 		this.state = {
 			"appbuild": false,
@@ -24,6 +25,18 @@ export default class Settings extends React.Component {
 	}
 
 	componentDidMount() {
+		extensionHelper.permissions.enabled('tabs')
+			.then(isEnabled=>{
+				this.setState({"tabs": isEnabled?true:false})
+			})
+
+		extensionHelper.permissions.ignored('tabs')
+			.then(isIgnored=>{
+				this.setState({"ignoreTabs": isIgnored?true:false})
+
+				return extensionHelper.permissions.ignore('tabs')
+			})
+		
 		extensionHelper.getSetting("appbuild")
 			.then((isEnabled)=>{
 				this.setState({"appbuild": isEnabled?true:false})
@@ -144,6 +157,15 @@ export default class Settings extends React.Component {
 		extensionHelper.setSetting(key, obj[key])
 	}
 
+	requestPermission(e) {
+		var key = e.target.name
+
+		extensionHelper.permissions.request(key)
+			.then(isEnabled=>{
+				this.setState({key: isEnabled?true:false})
+			})
+	}
+
 	render() {
 		return (
 			<div className="common-page settings-page">
@@ -157,20 +179,33 @@ export default class Settings extends React.Component {
 						{t.s("extension")}
 					</div>
 
-					<label className="settings-parameter" hidden={!__APPBUILD__}>
-						<div className="spl"><input type="checkbox" name="appbuild" checked={this.state["appbuild"]} onClick={this.setSetting} onChange={()=>{}} /></div>
-						<div className="title">Mini Application</div>
+					<label className="settings-parameter">
+						<div className="spl"><input type="checkbox" name="tabs" checked={this.state["tabs"]} disabled={this.state.tabs} onClick={this.requestPermission} onChange={()=>{}} /></div>
+						<div className="title">
+							Highlight saved pages {!this.state.ignoreTabs && <span className="new"/>}
+							<p>Display ★ badge when current page is saved in your collection</p>
+							{!this.state.tabs && <p>Requires additional permission!</p>}
+						</div>
 					</label>
 
-					<label className="settings-parameter">
+					<label className="settings-parameter" hidden={!__APPBUILD__}>
+						<div className="spl"><input type="checkbox" name="appbuild" checked={this.state["appbuild"]} onClick={this.setSetting} onChange={()=>{}} /></div>
+						<div className="title">
+							Mini Application
+							<p>Open Web App (in small form factor) instead of creating new bookmark automatically</p>
+						</div>
+					</label>
+
+					{/*<label className="settings-parameter">
 						<div className="spl"><input type="checkbox" name="drag-disabled" checked={!this.state["drag-disabled"]} onClick={this.setSetting} onChange={()=>{}} /></div>
 						<div className="title">Drag'n'drop</div>
-					</label>
+					</label>*/}
 
 					<label className="settings-parameter" hidden={!extensionHelper.omniboxIsEnabled()}>
 						<div className="spl"><input type="checkbox" name="omnibox-disabled" checked={!this.state["omnibox-disabled"]} onClick={this.setSetting} onChange={()=>{}} /></div>
 						<div className="title">
 							Omnibox{/*<span hidden={this.state["omnibox-disabled"]}>, keyword</span>*/}
+							<p>Type "r something" to find bookmark right from address bar</p>
 						</div>
 
 						{/*<input hidden={this.state["omnibox-disabled"]} type="text" className="sp-text-inline" value={this.state["omnibox-keyword"]} onChange={this.setKeyword} required />*/}

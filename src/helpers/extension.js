@@ -54,6 +54,33 @@ const ExtensionHelper = {
 		if (!chrome.omnibox)
 			return false;
 		return true;
+	},
+
+	permissions: {
+		enabled(name) {
+			return new Promise(res=>{
+				extension.permissions.contains({permissions: [name]}, res)
+			})
+		},
+
+		ignored(name) {
+			return new Promise(res=>{
+				res(localStorage.getItem(`${name}-permissions-ignore`)=='1')
+			})
+		},
+
+		ignore(name) {
+			return new Promise(res=>{
+				localStorage.setItem(`${name}-permissions-ignore`, '1')
+				res(true)
+			})
+		},
+
+		request(name) {
+			return new Promise(res=>{
+				extension.permissions.request({permissions: [name]}, res)
+			})
+		}
 	}
 }
 
