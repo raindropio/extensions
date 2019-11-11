@@ -81,24 +81,6 @@ const Saver = {
 				bookmark.restore(state.id)
 					.then(this.notifySuccess)
 			break;
-
-			case "auth":
-				switch (buttonIndex) {
-					case 0:
-						//login
-						openTab("https://raindrop.io/app/#/account/login")
-					break;
-
-					case 1:
-						//signup
-						openTab("https://raindrop.io/app/#/account/signup")
-					break;
-				}
-			break;
-
-			case "error":
-				this.save(data.id);
-			break;
 		}
 
 		notifications.close(id);
@@ -164,33 +146,21 @@ const Saver = {
 	},
 
 	notifyError(url, e) {
-		var n = {
-			priority: 2,
-			requireInteraction: true,
-			title: extension.i18n.getMessage("saveError"),
-			//iconUrl: 'assets/error_'+extensionConfig.notificationIconSize+'.png',
-			message: ""
-		}
-
 		if (e=="auth"){
-			urlState[url] = {step: "auth"};
-			n.title = extension.i18n.getMessage("pleaseLogin");
-			n.buttons = [
-				{title: extension.i18n.getMessage("signIn")},
-				{title: extension.i18n.getMessage("signUp")}
-			]
+			if (window.confirm(extension.i18n.getMessage("pleaseLogin")))
+				openTab("https://raindrop.io/app/#/account/login")
+
+			urlState[url] = {step: "auth"}
 		}else {
-			urlState[url] = {step: "error"};
-			n.message = e.toString();
-			if (n.message == "cant_insert_bookmark")
-				n.message = extension.i18n.getMessage("supportOnlyUrls")
+			var message = e.toString()
+			if (message == "cant_insert_bookmark")
+				message = extension.i18n.getMessage("supportOnlyUrls")
 
-			n.buttons = [
-				{title: extension.i18n.getMessage("tryAgain")}
-			]
+			if (window.confirm(`${extension.i18n.getMessage("saveError")}\n${message}`))
+				this.save(url)
+
+			urlState[url] = {step: "error"}
 		}
-
-		notifications.show(n, url, "save")
 	},
 
 	save(url) {

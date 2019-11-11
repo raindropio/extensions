@@ -79,11 +79,6 @@ var m = {
 	commands: function(value) {
 		var temp = Object.assign({}, value);
 
-		if (global.platform == "firefox"){
-			temp["save-page"] = temp["_execute_browser_action"];
-			delete temp["_execute_browser_action"];
-		}
-
 		return temp;
 	},
 

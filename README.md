@@ -6,6 +6,7 @@ Highly recommend to user `yarn` to install dependencies, it prevent any inconsis
 `yarn run build`
 
 ### Build for Firefox
+`mkdir build`
 `yarn`
 `yarn run build-firefox`
 

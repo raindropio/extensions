@@ -39,12 +39,22 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+C",
-        "windows": "Ctrl+Shift+C",
-        "mac": "Command+Shift+C",
-        "chromeos": "Ctrl+Shift+C",
-        "linux": "Ctrl+Shift+C"
+        "default": "Ctrl+Shift+E",
+        "windows": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E",
+        "chromeos": "Ctrl+Shift+E",
+        "linux": "Ctrl+Shift+E"
       }
+    },
+    "save-page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+O",
+        "windows": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O",
+        "chromeos": "Ctrl+Shift+O",
+        "linux": "Ctrl+Shift+O"
+      },
+      "description": "__MSG_savePage__"
     },
     "show-bookmarks": {
       "description": "__MSG_myBookmarks__",
