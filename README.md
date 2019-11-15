@@ -3,7 +3,7 @@
 Highly recommend to user `yarn` to install dependencies, it prevent any inconsistencies!
 
 ### Build for Chrome
-`yarn run build`
+`yarn run build-chrome`
 
 ### Build for Firefox
 `mkdir build`
