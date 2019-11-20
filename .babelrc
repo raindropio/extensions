@@ -1,8 +1,14 @@
 {
-	"presets": ["es2015-minimal", "stage-0", "react"],
+    "presets": ["es2015", "stage-0", "react"],
+    "plugins": [
+        ["transform-runtime", {
+          "regenerator": true
+        }]
+    ],
 	"env": {
 		"production": {
 			"plugins": [
+				"lodash",
 				"babel-plugin-transform-remove-console",
 				"babel-plugin-transform-remove-debugger"
 			]

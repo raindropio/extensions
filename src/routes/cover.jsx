@@ -18,6 +18,13 @@ var _ = {
 	findIndex: require('lodash/findIndex')
 }
 
+function urltoFile(url, filename, mimeType){
+	return (fetch(url)
+		.then(function(res){return res.arrayBuffer();})
+		.then(function(buf){return new File([buf], filename,{type:mimeType});})
+	);
+}
+
 export default class Cover extends React.Component {
 	constructor(props) {
 		super(props);
@@ -85,19 +92,22 @@ export default class Cover extends React.Component {
 
     onCapturePage() {
     	extensionHelper.capturePage(this.state.item.link, (item)=>{
-    		var savePic = ()=>{
+    		if (item.dataURI){
+				urltoFile(item.link, 'screenshot.jpg', 'image/jpeg')
+					.then(file=>{
+						bookmarkActions.uploadCover({
+							_id: this.state.item._id,
+							file
+						})
+
+						window.location.hash = "#"+(this.state.linkBack)
+					})
+			}
+    		else{
     			var media = JSON.parse(JSON.stringify(this.state.item.media||[]));
     			media.unshift(item);
     			this.updateBookmark({coverId: 0, cover: 0, coverEnabled: true, media: media});
     		}
-    		
-    		if (item.dataURI)
-    			resize(item.link, (data)=>{
-    				item.link = data;
-    				savePic()
-    			})
-    		else
-    			savePic()
     	})
     }
 

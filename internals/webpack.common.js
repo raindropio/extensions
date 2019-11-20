@@ -7,8 +7,7 @@ var SplitByPathPlugin = require('webpack-split-by-path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var copyFilesList = [
-	{ from: './background/opera/panel.html', to: 'panel.html' },
-	{ from: './background/inject/inject.css', to: 'inject.css' }
+	{ from: './background/opera/panel.html', to: 'panel.html' }
 ]
 
 if (global.withAppBuild){
@@ -84,7 +83,7 @@ const Common = {
 				cacheDirectory: path.join(__dirname, "../temp"),
 				presets: ['react', "stage-0", 'es2015-minimal']
 			},*/
-			exclude: /node_modules/
+			exclude: /node_modules\/(?!(normalize-url)\/).*/
 		},
 		'svg': {
 			test: /.*\.svg$/,

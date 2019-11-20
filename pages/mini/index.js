@@ -8,6 +8,12 @@ var sendMessageToIframe = function(m) {
 		document.getElementById("iframe").contentWindow.postMessage(m,'*');
 }
 
+var sendMessageToBackground = function(data, callback) {
+	if (typeof webextension.runtime != "undefined"){
+		webextension.runtime.sendMessage(data, callback)
+	}
+}
+
 var onMessage = function(e) {
 	//if (e.origin!="https://raindrop.io")
 	//	return;
@@ -28,9 +34,7 @@ var onMessage = function(e) {
 		break;
 
 		case "setButtonStatus":
-			if (typeof webextension.runtime != "undefined"){
-				webextension.runtime.sendMessage(Object.assign({}, e.data, {action: "setStatus"}), function(){});
-			}
+			sendMessageToBackground(Object.assign({}, e.data, {action: "setStatus"}), function(){});
 		break;
 
 		case "openTab":
@@ -44,8 +48,9 @@ window.removeEventListener("message", onMessage, false);
 window.addEventListener("message", onMessage, false);
 
 
-//tabs permission
 window.onload = function() {
+	sendMessageToBackground({action: "appStarted"}, function(){})
+	//tabs permission
 	webextension.permissions.contains({permissions: ['tabs']}, function(result) {
 		if (result){
 			localStorage.setItem('tabs-permissions-ignore', '1')

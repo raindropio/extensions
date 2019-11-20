@@ -85,8 +85,18 @@ const onMessage = (r, sender, sendResponse)=>{
 		break;
 
 		case "appStarted":
+			//Inject script
+			extension.tabs.executeScript({
+				code: 'window.raindropInjectScriptLoaded'
+			}, function([alreadyInjected=false]) {
+				if (!alreadyInjected)
+					extension.tabs.executeScript({
+						file: 'inject.js'
+					})
+			})
+
 			links.resetAll();
-		break;
+		break
 	}
 }
 

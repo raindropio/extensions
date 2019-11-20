@@ -73,11 +73,9 @@ export default createStore({
 		})
 	},
 
-	localParse() {
+	localParse(url) {
 		return new Promise((res,rej)=>{
-			sendMessage({action:"parse"}, (result)=>{
-				res(result)
-			});
+			sendMessage({action:"parse", url}, res);
 		})
 	},
 
@@ -143,7 +141,7 @@ export default createStore({
 				//if (typeof _loadedTags[_state.item._id] != "undefined")
 					this.appendSuggestedTags(json.tags);
 
-				//this.trigger(_state);
+				this.trigger(_state);
 				res(true);
 			})
 		})
@@ -190,6 +188,24 @@ export default createStore({
 		})
 	},
 
+	onUploadCover: function({_id, file}, callback) {
+		Api.upload(
+		  "raindrop/"+_id+"/cover",
+		  {name: "cover", file},
+		  function(){},
+		  (json)=>{
+			if (json.result){
+				_state.item = json.item;
+			}
+
+			this.trigger(_state);
+
+			if (callback)
+				callback();
+		  }
+		)
+	},
+
 	onLoadURL(preferedURL="") {
 		var useLocalParser = preferedURL?false:true,
 			finalURL = "",
@@ -221,7 +237,7 @@ export default createStore({
 				//use local parser
 				else if (useLocalParser){
 					_state.fixMeta = true;
-					return this.localParse();
+					return this.localParse(finalURL);
 				}
 
 				return false;
@@ -231,7 +247,7 @@ export default createStore({
 					return bookmark;
 
 				//use server parser
-				return this.serverParse(finalURL);
+				return this.serverParse(finalURL)
 			})
 			.then((bookmark)=>{
 				bookmark = bookmark||{};
@@ -263,7 +279,7 @@ export default createStore({
 				_state.item = bookmark;
 				_state.status = "done";
 
-				return this.loadSuggestedTags();
+				this.loadSuggestedTags()
 			})
 			.then(()=>{
 				this.trigger(_state);
@@ -320,7 +336,7 @@ export default createStore({
 	loadLinkMeta() {
 		var updateBookmark = ((_state.fixMeta)&&(_state.item.type!="article"));
 
-		Api.get("parse?partial=true&url="+encodeURIComponent(_state.item.url||_state.item.link), (json)=>{
+		Api.get("parse?url="+encodeURIComponent(_state.item.url||_state.item.link), (json)=>{
 			if (!json.result) return;
 
 			if (UserStore.isPro()){

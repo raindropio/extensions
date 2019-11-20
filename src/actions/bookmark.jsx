@@ -5,5 +5,6 @@ export default Reflux.createActions([
     'loadId',
     'remove',
     'restore',
-    'update'
+    'update',
+    'uploadCover'
 ]);

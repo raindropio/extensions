@@ -227,7 +227,7 @@ const Api = {
         data.append(file.name, file.file, file.file.name);
 
         var xhr = new XMLHttpRequest()
-        xhr.open('POST', this.makeFinalURL(url));
+        xhr.open('PUT', this.makeFinalURL(url));
         xhr.withCredentials = true;
         xhr.onload = function() {
             callback(JSON.parse(xhr.responseText));

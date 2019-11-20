@@ -1,51 +1,22 @@
-import drag from './drag'
-//import googleSearch from './google'
+import ex from '../extension'
+import Parser from './parser'
 
-var parser = {};
-if (__PLATFORM__ != "firefox")
-	parser = require('../parser').default
+window.raindropInjectScriptLoaded = true
 
-window.RaindropTestParse = (callback)=>{
-	ParsePage(callback)
-}
+ex.extension.runtime && ex.extension.runtime.onMessage && ex.extension.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    switch(request.action){
+        case "parse":
+            if (request.url != window.location.href)
+                return sendResponse(null)
 
-var {extension} = require('../extension').default
+            Parser.getItem()
+                .then(sendResponse)
+                .catch(e=>{
+                    console.log(e)
+                    sendResponse(null)
+                })
+        break;
+    }
 
-const ParsePage = (callback)=>{
-	var parseLocaly = true;
-
-	if ((window.history.state)&&(window.history.length>1))
-		parseLocaly = false;
-
-	if (__PLATFORM__ == "firefox")
-		parseLocaly = false;
-
-	if (parseLocaly) {
-		console.log("local parser")
-		parser.run(callback);
-	}
-	else{
-		console.log("server parser")
-		callback(false);
-	}
-}
-
-if (typeof extension.runtime != "undefined")
-	if (typeof extension.runtime.onMessage != "undefined")
-		extension.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-			switch(request.action){
-				case "parse":
-					ParsePage(sendResponse)
-				break;
-			}
-		});
-
-drag.init()
-
-//Google search
-/*if (window.location.href.indexOf('google')!=-1){
-	var q = "";
-	try{q = decodeURIComponent(window.location.href.match(/[\#\&\?]q=([^&]+)/)[1]).replace('+',' ');}catch(e){}
-	
-	googleSearch.inject(q);
-}*/
+    return true
+})
