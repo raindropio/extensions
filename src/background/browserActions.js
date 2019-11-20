@@ -71,7 +71,7 @@ const onMessage = (r, sender, sendResponse)=>{
 	switch(r.action){
 		case "rerenderBrowserAction":
 			button.render();
-		break;
+			return true
 
 		case "setStatus":
 			getCurrentTab((tab)=>{
@@ -82,7 +82,7 @@ const onMessage = (r, sender, sendResponse)=>{
 				links.setStatus(obj);
 				button.render();
 			});
-		break;
+			return true
 
 		case "appStarted":
 			//Inject script
@@ -96,7 +96,7 @@ const onMessage = (r, sender, sendResponse)=>{
 			})
 
 			links.resetAll();
-		break
+			return true
 	}
 }
 

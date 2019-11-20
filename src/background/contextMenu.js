@@ -64,7 +64,7 @@ const contextMenus = {
 		switch(r.action){
 			case "saveLink":
 				contextMenus.onClick({menuItemId: contextMenus.ids.saveLink, linkUrl: r.url});
-			break;
+				return true
 		}
 	},
 

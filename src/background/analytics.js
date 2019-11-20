@@ -21,7 +21,7 @@ if (extension){
 		switch(r.action){
 			case "pageView":
 				Analytics.pageView(r.page, r.userId||"");
-			break;
+				return true
 		}
 	}
 

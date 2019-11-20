@@ -51,11 +51,11 @@ if (extension){
 		switch(r.action){
 			case "getSetting":
 				sendResponse(R.getSetting(r.name));
-			break;
+				return true
 
 			case "setSetting":
 				R.setSetting(r.name, r.value);
-			break;
+				return true
 		}
 	}
 

@@ -27,7 +27,10 @@ class Parser {
 		}
 
 		//If is single page application, download html of original document
+		//Important because meta tags are usually not updated for SPA's
 		if ((window.history.state)&&(window.history.length>1)){
+			console.log('Download origin html, due to SPA')
+
 			head.original = (await (await fetch(location.href, {cache: 'force-cache'})).text())
 				.replace(/\r?\n|\r/g, '')
 				.match(/<head.+?<\/head>/g)
@@ -46,7 +49,7 @@ class Parser {
 		}
 
 		//get H1 and document title
-		cache.documentTitle = head.query('title')[0].innerText
+		cache.documentTitle = document.title
 		try{cache.h1 = $('h1')[0].innerText}catch(e){}
 
 		//check og and twitter meta tags
@@ -119,7 +122,7 @@ class Parser {
 
 			for(var i in allPageImages)
 				if (allPageImages[i].naturalWidth>=avgWidth){
-					images.unshift(this._getCleanURL(allPageImages[i].src))
+					images.push(this._getCleanURL(allPageImages[i].src))
 					break;
 				}
 		}
