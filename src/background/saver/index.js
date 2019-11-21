@@ -56,7 +56,7 @@ const Saver = {
 
 		var n = {
 			priority: 2,
-			requireInteraction: true,
+			...(__PLATFORM__!="firefox" ? {requireInteraction: true} : {}),
 			title: extension.i18n.getMessage((item.type||"link")+"Saved"),
 			message: item.title+"\n"+extension.i18n.getMessage("clickToEdit")
 		}
@@ -67,8 +67,9 @@ const Saver = {
 		if (item.coverDataURI)
 			n.iconUrl = item.coverDataURI
 
-		notifications.close(notifications.hashId(item.link, 'save'))
-		notifications.show(n, item.link, "done")
+		notifications.close(notifications.hashId(item.link, 'save'), function() {
+			notifications.show(n, item.link, "done")
+		})
 
 		links.resetAll()
 		browserAction.render()
@@ -79,7 +80,7 @@ const Saver = {
 
 		var n = {
 			priority: 2,
-			requireInteraction: true,
+			...(__PLATFORM__!="firefox" ? {requireInteraction: true} : {}),
 			title: extension.i18n.getMessage((item.type||"link")+"RemovedPermament"),
 			message: item.title,
 			buttons: [{title: extension.i18n.getMessage("restore")}]
@@ -88,8 +89,9 @@ const Saver = {
 		if (item.coverDataURI)
 			n.iconUrl = item.coverDataURI
 
-		notifications.close(notifications.hashId(item.link, 'save'))
-		notifications.show(n, item.link, "done")
+		notifications.close(notifications.hashId(item.link, 'save'), function() {
+			notifications.show(n, item.link, "done")
+		})
 
 		links.resetAll()
 		browserAction.render()

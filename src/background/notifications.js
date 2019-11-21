@@ -1,4 +1,3 @@
-import hash from 'object-hash'
 import extensionConfig from './config'
 
 var {extension, getCurrentTab, browserName} = require('./extension').default
@@ -13,7 +12,7 @@ const Notify = {
 	},
 
 	hashId(id, prefix='') {
-		return prefix+hash(id)
+		return prefix+id
 	},
 
 	getGrant(callback) {
@@ -60,9 +59,11 @@ const Notify = {
 		})
 	},
 
-	close(_id) {
+	close(_id, callback) {
 		if (_id)
-			extension.notifications.clear(_id)
+			extension.notifications.clear(_id, callback)
+		else
+			typeof callback == 'function' && callback()
 	}
 }
 

@@ -346,7 +346,7 @@ export default createStore({
 
 			if (updateBookmark){
 				var upd = {type: json.item.type, html: json.item.html||""}
-				if ((_state.item.media||[]).length)
+				if ((_state.item.media||[]).length==0)
 					upd.media = json.item.media||[];
 
 				this.onUpdate(upd)
