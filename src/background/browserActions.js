@@ -6,27 +6,71 @@ var {extension, getCurrentTab, browserName, isNewTabPage, updateTabAndGoToRaindr
 var manifest = require('json!../config/manifest.json');
 var popupPath = manifest.browser_action.default_popup;
 
-const button = {
-	/*icons: {},
-
-	initIcons() {
-		var idle = manifest.browser_action.default_icon;
-		var statuses = {saved: {}, newtab: {}};//, loading: {}, savedloading: {}
-
-		for(var i in statuses)
-			for (var j in manifest.browser_action.default_icon)
-				statuses[i][j] = manifest.browser_action.default_icon[j].replace("idle", "/"+i);
-
-		statuses.idle = manifest.browser_action.default_icon;
-		if (__PLATFORM__=="firefox"){
-			for(var i in statuses.idle)
-				statuses.idle[i] = statuses.idle[i].replace("idle","firefox_idle");
-
-			for(var i in statuses.saved)
-				statuses.idle[i] = statuses.idle[i].replace("saved","firefox_saved");
+class BrowserAction {
+	constructor() {
+		const onMessage = (r, sender, sendResponse)=>{
+			switch(r.action){
+				case "rerenderBrowserAction":
+					this.render();
+					return true
+		
+				case "setStatus":
+					getCurrentTab((tab)=>{
+						var obj = Object.assign({},r);
+						if (!obj.url)
+							obj.url = tab.url;
+		
+						links.setStatus(obj);
+						this.render();
+					});
+					return true
+		
+				case "appStarted":
+					//Inject script
+					extension.tabs.executeScript({
+						code: 'window.raindropInjectScriptLoaded'
+					}, function([alreadyInjected=false]) {
+						if (!alreadyInjected)
+							extension.tabs.executeScript({
+								file: 'inject.js'
+							})
+					})
+		
+					links.resetAll();
+					return true
+			}
 		}
-		button.icons = statuses;
-	},*/
+		
+		const onTabUpdate = (tab)=>{
+			setTimeout(this.render, 100)
+		}
+		
+		const onClicked = (tab)=>{
+			updateTabAndGoToRaindrop()
+		}
+		
+		if (extension){
+			extension.browserAction.onClicked.removeListener(onClicked);
+			extension.browserAction.onClicked.addListener(onClicked);
+		
+			extension.runtime.onMessage.removeListener(onMessage);
+			extension.runtime.onMessage.addListener(onMessage);
+		
+			extension.tabs.onUpdated.removeListener(onTabUpdate);
+			extension.tabs.onUpdated.addListener(onTabUpdate);
+		
+			extension.tabs.onActivated.removeListener(onTabUpdate);
+			extension.tabs.onActivated.addListener(onTabUpdate);
+		
+			//button.initIcons();
+			extension.browserAction.setBadgeBackgroundColor({color: '#0087EA'})
+			try{
+				extension.browserAction.setBadgeTextColor({color: '#FFFFFF'})
+			}catch(e){}
+		
+			this.render();
+		}
+	}
 
 	render() {
 		getCurrentTab((tab={})=>{
@@ -67,65 +111,4 @@ const button = {
 	}
 }
 
-const onMessage = (r, sender, sendResponse)=>{
-	switch(r.action){
-		case "rerenderBrowserAction":
-			button.render();
-			return true
-
-		case "setStatus":
-			getCurrentTab((tab)=>{
-				var obj = Object.assign({},r);
-				if (!obj.url)
-					obj.url = tab.url;
-
-				links.setStatus(obj);
-				button.render();
-			});
-			return true
-
-		case "appStarted":
-			//Inject script
-			extension.tabs.executeScript({
-				code: 'window.raindropInjectScriptLoaded'
-			}, function([alreadyInjected=false]) {
-				if (!alreadyInjected)
-					extension.tabs.executeScript({
-						file: 'inject.js'
-					})
-			})
-
-			links.resetAll();
-			return true
-	}
-}
-
-const onTabUpdate = (tab)=>{
-	setTimeout(()=>button.render(),100);
-}
-
-const onClicked = (tab)=>{
-	updateTabAndGoToRaindrop()
-}
-
-if (extension){
-	extension.browserAction.onClicked.removeListener(onClicked);
-	extension.browserAction.onClicked.addListener(onClicked);
-
-	extension.runtime.onMessage.removeListener(onMessage);
-	extension.runtime.onMessage.addListener(onMessage);
-
-	extension.tabs.onUpdated.removeListener(onTabUpdate);
-	extension.tabs.onUpdated.addListener(onTabUpdate);
-
-	extension.tabs.onActivated.removeListener(onTabUpdate);
-	extension.tabs.onActivated.addListener(onTabUpdate);
-
-	//button.initIcons();
-	extension.browserAction.setBadgeBackgroundColor({color: '#0087EA'})
-	try{
-		extension.browserAction.setBadgeTextColor({color: '#FFFFFF'})
-	}catch(e){}
-
-	button.render();
-}
+export default new BrowserAction()

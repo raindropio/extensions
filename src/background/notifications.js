@@ -12,6 +12,10 @@ const Notify = {
 		return ids[id];
 	},
 
+	hashId(id, prefix='') {
+		return prefix+hash(id)
+	},
+
 	getGrant(callback) {
 		if (__PLATFORM__=="firefox")
 			return callback(true);
@@ -31,7 +35,7 @@ const Notify = {
 	},
 
 	show(_options, _originalId="empty", _prefix="") {
-		var _id = _prefix+hash(_originalId);
+		var _id = Notify.hashId(_originalId, _prefix)
 		ids[_id] = {
 			id: _originalId,
 			type: _prefix
@@ -41,7 +45,7 @@ const Notify = {
 			if (!granted)return;
 
 			var options = Object.assign({
-				type: "basic",
+				type: _options.type||"basic",
 				iconUrl: 'assets/icon-'+extensionConfig.notificationIconSize+'.png',
 				//priority: 2
 			}, _options);
@@ -52,33 +56,13 @@ const Notify = {
 					delete options.buttons;
 			}
 
-			extension.notifications.getAll((allNotifications)=>{
-				var update=false;
-				for(var i in allNotifications){
-					if (i==_id){
-						update=true;
-						break;
-					}
-				}
-
-				if (update){
-					if (__PLATFORM__=="firefox"){
-						extension.notifications.clear(_id);
-						update=false;
-					}
-					else
-						extension.notifications.update(_id, options);
-				}
-				
-				if (!update)
-					extension.notifications.create(_id, options);
-			})
+			extension.notifications.create(_id, options)
 		})
 	},
 
 	close(_id) {
 		if (_id)
-			extension.notifications.clear(_id);
+			extension.notifications.clear(_id)
 	}
 }
 
