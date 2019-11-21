@@ -93,7 +93,7 @@ export default class Cover extends React.Component {
     onCapturePage() {
     	extensionHelper.capturePage(this.state.item.link, (item)=>{
     		if (item.dataURI){
-				urltoFile(item.link, 'screenshot.jpg', 'image/jpeg')
+				urltoFile(item.link, `${new Date().getTime()}.jpg`, 'image/jpeg')
 					.then(file=>{
 						bookmarkActions.uploadCover({
 							_id: this.state.item._id,
