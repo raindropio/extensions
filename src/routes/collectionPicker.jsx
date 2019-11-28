@@ -53,7 +53,7 @@ export default class CollectionsPicker extends React.Component {
 	render() {
 		return (
 			<div className={"collection-page anim-"+this.state.anim}>
-				<ThemeColor src={this.state.item.cover} cssBlock={ThemeColorHelper.generateCSS} />
+				<ThemeColor collectionId={this.state.item.collection.$id} cssBlock={ThemeColorHelper.generateCSS} />
 				<CollectionsList
 					onCancel={this.cancelCollectionSelect}
 					onSelectCollection={this.onSelectCollection} />

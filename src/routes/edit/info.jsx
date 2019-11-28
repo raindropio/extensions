@@ -19,7 +19,7 @@ export default class Info extends React.Component {
 		this.inputChange = this.inputChange.bind(this);
 
 		this.state = {
-			showExcerpt: false
+			showExcerpt: true
 		}
 	}
 

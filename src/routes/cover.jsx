@@ -146,7 +146,7 @@ export default class Cover extends React.Component {
 
 				</header>
 
-                <ThemeColor src={this.state.item.cover} cssBlock={ThemeColorHelper.generateCSS} />
+                <ThemeColor collectionId={this.state.item.collection.$id} cssBlock={ThemeColorHelper.generateCSS} />
 
 				<div className="common-page-content cover-page-items">
 					<Masonry ref="masonry" elementType="article" options={{transitionDuration: "0"}}>

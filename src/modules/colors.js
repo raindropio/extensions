@@ -1,8 +1,3 @@
-import network from './network'
-import colorThief from './color-thief'
-
-var colorURLS = {};
-
 export default {
 	contrast(rgb) {
 	    var c = "white", p = 255;
@@ -81,39 +76,5 @@ export default {
 
     tagColor: function(str) {
     	return this.colorFromString(str.toLowerCase());
-    },
-
-    getColorFromImage: function(src,callback) {
-        if (colorURLS[src]) return callback(colorURLS[src].c||null);
-
-        colorURLS[src] = {};
-
-        colorURLS[src].img = document.createElement('img');
-        colorURLS[src].img.src = network.thumb(src);
-        colorURLS[src].img.setAttribute('crossorigin', "anonymous");
-
-        colorURLS[src].img.addEventListener('load',(e)=>{
-            var c = "0,0,0";
-
-            var finalColor = colorThief.getColor(e.target);
-            
-            if (this.contrast(finalColor)[0]!="black")
-                c=this.getDarkPalette(finalColor);
-            //try{c = this.getDarkPalette(colorThief.getColor(e.target));}catch(e){}
-
-            delete colorURLS[src].img;
-
-            if (c!="0,0,0"){
-                colorURLS[src].c = c;
-                return callback(c);
-            }
-
-            colorURLS[src].c = null;
-            return callback(null);
-        });
-
-        colorURLS[src].img.addEventListener('error',(e)=>{
-            delete colorURLS[src].img;
-        });
     }
 }

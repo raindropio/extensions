@@ -41,8 +41,19 @@ var translate = {
 
         if (lang==null){
           var browserLang = "";
-          if (typeof navigator != "undefined")
-          browserLang = (navigator||{}).language || (navigator||{}).userLanguage || "";
+
+          if (typeof navigator != "undefined"){
+            //chrome specific
+            try{
+              const allLangs = navigator.languages.filter(l=>!l.includes('en'))
+              if (this.cleanLang(allLangs[0]))
+                browserLang = allLangs[0]
+            } catch(e){}
+
+            if (!browserLang)
+              browserLang = (navigator||{}).language || (navigator||{}).userLanguage || "";
+          }
+
           try{
             browserLang = browserLang.trim().substr(0,2).toLowerCase();
           } catch(e) {if (e) browserLang=""; }

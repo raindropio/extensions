@@ -121,7 +121,7 @@ export default createStore({
 			_state.suggestedTags = tags.concat(_state.suggestedTags);
 		else
 			_state.suggestedTags = _state.suggestedTags.concat(tags);
-		_state.suggestedTags = _.uniq(_state.suggestedTags).slice(0, 10);
+		_state.suggestedTags = _.uniq(_state.suggestedTags).slice(0, 10).sort();
 
 		_loadedTags[_state.item._id] = (tags.length>0);
 	},
@@ -174,6 +174,11 @@ export default createStore({
 	onUpdate(obj, callback, params={}) {
 		if (typeof params.trigger == "undefined")
 			params.trigger = true;
+
+		if (params.trigger){
+			_state.item = {..._state.item, ...obj}
+			this.trigger(_state)
+		}
 
 		Api.put("raindrop/"+_state.item._id, obj, (json)=>{
 			if (json.result){

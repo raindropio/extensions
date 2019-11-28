@@ -14,7 +14,7 @@ import ThemeColor from '../../co/common/themeColor'
 import ThemeColorHelper from '../../helpers/themeColor'
 import Loading from '../../co/loading'
 import Info from './info'
-import Tags from './tags'
+import Tags from './tags2'
 
 import Footer from './footer'
 
@@ -147,7 +147,7 @@ export default class Edit extends React.Component {
 
 		return (
 			<div className={className}>
-				<ThemeColor src={this.state.item.cover} cssBlock={ThemeColorHelper.generateCSS} />
+				<ThemeColor collectionId={this.state.item.collection.$id} cssBlock={ThemeColorHelper.generateCSS} />
 
 				{this.renderCollection()}
 				<div className="edit-page-about">

@@ -1,12 +1,12 @@
 import Reflux from 'reflux'
 import Api from 'api'
 import hash from 'object-hash'
-var ls = {};
+var ls = {}; try{localStorage.getItem("a"); ls = require('localforage');}catch(e){}
 
 import FiltersActions from '../actions/filters';
 
 var _ = {
-  sortBy: require('lodash/sortBy')
+    orderBy: require('lodash/orderBy')
 }
 
 var _filters = [], _query = {};
@@ -22,7 +22,7 @@ module.exports = Reflux.createStore({
     },
 
     onLoad: function() {
-    	var cid = parseInt(_query.cid);
+    	var cid = parseInt(_query.cid)||0;
     	var withSearch = Object.keys(_query.search||{}).length>0;
     	var cacheName = hash(_query);
 
@@ -43,18 +43,7 @@ module.exports = Reflux.createStore({
 
     	_filters[cid].loading = true;
         _filters[cid].items = [];
-        this.trigger(_filters);
-
-        /*
-    	try{ls.getItem(cacheName)
-          .then((val)=>{
-              if ((val) && (_filters[cid].loading)) {
-                  _filters[cid].items = val;
-                  _filters[cid].loading = false;
-
-                  this.trigger(_state);
-              }
-          }).catch(function(e){});}catch(e){}*/
+        this.trigger(_filters)
 
         var searchString = "";
         if (withSearch)
@@ -65,13 +54,17 @@ module.exports = Reflux.createStore({
             	tags: json.tags||[],
             	types: json.types||[],
                 sites: json.sites||[],
+                notag: json.notag||{},
                 important: json.important||{},
+                broken: json.broken||{},
                 best: json.best||{}
             };
 
-            _filters[cid].items.tags = _.sortBy(_filters[cid].items.tags, function(item){
-                return item._id;
-            });
+            _filters[cid].items.tags = _.orderBy(
+                _filters[cid].items.tags,
+                ({_id})=>_id.toLowerCase(),
+                ['asc']
+            );
 
             _filters[cid].loading = false;
 			_filters[cid].loaded = true;
@@ -80,5 +73,11 @@ module.exports = Reflux.createStore({
 
 			this.trigger(_filters);
     	});
+    },
+
+    getTags: (cid)=>{
+        if (_filters[cid] && _filters[cid].items && _filters[cid].items.tags)
+            return _filters[cid].items.tags || []
+        return []
     }
 });
