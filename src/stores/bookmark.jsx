@@ -94,11 +94,11 @@ export default createStore({
 		return new Promise((res,rej)=>{
 			item.collectionId = -1;
 
-			if (!tryAgain){
+			/*if (!tryAgain){
 				try{item.collectionId = UserStore.getUser().config.last_collection}catch(e){}
 				if (item.collectionId == -99)
 					item.collectionId = -1;
-			}
+			}*/
 
 			Api.post("raindrop", item, (json)=>{
 				if (!json.result){
@@ -351,8 +351,10 @@ export default createStore({
 
 			if (updateBookmark){
 				var upd = {type: json.item.type, html: json.item.html||""}
-				if ((_state.item.media||[]).length==0)
-					upd.media = json.item.media||[];
+				upd.media = [
+					...json.item.media||[],
+					..._state.item.media||[]
+				]
 
 				this.onUpdate(upd)
 			}

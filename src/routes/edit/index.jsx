@@ -85,8 +85,8 @@ export default class Edit extends React.Component {
         this.unsubscribeBookmark();
     }
 
-    handleBookmarkChange(obj, callback) {
-    	bookmarkActions.update(obj, callback);
+    handleBookmarkChange(obj, callback, options) {
+    	bookmarkActions.update(obj, callback, options);
     }
 
     goTo(url, withAnim = false) {

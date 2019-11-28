@@ -7,14 +7,15 @@ const selectStyles = {
     control: (styles, { isFocused })=>({
         ...styles, 
         border: 0,
-        minHeight: '26px',
-        boxShadow: isFocused ? 'inset 0 0 0 1px var(--accentColor, #4a90e2)' : 'inset 0 0 0 var(--thin-border, 1px) var(--thin-border-color-plus, rgba(0,0,0,.15))'
+        minHeight: '29px',
+        boxShadow: isFocused ? 'inset 0 0 0 1px var(--accentColor, #4a90e2), 0 0 0 var(--thin-border, 1px) var(--accentColor, #4a90e2)' : 'inset 0 0 0 var(--thin-border, 1px) var(--thin-border-color-plus, rgba(0,0,0,.15))'
     }),
     dropdownIndicator: ()=>({ display: 'none' }),
-    multiValue: (styles)=>({ ...styles, backgroundColor: 'var(--accentColor, #4a90e2)' }),
+    multiValue: (styles)=>({ ...styles, backgroundColor: 'var(--accentColor, #4a90e2)', fontSize: '15px' }),
     multiValueLabel: (styles)=>({ ...styles, color: 'white' }),
     multiValueRemove: (styles)=>({ ...styles, color: 'white', ':hover': { backgroundColor: 'rgba(0,0,0,.25)' } }),
-    valueContainer: (styles)=>({ ...styles, padding: '2px 3px' })
+    valueContainer: (styles)=>({ ...styles, padding: '2px 3px' }),
+    indicatorSeparator: ()=>({ display: 'none' })
 }
 
 export default class Tags extends React.Component {
@@ -63,7 +64,8 @@ export default class Tags extends React.Component {
     }
 
     onSelectChange = (selected)=>{
-        this.props.onChange({tags: selected.map(({value})=>value) })
+        this.setState({ selected })
+        this.props.onChange({tags: selected.map(({value})=>value) }, ()=>{}, {trigger: false})
     }
 
     formatCreateLabel = (input)=>`+${input}`
