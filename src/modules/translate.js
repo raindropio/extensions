@@ -37,18 +37,13 @@ var translate = {
       //get defautls if lang not presented
       if (typeof lang == "undefined"){
         lang = null;
-        try{lang = localStorage.getItem("language")||null;}catch(e){}
+        try{lang = localStorage.getItem("lang")||null;}catch(e){}
 
         if (lang==null){
           var browserLang = "";
 
           if (typeof navigator != "undefined"){
-            //chrome specific
-            try{
-              const allLangs = navigator.languages.filter(l=>!l.includes('en'))
-              if (this.cleanLang(allLangs[0]))
-                browserLang = allLangs[0]
-            } catch(e){}
+            //navigator.languages is buggy, do not use it
 
             if (!browserLang)
               browserLang = (navigator||{}).language || (navigator||{}).userLanguage || "";
@@ -68,7 +63,7 @@ var translate = {
           lang = this.defaultLang;
 
       this.currentLang = lang;
-      try{localStorage.setItem("language", this.currentLang);}catch(e){}
+      try{localStorage.setItem("lang", this.currentLang);}catch(e){}
   },
 
   s: function(key) {

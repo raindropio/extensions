@@ -84,6 +84,9 @@ class Parser {
 				_escapeRegExp(domain)+'$'
 			, 'i'), '').trim().replace(/(\||-|—)$/i,'').trim()
 
+		//fallback to server parser if image not found
+		if (!cache.image)
+			return null
 
 		//make item
 		const clean = {

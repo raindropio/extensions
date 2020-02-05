@@ -10,6 +10,7 @@ var config = {
 		main: './app.js',
 		background: './background',
 		inject: './background/inject',
+		analytics: './analytics',
 
 		//pages
 		ready: '../pages/ready'
