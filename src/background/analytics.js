@@ -1,5 +1,13 @@
 var {extension} = require('./extension').default
 
+const Analytics = {
+	send(payload) {
+	},
+
+	pageView(page, userId="") {
+	}
+}
+
 if (extension){
 	var onMessage = (r, sender, sendResponse)=>{
 		switch(r.action){

@@ -49,13 +49,13 @@ var m = {
 
 	contentSecurity: function(value) {
 		if (process.env.NODE_ENV == "production"){
-			/*if (global.platform == "firefox")
-				return undefined;*/
+			if (global.platform == "firefox")
+				return undefined;
 
 			return value;
 		}
 
-		return "script-src 'self' http://localhost:80 https://localhost:80 https://raindrop.io https://*.usefathom.com 'unsafe-eval'; style-src * 'unsafe-inline' 'self' blob:;"
+		return "script-src 'self' http://localhost:80 https://localhost:80 'unsafe-eval'; style-src * 'unsafe-inline' 'self' blob:; object-src 'self'"
 	},
 
 	browserAction: function(value) {

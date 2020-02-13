@@ -27,7 +27,7 @@ const Common = {
 			template: './index.ejs',
 			hash: false,
 			inject: 'head',
-			chunks: ['main', 'languages'],
+			chunks: ['main', 'languages', 'analytics'],
 			favicon: "./assets/extension/icon-48.png"
 		}),
 		//ready.html
@@ -36,7 +36,7 @@ const Common = {
 			template: '../pages/ready/index.ejs',
 			hash: false,
 			inject: 'head',
-			chunks: ['ready', 'languages'],
+			chunks: ['ready', 'languages', 'analytics'],
 			filename: "ready.html",
 			favicon: "./assets/extension/icon-48.png"
 		}),

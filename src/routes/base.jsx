@@ -32,8 +32,8 @@ class Base extends React.Component {
         })
 
         //On blur close if is modal
-        if (!__DEV__)
-            window.addEventListener('blur', ()=>window.close());
+        //if (!__DEV__)
+        //    window.addEventListener('blur', ()=>window.close());
 
         if (isModal){
         	window.addEventListener('keydown', (e)=>{
