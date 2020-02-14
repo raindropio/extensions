@@ -17,11 +17,11 @@ const contextMenus = {
 	onClick: function (info) {
 		switch (info.menuItemId) {
 			case contextMenus.ids.showBookmarks:
-				return openTab("https://raindrop.io")
+				return openTab("https://app.raindrop.io")
 			break;
 
 			case contextMenus.ids.settings:
-				return openTab("https://raindrop.io/app#/settings")
+				return openTab("https://app.raindrop.io/#/settings")
 			break;
 
 			case contextMenus.ids.logOut:
