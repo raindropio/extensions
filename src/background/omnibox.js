@@ -8,6 +8,12 @@ var _ = {
 
 const Omnibox = {
 	onSubmit(text) {
+		if (localStorage.getItem('omnibox-disabled')){
+			extension.tabs.update(null, {url: `https://www.google.com/search?q=${encodeURIComponent('r ' + text)}`})
+			
+			return 
+		}
+
 		text = (text||"").trim();
 
 		var url = config.host;
@@ -25,7 +31,12 @@ const Omnibox = {
 	onChange(text, send) {
 		if (localStorage.getItem('omnibox-disabled')){
 			extension.omnibox.setDefaultSuggestion({
-				description: ""
+				description: (
+					text ? (
+						__PLATFORM__!='firefox' ? "<match>r "+_.escape(text)+"</match>" : 'r ' + text
+					) + ' in Google'
+					: 'Omnibox for Raindrop.io is disabled, now queries will be redirected to Google search'
+				)
 			})
 			send([])
 			return;
