@@ -6,7 +6,7 @@ var _ = {
 	uniq: require('lodash/uniq')
 }
 
-var {extension, sendMessage, getCurrentTab} = require('../background/extension').default
+var {extension, getSetting, sendMessage, getCurrentTab} = require('../background/extension').default
 
 var _state = {
 	status: "",
@@ -91,29 +91,33 @@ export default createStore({
 	},
 
 	insertBookmark(item, tryAgain=false) {
-		return new Promise((res,rej)=>{
-			item.collectionId = -1;
+		return getSetting('last_collection')
+			.then(saveToLastCollection=>{
+				item.collectionId = -1;
 
-			/*if (!tryAgain){
-				try{item.collectionId = UserStore.getUser().config.last_collection}catch(e){}
-				if (item.collectionId == -99)
-					item.collectionId = -1;
-			}*/
-
-			Api.post("raindrop", item, (json)=>{
-				if (!json.result){
-					if (!tryAgain)
-						return res(this.insertBookmark(item, true));
-
-					if (json.auth===false)
-						return rej("login_needLogin")
-
-					return rej("cant_insert_bookmark")
+				if (!tryAgain && saveToLastCollection){
+					try{item.collectionId = UserStore.getUser().config.last_collection}catch(e){}
+					if (item.collectionId == -99)
+						item.collectionId = -1;
 				}
-
-				res(json.item||{})
 			})
-		})
+			.then(()=>
+				new Promise((res,rej)=>{
+					Api.post("raindrop", item, (json)=>{
+						if (!json.result){
+							if (!tryAgain)
+								return res(this.insertBookmark(item, true));
+		
+							if (json.auth===false)
+								return rej("login_needLogin")
+		
+							return rej("cant_insert_bookmark")
+						}
+		
+						res(json.item||{})
+					})
+				})
+			)
 	},
 
 	appendSuggestedTags(tags=[], toBegining=false) {

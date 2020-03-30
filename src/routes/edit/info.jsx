@@ -19,11 +19,15 @@ export default class Info extends React.Component {
 		this.inputChange = this.inputChange.bind(this);
 
 		this.state = {
-			showExcerpt: true
+			showExcerpt: true,
+			autoFocusField: localStorage.getItem('autoFocus') || 'title'
 		}
 	}
 
+
 	textareaFocus(e) {
+		localStorage.setItem('autoFocus', e.target.name)
+
 		if (typeof changed[e.target.name] == "undefined"){
 			if (typeof e.persist == "function")
 				e.persist()
@@ -81,12 +85,13 @@ export default class Info extends React.Component {
 				ref="excerpt"
 				className={className}
 				required={true}
-				autoFocus
 				autoComplete="off"
 				spellCheck="false"
 				placeholder={placeholder}
 				defaultValue={this.props.excerpt}
+				autoFocus={this.state.autoFocusField=='excerpt'}
 				onChange={this.inputChange}
+				onFocus={this.textareaFocus}
 				onKeyDown={this.textareaKeyDown}/>
 		);
 	}
@@ -102,12 +107,14 @@ export default class Info extends React.Component {
 
 				<div className="text">
 					<Textarea 	
+								ref="title"
 								tabIndex="2"
 								name="title"
 								spellCheck="false"
 								className="field-title field size-medium"
 								required={true}
 								autoComplete="off"
+								autoFocus={this.state.autoFocusField=='title'}
 								title={t.s("enterTitle")}
 								placeholder={t.s("enterTitle")}
 								defaultValue={this.props.title}
@@ -118,7 +125,7 @@ export default class Info extends React.Component {
 				</div>
 
 				<Cover src={this.props.cover}>
-					<a tabIndex="1" className="cover-button" title={t.s("covers")} onClick={this.goToCover} onKeyDown={(e)=>{if (e.keyCode == 13) this.goToCover()}}>
+					<a tabIndex="5" className="cover-button" title={t.s("covers")} onClick={this.goToCover} onKeyDown={(e)=>{if (e.keyCode == 13) this.goToCover()}}>
 						<span className="button primary circle"><Icon name="settings" normal/></span>
 					</a>
 				</Cover>

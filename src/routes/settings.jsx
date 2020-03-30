@@ -20,7 +20,8 @@ export default class Settings extends React.Component {
 			"appbuild": false,
 			"drag-disabled": false,
 			"omnibox-disabled": false,
-			"omnibox-keyword": extensionConfig.omnibox_keyword
+			"omnibox-keyword": extensionConfig.omnibox_keyword,
+			last_collection: false
 		}
 	}
 
@@ -55,6 +56,11 @@ export default class Settings extends React.Component {
 		extensionHelper.getSetting("omnibox-keyword")
 			.then((key)=>{
 				this.setState({"omnibox-keyword": key||extensionConfig.omnibox_keyword})
+			})
+
+		extensionHelper.getSetting("last_collection")
+			.then((isEnabled)=>{
+				this.setState({"last_collection": isEnabled?true:false})
 			})
 	}
 
@@ -183,16 +189,23 @@ export default class Settings extends React.Component {
 						<div className="spl"><input type="checkbox" name="tabs" checked={this.state["tabs"]} disabled={this.state.tabs} onClick={this.requestPermission} onChange={()=>{}} /></div>
 						<div className="title">
 							Highlight saved pages {!this.state.ignoreTabs && <span className="new"/>}
-							<p>Display ★ badge when current page is saved in your collection</p>
-							{!this.state.tabs && <p>Requires additional permission!</p>}
+							<p>Display ★ badge for saved pages. {!this.state.tabs && 'Requires additional permission!'}</p>
 						</div>
 					</label>
 
 					<label className="settings-parameter" hidden={!__APPBUILD__}>
 						<div className="spl"><input type="checkbox" name="appbuild" checked={this.state["appbuild"]} onClick={this.setSetting} onChange={()=>{}} /></div>
 						<div className="title">
-							Mini Application
+							Full featured app
 							<p>Open Web App (in small form factor) instead of creating new bookmark automatically</p>
+						</div>
+					</label>
+
+					<label className="settings-parameter" hidden={!__APPBUILD__}>
+						<div className="spl"><input type="checkbox" name="last_collection" checked={this.state.last_collection} onClick={this.setSetting} onChange={()=>{}} /></div>
+						<div className="title">
+							Save to last collection
+							<p>Save new bookmarks to last used collection, instead default "Unsorted"</p>
 						</div>
 					</label>
 

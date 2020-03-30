@@ -22,7 +22,6 @@ export default class Edit extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.handleBookmarkChange = this.handleBookmarkChange.bind(this);
 		this.goTo = this.goTo.bind(this);
 		this.buttonCollectionSelect = this.buttonCollectionSelect.bind(this);
 
@@ -70,9 +69,6 @@ export default class Edit extends React.Component {
 		this.unsubscribeBookmark = bookmarkStore.listen(this.onBookmarkChange.bind(this));
 
 		bookmarkActions.loadId(this.props.params.id);
-
-		if (this.refs.selectCollection)
-			this.refs.selectCollection.focus()
 	}
 
 	componentWillUnmount() {
@@ -85,9 +81,15 @@ export default class Edit extends React.Component {
         this.unsubscribeBookmark();
     }
 
-    handleBookmarkChange(obj, callback, options) {
+    handleBookmarkChange = (obj, callback, options)=>{
     	bookmarkActions.update(obj, callback, options);
-    }
+	}
+	
+	handleSubmit = ()=>{
+		this.handleBookmarkChange({}, ()=>{
+			window.close()
+		})
+	}
 
     goTo(url, withAnim = false) {
     	if (withAnim){
@@ -114,7 +116,7 @@ export default class Edit extends React.Component {
 
     renderCollection() {
     	return (
-    		<a ref="selectCollection" className="ce-actions" tabIndex="1" autoFocus onClick={this.buttonCollectionSelect} onKeyPress={this.buttonCollectionSelect}><span className="card">
+    		<a ref="selectCollection" className="ce-actions" tabIndex="1" onClick={this.buttonCollectionSelect} onKeyPress={this.buttonCollectionSelect}><span className="card">
 				<Collection already={this.state.already} />
 			</span></a>
     	);
@@ -151,8 +153,8 @@ export default class Edit extends React.Component {
 
 				{this.renderCollection()}
 				<div className="edit-page-about">
-					<Info {...this.state.item} goTo={this.goTo} onChange={this.handleBookmarkChange} />
-					<Tags {...this.state.item} suggestedTags={this.state.suggestedTags} onChange={this.handleBookmarkChange} />
+					<Info {...this.state.item} goTo={this.goTo} onChange={this.handleBookmarkChange} onSubmit={this.handleSubmit} />
+					<Tags {...this.state.item} suggestedTags={this.state.suggestedTags} onChange={this.handleBookmarkChange} onSubmit={this.handleSubmit} />
 
 					{/*<div className="edit-page-separator" />*/}
 				</div>

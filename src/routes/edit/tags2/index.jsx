@@ -15,7 +15,14 @@ const selectStyles = {
     multiValueLabel: (styles)=>({ ...styles, color: 'white' }),
     multiValueRemove: (styles)=>({ ...styles, color: 'white', ':hover': { backgroundColor: 'rgba(0,0,0,.25)' } }),
     valueContainer: (styles)=>({ ...styles, padding: '2px 3px' }),
-    indicatorSeparator: ()=>({ display: 'none' })
+    indicatorSeparator: ()=>({ display: 'none' }),
+    option: (styles, { isSelected, isFocused })=>({
+        ...styles,
+        backgroundColor: isSelected ? 'var(--accentColor, #4a90e2)' : isFocused ? 'rgba(0,0,0,.1)' : 'transparent',
+        padding: '4px 12px'
+    }),
+    input: (styles)=>({ ...styles, fontSize: '14px' }),
+    placeholder: (styles)=>({ ...styles, fontSize: '14px' })
 }
 
 export default class Tags extends React.Component {
@@ -23,6 +30,8 @@ export default class Tags extends React.Component {
         super(props)
 
         this.state = {
+            autoFocus: localStorage.getItem('autoFocus') == 'tags',
+            menuOpen: false,
             selected: [],
             available: []
         }
@@ -57,8 +66,8 @@ export default class Tags extends React.Component {
     onAvailableChange=()=>{
         this.setState({
             available: [
-                { label: t.s('my'), options: filtersStore.getTags(0).map(({_id, count})=>({ label: _id, value: _id })) },
-                { label: t.s('suggested'), options: this.props.suggestedTags.map(( label )=>({ label, value: label })) }
+                { label: t.s('suggested'), options: this.props.suggestedTags.map(( label )=>({ label, value: label })) },
+                { label: t.s('all'), options: filtersStore.getTags(0).map(({_id, count})=>({ label: _id, value: _id })) }
             ]
         })
     }
@@ -68,26 +77,43 @@ export default class Tags extends React.Component {
         this.props.onChange({tags: selected.map(({value})=>value) }, ()=>{}, {trigger: false})
     }
 
+    onKeyDown = ({ key })=>{
+        if (key === 'Enter' && !this.state.menuOpen){
+            this.props.onSubmit()
+        }
+    }
+
+    onMenuOpen = ()=>this.setState({menuOpen: true})
+    
+    onMenuClose = ()=>this.setState({menuOpen: false})
+
+    onFocus = ()=>localStorage.setItem('autoFocus', 'tags')
+
     formatCreateLabel = (input)=>`+${input}`
     noOptionsMessage = ()=><div>{t.s('noTags')}</div>
 
 	render() {
         return (
-            <section className="tags">
+            <section className="tags" data-open={this.state.menuOpen}>
                 <Select
                     isMulti
                     value={this.state.selected}
                     options={this.state.available}
-                    menuPlacement='top'
+                    menuPlacement='bottom'
                     placeholder={t.s("addTag")+"…"}
-                    closeMenuOnSelect={false}
+                    closeMenuOnSelect={true}
                     isClearable={false}
-                    openMenuOnFocus
-                    tabIndex='10'
+                    openMenuOnFocus={false}
+                    autoFocus={this.state.autoFocus}
+                    tabIndex='4'
                     tabSelectsValue={false}
                     formatCreateLabel={this.formatCreateLabel}
                     noOptionsMessage={this.noOptionsMessage}
                     onChange={this.onSelectChange}
+                    onKeyDown={this.onKeyDown}
+                    onMenuOpen={this.onMenuOpen}
+                    onMenuClose={this.onMenuClose}
+                    onFocus={this.onFocus}
                     styles={selectStyles} />
             </section>
         )
