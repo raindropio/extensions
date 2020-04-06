@@ -8,6 +8,8 @@ import extensionConfig from '../background/config'
 import config from '../modules/config'
 import dialogStore from '../stores/dialog'
 
+import TypeForm from './type/form'
+
 export default class Settings extends React.Component {
 	constructor(props) {
 		super(props);
@@ -21,7 +23,8 @@ export default class Settings extends React.Component {
 			"drag-disabled": false,
 			"omnibox-disabled": false,
 			"omnibox-keyword": extensionConfig.omnibox_keyword,
-			last_collection: false
+			last_collection: false,
+			default_field: 'collection'
 		}
 	}
 
@@ -37,7 +40,7 @@ export default class Settings extends React.Component {
 
 				return extensionHelper.permissions.ignore('tabs')
 			})
-		
+
 		extensionHelper.getSetting("appbuild")
 			.then((isEnabled)=>{
 				this.setState({"appbuild": isEnabled?true:false})
@@ -61,6 +64,11 @@ export default class Settings extends React.Component {
 		extensionHelper.getSetting("last_collection")
 			.then((isEnabled)=>{
 				this.setState({"last_collection": isEnabled?true:false})
+			})
+
+		extensionHelper.getSetting("default_field")
+			.then((default_field)=>{
+				this.setState({ default_field })
 			})
 	}
 
@@ -132,24 +140,11 @@ export default class Settings extends React.Component {
 	setSetting(e) {
 		var key = e.target.name;
 		var obj = {};
-		obj[key]=!this.state[key];
+		obj[key]=typeof e.target.checked != 'undefined' ? e.target.checked : e.target.value;
 
 		this.setState(obj);
 
-		extensionHelper.setSetting(key, obj[key]);
-
-		if (key=="appbuild"){
-			extensionHelper.rerenderBrowserAction();
-
-			dialogStore.onShow({
-				title: t.s('desktopNeedRestart'),
-				items: [
-					{title: t.s("refresh"), onClick: ()=>{
-						window.close();
-					}}
-				]
-			})
-		}
+		extensionHelper.setSetting(key, obj[key])
 	}
 
 	setKeyword(e) {
@@ -172,6 +167,17 @@ export default class Settings extends React.Component {
 			})
 	}
 
+	onAppBuildChange = ()=>{
+		dialogStore.onShow({
+			title: t.s('desktopNeedRestart'),
+			items: [
+				{title: t.s("refresh"), onClick: ()=>{
+					window.close();
+				}}
+			]
+		})
+	}
+
 	render() {
 		return (
 			<div className="common-page settings-page">
@@ -182,7 +188,7 @@ export default class Settings extends React.Component {
 
 				<div className="common-page-content">
 					<div className="settings-group">
-						{t.s("extension")}
+						{t.s("commonSettings")}
 					</div>
 
 					<label className="settings-parameter">
@@ -193,36 +199,60 @@ export default class Settings extends React.Component {
 						</div>
 					</label>
 
-					<label className="settings-parameter" hidden={!__APPBUILD__}>
-						<div className="spl"><input type="checkbox" name="appbuild" checked={this.state["appbuild"]} onClick={this.setSetting} onChange={()=>{}} /></div>
-						<div className="title">
-							Full featured app
-							<p>Open Web App (in small form factor) instead of creating new bookmark automatically</p>
-						</div>
-					</label>
-
-					<label className="settings-parameter" hidden={!__APPBUILD__}>
-						<div className="spl"><input type="checkbox" name="last_collection" checked={this.state.last_collection} onClick={this.setSetting} onChange={()=>{}} /></div>
-						<div className="title">
-							Save to last collection
-							<p>Save new bookmarks to last used collection, instead default "Unsorted"</p>
-						</div>
-					</label>
-
-					{/*<label className="settings-parameter">
-						<div className="spl"><input type="checkbox" name="drag-disabled" checked={!this.state["drag-disabled"]} onClick={this.setSetting} onChange={()=>{}} /></div>
-						<div className="title">Drag'n'drop</div>
-					</label>*/}
-
 					<label className="settings-parameter" hidden={!extensionHelper.omniboxIsEnabled()}>
-						<div className="spl"><input type="checkbox" name="omnibox-disabled" checked={!this.state["omnibox-disabled"]} onClick={this.setSetting} onChange={()=>{}} /></div>
+						<div className="spl"><input type="checkbox" name="omnibox-disabled" checked={this.state["omnibox-disabled"]} onChange={this.setSetting} /></div>
 						<div className="title">
-							Omnibox{/*<span hidden={this.state["omnibox-disabled"]}>, keyword</span>*/}
+							Disable Omnibox{/*<span hidden={this.state["omnibox-disabled"]}>, keyword</span>*/}
 							<p>Type "r something" to find bookmark right from address bar</p>
 						</div>
 
 						{/*<input hidden={this.state["omnibox-disabled"]} type="text" className="sp-text-inline" value={this.state["omnibox-keyword"]} onChange={this.setKeyword} required />*/}
 					</label>
+
+					{/*<label className="settings-parameter">
+						<div className="spl"><input type="checkbox" name="drag-disabled" checked={!this.state["drag-disabled"]} onChange={this.setSetting} /></div>
+						<div className="title">Drag'n'drop</div>
+					</label>*/}
+
+					<div className="settings-group">
+						Extension type
+					</div>
+
+					<label className="settings-parameter" hidden={!__APPBUILD__}>
+						<TypeForm onChange={this.onAppBuildChange} />
+					</label>
+
+					<div hidden={this.state.appbuild}>
+						<div className="settings-group">
+							{t.s("extension")} {t.s('settings').toLowerCase()}
+						</div>
+
+						<label className="settings-parameter" hidden={!__APPBUILD__}>
+							<div className="spl"><input type="checkbox" name="last_collection" checked={this.state.last_collection} onChange={this.setSetting} /></div>
+							<div className="title">
+								Save to last collection
+								<p>Save new bookmarks to last used collection, instead default "Unsorted"</p>
+							</div>
+						</label>
+
+						<label className="settings-parameter" hidden={!__APPBUILD__}>
+							<div className="spl">
+								↹
+							</div>
+							<div className="title">
+								Focus on field
+
+								<div style={{paddingTop: '4px'}}>
+									<select value={this.state.default_field} name='default_field' onChange={this.setSetting}>
+										<option value='collection'>Collection</option>
+										<option value='title'>Title</option>
+										<option value='excerpt'>Description</option>
+										<option value='tags'>Tags</option>
+									</select>
+								</div>
+							</div>
+						</label>
+					</div>
 
 					{this.renderButtons()}
 				</div>

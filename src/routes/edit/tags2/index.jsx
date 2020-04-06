@@ -30,7 +30,6 @@ export default class Tags extends React.Component {
         super(props)
 
         this.state = {
-            autoFocus: localStorage.getItem('autoFocus') == 'tags',
             menuOpen: false,
             selected: [],
             available: []
@@ -87,8 +86,6 @@ export default class Tags extends React.Component {
     
     onMenuClose = ()=>this.setState({menuOpen: false})
 
-    onFocus = ()=>localStorage.setItem('autoFocus', 'tags')
-
     formatCreateLabel = (input)=>`+${input}`
     noOptionsMessage = ()=><div>{t.s('noTags')}</div>
 
@@ -104,7 +101,7 @@ export default class Tags extends React.Component {
                     closeMenuOnSelect={true}
                     isClearable={false}
                     openMenuOnFocus={false}
-                    autoFocus={this.state.autoFocus}
+                    autoFocus={this.props.default_field=='tags'}
                     tabIndex='4'
                     tabSelectsValue={false}
                     formatCreateLabel={this.formatCreateLabel}
@@ -113,7 +110,6 @@ export default class Tags extends React.Component {
                     onKeyDown={this.onKeyDown}
                     onMenuOpen={this.onMenuOpen}
                     onMenuClose={this.onMenuClose}
-                    onFocus={this.onFocus}
                     styles={selectStyles} />
             </section>
         )

@@ -76,7 +76,10 @@ export default class Start extends React.Component {
 		this.successComplete=true;
 
 		if (this.bookmarkId)
-			window.location.hash = '#/edit/'+this.bookmarkId+(this.bookmarkAlready ? "?already=1" : '')
+			window.location.hash = '#/edit/'+this.bookmarkId+ '?' + [
+				`default_field=${this.state.default_field}`,
+				this.bookmarkAlready ? "already=1" : ''
+			].join('&')
 		else
 			window.location.hash = '#/error/default?e='+encodeURIComponent("can't init app")
 	}
@@ -145,8 +148,11 @@ export default class Start extends React.Component {
 			initApp();
 	}
 
-	componentWillUnmount() {
-		
+	componentDidMount() {
+		extensionHelpers.getSetting("default_field")
+			.then(default_field=>
+				this.setState({ default_field })
+			)
 	}
 
 	render() {

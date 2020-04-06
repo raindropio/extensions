@@ -19,15 +19,12 @@ export default class Info extends React.Component {
 		this.inputChange = this.inputChange.bind(this);
 
 		this.state = {
-			showExcerpt: true,
-			autoFocusField: localStorage.getItem('autoFocus') || 'title'
+			showExcerpt: true
 		}
 	}
 
 
 	textareaFocus(e) {
-		localStorage.setItem('autoFocus', e.target.name)
-
 		if (typeof changed[e.target.name] == "undefined"){
 			if (typeof e.persist == "function")
 				e.persist()
@@ -89,7 +86,7 @@ export default class Info extends React.Component {
 				spellCheck="false"
 				placeholder={placeholder}
 				defaultValue={this.props.excerpt}
-				autoFocus={this.state.autoFocusField=='excerpt'}
+				autoFocus={this.props.default_field=='excerpt'}
 				onChange={this.inputChange}
 				onFocus={this.textareaFocus}
 				onKeyDown={this.textareaKeyDown}/>
@@ -114,7 +111,7 @@ export default class Info extends React.Component {
 								className="field-title field size-medium"
 								required={true}
 								autoComplete="off"
-								autoFocus={this.state.autoFocusField=='title'}
+								autoFocus={this.props.default_field=='title'}
 								title={t.s("enterTitle")}
 								placeholder={t.s("enterTitle")}
 								defaultValue={this.props.title}

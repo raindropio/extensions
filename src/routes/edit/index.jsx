@@ -30,6 +30,7 @@ export default class Edit extends React.Component {
 			showCollections: 		false,
 			already: 				(props.location.query.already ? true : false),
 			anim: 					(props.location.query.anim ? props.location.query.anim : ""),
+			default_field:			(props.location.query.default_field),
 		},this.prepareBookmark());
 	}
 
@@ -69,6 +70,9 @@ export default class Edit extends React.Component {
 		this.unsubscribeBookmark = bookmarkStore.listen(this.onBookmarkChange.bind(this));
 
 		bookmarkActions.loadId(this.props.params.id);
+
+		if (this.refs.selectCollection && !this.state.default_field || this.state.default_field=='collection')	
+			this.refs.selectCollection.focus()
 	}
 
 	componentWillUnmount() {
@@ -153,8 +157,8 @@ export default class Edit extends React.Component {
 
 				{this.renderCollection()}
 				<div className="edit-page-about">
-					<Info {...this.state.item} goTo={this.goTo} onChange={this.handleBookmarkChange} onSubmit={this.handleSubmit} />
-					<Tags {...this.state.item} suggestedTags={this.state.suggestedTags} onChange={this.handleBookmarkChange} onSubmit={this.handleSubmit} />
+					<Info {...this.state.item} default_field={this.state.default_field} goTo={this.goTo} onChange={this.handleBookmarkChange} onSubmit={this.handleSubmit} />
+					<Tags {...this.state.item} default_field={this.state.default_field} suggestedTags={this.state.suggestedTags} onChange={this.handleBookmarkChange} onSubmit={this.handleSubmit} />
 
 					{/*<div className="edit-page-separator" />*/}
 				</div>
