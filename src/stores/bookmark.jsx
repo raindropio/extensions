@@ -85,7 +85,7 @@ export default createStore({
 				if (json.auth===false)
 					return rej("login_needLogin")
 				
-				res(Object.assign({}, json.item, {parser:"local"}))
+				res(json.item)
 			})
 		})
 	},
