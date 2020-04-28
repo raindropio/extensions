@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import t from 't'
-
+import debounce from 'lodash/debounce'
 import forms from '../../helpers/forms'
 
 import Icon from '../../co/common/icon'
@@ -16,7 +16,7 @@ export default class Info extends React.Component {
 		super(props);
 
 		this.goToCover = this.goToCover.bind(this);
-		this.inputChange = this.inputChange.bind(this);
+		this.inputChange = debounce(this.inputChange.bind(this), 100);
 
 		this.state = {
 			showExcerpt: true
