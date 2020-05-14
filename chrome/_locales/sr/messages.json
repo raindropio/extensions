@@ -1,0 +1,54 @@
+{
+    "savePage": {
+        "message": "Сачувај страницу на Raindrop.io",
+        "description": "Save page to Raindrop.io"
+    },
+    "saveToInbox": {
+        "message": "Сачувај у пријемном сандучету (Raindrop.io)",
+        "description": "Save to Inbox (Raindrop.io)"
+    },
+    "saveLink": {
+        "message": "Сачувај страницу",
+        "description": "Save page"
+    },
+    "saveImage": {
+        "message": "Сачувај слику на Raindrop.io",
+        "description": "Save image to Raindrop.io"
+    },
+    "myBookmarks": {
+        "message": "Моји обележивачи",
+        "description": "My bookmarks"
+    },
+    "appName": {
+        "message": "Raindrop.io - Паметни обележивачи",
+        "description": "Raindrop.io - Smart Bookmarks"
+    },
+    "appDesc": {
+        "message": "Леп начин да запамтите најважније.",
+        "description": "A beautiful way to remember the most important."
+    },
+    "firstRun": {
+        "message": "Да бисте започели коришћење Raindrop.io, потребно је само да освежите тренутну страницу и поново кликнете.",
+        "description": "For start using Raindrop.io you just need to refresh current page and click again."
+    },
+    "refreshPage": {
+        "message": "Освежи тренутну страницу",
+        "description": "Refresh current page"
+    },
+    "support": {
+        "message": "Подршка",
+        "description": "Support"
+    },
+    "afterUpdateTitle": {
+        "message": "Додатак је ажуриран",
+        "description": "The extension has been updated"
+    },
+    "afterUpdate": {
+        "message": "Имамо неколико нових функција, побољшања и исправки грешака. Желите ли да видите шта је ново у овој верзији?",
+        "description": "We have several new features, improvements and bug fixes. Want to see what's new in this version?"
+    },
+    "seeChangeLog": {
+        "message": "Погледај листу измена...",
+        "description": "Read more..."
+    }
+}
